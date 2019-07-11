@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Jul 11 16:58:20 2019" VIVADOVERSION="2018.2">
+
+  <SYSTEMINFO ARCH="artix7" BOARD="digilentinc.com:arty-a7-35:part0:1.0" DEVICE="7a35ti" NAME="sim_clk" PACKAGE="csg324" SPEEDGRADE="-1L"/>
+
+  <EXTERNALPORTS>
+    <PORT CLKFREQUENCY="100000000" DIR="O" NAME="sim_clk_out" SIGIS="clk" SIGNAME="sim_clk_gen_0_clk">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="sim_clk_gen_0" PORT="clk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="sim_rst_out" SIGIS="rst" SIGNAME="sim_clk_gen_0_sync_rst">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="sim_clk_gen_0" PORT="sync_rst"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <EXTERNALINTERFACES/>
+
+  <MODULES>
+    <MODULE FULLNAME="/sim_clk_gen_0" HWVERSION="1.0" INSTANCE="sim_clk_gen_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sim_clk_gen" VLNV="xilinx.com:ip:sim_clk_gen:1.0">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=sim_clk_gen;v=v1_0;d=pb054-sim-clk-gen.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="CLOCK_PERIOD" VALUE="10"/>
+        <PARAMETER NAME="INITIAL_RESET_CLOCK_CYCLES" VALUE="100"/>
+        <PARAMETER NAME="RESET_POLARITY" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="sim_clk_sim_clk_gen_0_0"/>
+        <PARAMETER NAME="CLOCK_TYPE" VALUE="Single_Ended"/>
+        <PARAMETER NAME="FREQ_HZ" VALUE="100000000"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="O" NAME="clk" SIGIS="clk" SIGNAME="sim_clk_gen_0_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="sim_clk_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="sync_rst" SIGIS="rst" SIGNAME="sim_clk_gen_0_sync_rst">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="sim_rst_out"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+  </MODULES>
+
+</EDKSYSTEM>

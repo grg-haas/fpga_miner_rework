@@ -1,0 +1,7 @@
+{
+    "cmd": "{PROJECT_PATH}\\utils\\kcpsm6.exe",
+    "args": [
+        "{FILE_ACTIVE}",
+        "..\\.outputs\\{FILE_ACTIVE_NAME_BASE}_prog"
+    ]
+}
