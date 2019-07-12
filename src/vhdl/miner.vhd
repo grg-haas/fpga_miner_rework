@@ -93,6 +93,19 @@ architecture behavioral of miner is
         );
     end component uart_tx6;
 
+    component core is
+        port
+        (
+            clk        : in std_logic;
+
+            data_in    : in std_logic_vector(7 downto 0);
+            data_out   : out std_logic_vector(7 downto 0);
+
+            status_in  : in std_logic_vector(7 downto 0);
+            status_out : out std_logic_vector(7 downto 0)
+        );
+    end component core;
+
     -- signals for the processor
     signal address        : std_logic_vector(11 downto 0) := (others => '0');
     signal instruction    : std_logic_vector(17 downto 0) := (others => '0');
@@ -121,7 +134,7 @@ architecture behavioral of miner is
     signal uart_buffer_read  : std_logic                    := '0';
     signal uart_reset        : std_logic                    := '0';
 
-    -- signals for the memory !!UNUSED
+    -- signals for the memory !!UNUSED but tied to 0
     signal bram_we         : std_logic_vector(3 downto 0)  := (others => '0');
     signal bram_addr_in    : std_logic_vector(15 downto 0) := (others => '0');
     signal bram_data_out   : std_logic_vector(31 downto 0) := (others => '0');
@@ -130,6 +143,12 @@ architecture behavioral of miner is
     signal addr_buf        : std_logic_vector(15 downto 0) := (others => '0');
     signal data_buf        : std_logic_vector(31 downto 0) := (others => '0');
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
+
+    -- signals for the workers
+    signal worker1_data_in    : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_data_out   : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_status_in  : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_status_out : std_logic_vector(7 downto 0) := (others => '0');
 
 begin
     bram_we      <= (others => '0');
@@ -189,7 +208,7 @@ begin
             we_b         => bram_we
         );
 
-    uart_tx: uart_tx6
+    uart_tx : uart_tx6
         port map
         (
             data_in             => uart_data_in,
@@ -203,7 +222,7 @@ begin
             clk                 => clk
         );
 
-    uart_rx: uart_rx6
+    uart_rx : uart_rx6
         port map
         (
             serial_in           => uart_rx_pin,
@@ -215,6 +234,18 @@ begin
             buffer_full         => uart_status(0),
             buffer_reset        => uart_reset,
             clk                 => clk
+        );
+
+    worker1 : core
+        port map
+        (
+            clk        => clk,
+
+            data_in    => worker1_data_in,
+            data_out   => worker1_data_out,
+
+            status_in  => worker1_status_in,
+            status_out => worker1_status_out
         );
 
     baud_rate: process(clk)
