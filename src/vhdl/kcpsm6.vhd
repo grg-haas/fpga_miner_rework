@@ -1,6 +1,7 @@
+-- args: --ieee=synopsys -P/home/grg/Projects/fpga/xilinx_libs -fexplicit
 --
 -------------------------------------------------------------------------------------------
--- Copyright © 2010-2014, Xilinx, Inc.
+-- Copyright ï¿½ 2010-2014, Xilinx, Inc.
 -- This file contains confidential and proprietary information of Xilinx, Inc. and is
 -- protected under U.S. and international copyright and other intellectual property laws.
 -------------------------------------------------------------------------------------------
@@ -40,12 +41,12 @@
 --
 -- Start of design entry - 14th May 2010.
 --         Alpha Version - 20th July 2010.
---           Version 1.0 - 30th September 2010. 
---           Version 1.1 - 9th February 2011. 
+--           Version 1.0 - 30th September 2010.
+--           Version 1.1 - 9th February 2011.
 --                         Correction to parity computation logic.
---           Version 1.2 - 4th October 2012. 
+--           Version 1.2 - 4th October 2012.
 --                         Addition of WebTalk information.
---           Version 1.3 - 21st May 2014. 
+--           Version 1.3 - 21st May 2014.
 --                         Disassembly of 'STAR sX, kk' instruction added to the simulation
 --                         code. No changes to functionality or the physical implementation.
 --
@@ -64,10 +65,10 @@
 -- Format of this file.
 --
 -- The module defines the implementation of the logic using Xilinx primitives.
--- These ensure predictable synthesis results and maximise the density of the implementation. 
+-- These ensure predictable synthesis results and maximise the density of the implementation.
 -- The Unisim Library is used to define Xilinx primitives. It is also used during
 -- simulation. The source can be viewed at %XILINX%\vhdl\src\unisims\unisim_VCOMP.vhd
--- 
+--
 -------------------------------------------------------------------------------------------
 --
 -- Library declarations
@@ -107,7 +108,7 @@ entity kcpsm6 is
 -------------------------------------------------------------------------------------------
 --
 -- Start of Main Architecture for kcpsm6
---	 
+--
 architecture low_level_definition of kcpsm6 is
 --
 -------------------------------------------------------------------------------------------
@@ -117,7 +118,7 @@ architecture low_level_definition of kcpsm6 is
 -------------------------------------------------------------------------------------------
 --
 -- State Machine and Interrupt
---	 
+--
 signal          t_state_value : std_logic_vector(2 downto 1);
 signal                t_state : std_logic_vector(2 downto 1);
 signal              run_value : std_logic;
@@ -134,7 +135,7 @@ signal       active_interrupt : std_logic;
 
 --
 -- Arithmetic and Logical Functions
---	 
+--
 signal      arith_logical_sel : std_logic_vector(2 downto 0);
 signal         arith_carry_in : std_logic;
 signal      arith_carry_value : std_logic;
@@ -146,29 +147,29 @@ signal    arith_logical_value : std_logic_vector(7 downto 0);
 signal   arith_logical_result : std_logic_vector(7 downto 0);
 --
 -- Shift and Rotate Functions
---	 
+--
 signal     shift_rotate_value : std_logic_vector(7 downto 0);
 signal    shift_rotate_result : std_logic_vector(7 downto 0);
 signal           shift_in_bit : std_logic;
 --
 -- ALU structure
---	 
+--
 signal             alu_result : std_logic_vector(7 downto 0);
 signal      alu_mux_sel_value : std_logic_vector(1 downto 0);
 signal            alu_mux_sel : std_logic_vector(1 downto 0);
 --
 -- Strobes
---	
+--
 signal            strobe_type : std_logic;
 signal     write_strobe_value : std_logic;
 signal   k_write_strobe_value : std_logic;
 signal      read_strobe_value : std_logic;
 --
 -- Flags
---	
+--
 signal       flag_enable_type : std_logic;
 signal      flag_enable_value : std_logic;
-signal            flag_enable : std_logic; 
+signal            flag_enable : std_logic;
 signal           lower_parity : std_logic;
 signal       lower_parity_sel : std_logic;
 signal     carry_lower_parity : std_logic;
@@ -194,14 +195,14 @@ signal        zero_flag_value : std_logic;
 signal              zero_flag : std_logic;
 --
 -- Scratch Pad Memory
---	 
+--
 signal       spm_enable_value : std_logic;
 signal             spm_enable : std_logic;
 signal           spm_ram_data : std_logic_vector(7 downto 0);
 signal               spm_data : std_logic_vector(7 downto 0);
 --
 -- Registers
---	 
+--
 signal           regbank_type : std_logic;
 signal             bank_value : std_logic;
 signal                   bank : std_logic;
@@ -215,12 +216,12 @@ signal                sy_addr : std_logic_vector(4 downto 0);
 signal                     sx : std_logic_vector(7 downto 0);
 signal                     sy : std_logic_vector(7 downto 0);
 --
--- Second Operand 
---	 
+-- Second Operand
+--
 signal               sy_or_kk : std_logic_vector(7 downto 0);
 --
--- Program Counter 
---	 
+-- Program Counter
+--
 signal       pc_move_is_valid : std_logic;
 signal              move_type : std_logic;
 signal           returni_type : std_logic;
@@ -232,8 +233,8 @@ signal               pc_value : std_logic_vector(11 downto 0);
 signal                     pc : std_logic_vector(11 downto 0);
 signal              pc_vector : std_logic_vector(11 downto 0);
 --
--- Program Counter Stack 
---	 
+-- Program Counter Stack
+--
 signal             push_stack : std_logic;
 signal              pop_stack : std_logic;
 signal           stack_memory : std_logic_vector(11 downto 0);
@@ -257,7 +258,7 @@ signal          stack_pointer : std_logic_vector(4 downto 0);
 --
 --**********************************************************************************
 --
--- Signals between these *** lines are only made visible during simulation 
+-- Signals between these *** lines are only made visible during simulation
 --
 --synthesis translate off
 --
@@ -547,14 +548,14 @@ signal     sim_spmFF : std_logic_vector(7 downto 0) := X"00";
 --
 
 attribute CORE_GENERATION_INFO : string;
-attribute CORE_GENERATION_INFO of low_level_definition : ARCHITECTURE IS 
+attribute CORE_GENERATION_INFO of low_level_definition : ARCHITECTURE IS
     "kcpsm6,kcpsm6_v1_3,{component_name=kcpsm6}";
 
 --
 -- Attributes to guide mapping of logic into Slices.
 --
 
-attribute hblknm : string; 
+attribute hblknm : string;
 attribute hblknm of                reset_lut : label is "kcpsm6_control";
 attribute hblknm of                 run_flop : label is "kcpsm6_control";
 attribute hblknm of      internal_reset_flop : label is "kcpsm6_control";
@@ -603,37 +604,37 @@ attribute hblknm of             parity_xorcy : label is "kcpsm6_decode2";
 attribute hblknm of          sync_sleep_flop : label is "kcpsm6_decode2";
 attribute hblknm of      sync_interrupt_flop : label is "kcpsm6_decode2";
 
-attribute hblknm of             push_pop_lut : label is "kcpsm6_stack1";	
-attribute hblknm of         regbank_type_lut : label is "kcpsm6_stack1";	
-attribute hblknm of                 bank_lut : label is "kcpsm6_stack1";	
-attribute hblknm of                bank_flop : label is "kcpsm6_stack1";	
+attribute hblknm of             push_pop_lut : label is "kcpsm6_stack1";
+attribute hblknm of         regbank_type_lut : label is "kcpsm6_stack1";
+attribute hblknm of                 bank_lut : label is "kcpsm6_stack1";
+attribute hblknm of                bank_flop : label is "kcpsm6_stack1";
 
-attribute hblknm of register_enable_type_lut : label is "kcpsm6_strobes";	
-attribute hblknm of      register_enable_lut : label is "kcpsm6_strobes";	
-attribute hblknm of         flag_enable_flop : label is "kcpsm6_strobes";	
-attribute hblknm of     register_enable_flop : label is "kcpsm6_strobes";	
-attribute hblknm of           spm_enable_lut : label is "kcpsm6_strobes";	
-attribute hblknm of      k_write_strobe_flop : label is "kcpsm6_strobes";	
-attribute hblknm of          spm_enable_flop : label is "kcpsm6_strobes";	
-attribute hblknm of          read_strobe_lut : label is "kcpsm6_strobes";	
-attribute hblknm of        write_strobe_flop : label is "kcpsm6_strobes";	
-attribute hblknm of         read_strobe_flop : label is "kcpsm6_strobes";	
+attribute hblknm of register_enable_type_lut : label is "kcpsm6_strobes";
+attribute hblknm of      register_enable_lut : label is "kcpsm6_strobes";
+attribute hblknm of         flag_enable_flop : label is "kcpsm6_strobes";
+attribute hblknm of     register_enable_flop : label is "kcpsm6_strobes";
+attribute hblknm of           spm_enable_lut : label is "kcpsm6_strobes";
+attribute hblknm of      k_write_strobe_flop : label is "kcpsm6_strobes";
+attribute hblknm of          spm_enable_flop : label is "kcpsm6_strobes";
+attribute hblknm of          read_strobe_lut : label is "kcpsm6_strobes";
+attribute hblknm of        write_strobe_flop : label is "kcpsm6_strobes";
+attribute hblknm of         read_strobe_flop : label is "kcpsm6_strobes";
 
-attribute hblknm of            stack_ram_low : label is "kcpsm6_stack_ram0";	
-attribute hblknm of   shadow_carry_flag_flop : label is "kcpsm6_stack_ram0";	
-attribute hblknm of          stack_zero_flop : label is "kcpsm6_stack_ram0";	
-attribute hblknm of         shadow_bank_flop : label is "kcpsm6_stack_ram0";	
-attribute hblknm of           stack_bit_flop : label is "kcpsm6_stack_ram0";	
-attribute hblknm of           stack_ram_high : label is "kcpsm6_stack_ram1";	
+attribute hblknm of            stack_ram_low : label is "kcpsm6_stack_ram0";
+attribute hblknm of   shadow_carry_flag_flop : label is "kcpsm6_stack_ram0";
+attribute hblknm of          stack_zero_flop : label is "kcpsm6_stack_ram0";
+attribute hblknm of         shadow_bank_flop : label is "kcpsm6_stack_ram0";
+attribute hblknm of           stack_bit_flop : label is "kcpsm6_stack_ram0";
+attribute hblknm of           stack_ram_high : label is "kcpsm6_stack_ram1";
 
-attribute hblknm of          lower_reg_banks : label is "kcpsm6_reg0";	
-attribute hblknm of          upper_reg_banks : label is "kcpsm6_reg1";	
-attribute hblknm of             pc_mode1_lut : label is "kcpsm6_vector1";	
-attribute hblknm of             pc_mode2_lut : label is "kcpsm6_vector1";	
+attribute hblknm of          lower_reg_banks : label is "kcpsm6_reg0";
+attribute hblknm of          upper_reg_banks : label is "kcpsm6_reg1";
+attribute hblknm of             pc_mode1_lut : label is "kcpsm6_vector1";
+attribute hblknm of             pc_mode2_lut : label is "kcpsm6_vector1";
 
 --
 -------------------------------------------------------------------------------------------
---	
+--
 -- Start of kcpsm6 circuit description
 --
 -- Summary of all primitives defined.
@@ -642,7 +643,7 @@ attribute hblknm of             pc_mode2_lut : label is "kcpsm6_vector1";
 --     50 x LUT6_2
 --     48 x FD               82 flip-flops
 --     20 x FDR       (Depending on the value of 'hwbuild' up)
---      0 x FDS       (to eight FDR will be replaced by FDS  )          
+--      0 x FDS       (to eight FDR will be replaced by FDS  )
 --     14 x FDRE
 --     29 x MUXCY
 --     27 x XORCY
@@ -652,7 +653,7 @@ attribute hblknm of             pc_mode2_lut : label is "kcpsm6_vector1";
 --       (8 LUTs)          (16 LUTs)           (32 LUTs)
 --
 -------------------------------------------------------------------------------------------
---	
+--
 begin
 
   --
@@ -663,7 +664,7 @@ begin
   -------------------------------------------------------------------------------------------
   --
 
-  assert ((scratch_pad_memory_size = 64) 
+  assert ((scratch_pad_memory_size = 64)
        or (scratch_pad_memory_size = 128)
        or (scratch_pad_memory_size = 256))
   report "Invalid 'scratch_pad_memory_size'. Please set to 64, 128 or 256."
@@ -672,7 +673,7 @@ begin
   --
   -------------------------------------------------------------------------------------------
   --
-  -- State Machine and Control 
+  -- State Machine and Control
   --
   --
   --     1 x LUT6
@@ -749,7 +750,7 @@ begin
             I3 => t_state(1),
             I4 => active_interrupt,
             I5 => internal_reset,
-             O => interrupt_enable_value);                     
+             O => interrupt_enable_value);
 
   interrupt_enable_flop: FD
   port map (  D => interrupt_enable_value,
@@ -769,7 +770,7 @@ begin
             I3 => bank,
             I4 => loadstar_type,
             I5 => '1',
-            O5 => active_interrupt_value, 
+            O5 => active_interrupt_value,
             O6 => sx_addr4_value);
 
   active_interrupt_flop: FD
@@ -786,7 +787,7 @@ begin
   --
   -------------------------------------------------------------------------------------------
   --
-  -- Decoders 
+  -- Decoders
   --
   --
   --     2 x LUT6
@@ -883,7 +884,7 @@ begin
             I4 => instruction(16),
             I5 => '1',
             O5 => alu_mux_sel_value(1),
-            O6 => arith_carry_in);                     
+            O6 => arith_carry_in);
 
   alu_mux_sel1_flop: FD
   port map (  D => alu_mux_sel_value(1),
@@ -1016,7 +1017,7 @@ begin
             I3 => bank,
             I4 => regbank_type,
             I5 => t_state(1),
-             O => bank_value);                     
+             O => bank_value);
 
   bank_flop: FDR
   port map (  D => bank_value,
@@ -1067,11 +1068,11 @@ begin
             I4 => '1',
             I5 => '1',
             O5 => lower_parity,
-            O6 => lower_parity_sel);  
-                   
+            O6 => lower_parity_sel);
+
   parity_muxcy: MUXCY
   port map( DI => lower_parity,
-            CI => '0',                     
+            CI => '0',
              S => lower_parity_sel,
              O => carry_lower_parity);
 
@@ -1083,7 +1084,7 @@ begin
             I3 => arith_logical_result(5),
             I4 => arith_logical_result(6),
             I5 => arith_logical_result(7),
-             O => upper_parity);                     
+             O => upper_parity);
 
   parity_xorcy: XORCY
   port map( LI => upper_parity,
@@ -1098,7 +1099,7 @@ begin
             I3 => instruction(3),
             I4 => instruction(7),
             I5 => instruction(16),
-             O => shift_carry_value);                     
+             O => shift_carry_value);
 
   shift_carry_flop: FD
   port map (  D => shift_carry_value,
@@ -1114,7 +1115,7 @@ begin
             I4 => instruction(15),
             I5 => instruction(16),
             O5 => drive_carry_in_zero,
-            O6 => carry_flag_value);  
+            O6 => carry_flag_value);
 
   carry_flag_flop: FDRE
   port map (  D => carry_flag_value,
@@ -1138,7 +1139,7 @@ begin
             I4 => '1',
             I5 => '1',
             O5 => strobe_type,
-            O6 => use_zero_flag_value);                     
+            O6 => use_zero_flag_value);
 
   use_zero_flag_flop: FD
   port map (  D => use_zero_flag_value,
@@ -1154,7 +1155,7 @@ begin
             I4 => alu_result(4),
             I5 => '1',
             O5 => lower_zero,
-            O6 => lower_zero_sel);                     
+            O6 => lower_zero_sel);
 
   lower_zero_muxcy: MUXCY
   port map( DI => lower_zero,
@@ -1171,11 +1172,11 @@ begin
             I4 => alu_result(7),
             I5 => '1',
             O5 => middle_zero,
-            O6 => middle_zero_sel);                     
+            O6 => middle_zero_sel);
 
   middle_zero_muxcy: MUXCY
   port map( DI => middle_zero,
-            CI => carry_lower_zero,                     
+            CI => carry_lower_zero,
              S => middle_zero_sel,
              O => carry_middle_zero);
 
@@ -1187,11 +1188,11 @@ begin
             I3 => '1',
             I4 => '1',
             I5 => '1',
-             O => upper_zero_sel);                     
+             O => upper_zero_sel);
 
   upper_zero_muxcy: MUXCY
   port map( DI => shadow_zero_flag,
-            CI => carry_middle_zero,                    
+            CI => carry_middle_zero,
              S => upper_zero_sel,
              O => zero_flag_value);
 
@@ -1205,7 +1206,7 @@ begin
   --
   -------------------------------------------------------------------------------------------
   --
-  -- 12-bit Program Address Generation 
+  -- 12-bit Program Address Generation
   --
   -------------------------------------------------------------------------------------------
   --
@@ -1218,9 +1219,9 @@ begin
 
 
   address_loop: for i in 0 to 11 generate
-    attribute hblknm : string;                      
-    attribute hblknm of            pc_flop : label is "kcpsm6_pc" & integer'image(i/4);	
-    attribute hblknm of return_vector_flop : label is "kcpsm6_stack_ram" & integer'image((i+4)/8);	  
+    attribute hblknm : string;
+    attribute hblknm of            pc_flop : label is "kcpsm6_pc" & integer'image(i/4);
+    attribute hblknm of return_vector_flop : label is "kcpsm6_stack_ram" & integer'image((i+4)/8);
 
   begin
 
@@ -1231,7 +1232,7 @@ begin
     --
     -- instruction(12)
     --              0  Constant aaa from instruction(11:0)
-    --              1  Return vector from stack 
+    --              1  Return vector from stack
     --
     -- 'aaa' is used during 'JUMP aaa', 'JUMP c, aaa', 'CALL aaa' and 'CALL c, aaa'.
     -- Return vector is used during 'RETURN', 'RETURN c', 'RETURN&LOAD' and 'RETURNI'.
@@ -1257,8 +1258,8 @@ begin
     --
 
     output_data: if (i rem 2)=0 generate
-      attribute hblknm : string;                      
-      attribute hblknm of pc_vector_mux_lut : label is "kcpsm6_vector" & integer'image(i/8);	
+      attribute hblknm : string;
+      attribute hblknm of pc_vector_mux_lut : label is "kcpsm6_vector" & integer'image(i/8);
     begin
 
       pc_vector_mux_lut: LUT6_2
@@ -1284,7 +1285,7 @@ begin
     --
     -- The function performed is defined by pc_mode(2:0).
     --
-    -- pc_mode (2) (1) (0) 
+    -- pc_mode (2) (1) (0)
     --          0   0   1  pc+1 for normal program flow.
     --          1   0   0  Forces interrupt vector value (+0) during active interrupt.
     --                     The vector is defined by a generic with default value FF0 hex.
@@ -1293,10 +1294,10 @@ begin
     --          0   1   1  pc_vector+1 for 'RETURN'.
     --
     -- Note that pc_mode(0) is High during operations that require an increment to occur.
-    -- The LUT6 associated with the LSB must invert pc or pc_vector in these cases and 
+    -- The LUT6 associated with the LSB must invert pc or pc_vector in these cases and
     -- pc_mode(0) also has to be connected to the start of the carry chain.
     --
-    -- 3 Slices 
+    -- 3 Slices
     --     12 x LUT6
     --     11 x MUXCY
     --     12 x XORCY
@@ -1315,9 +1316,9 @@ begin
 
 
     lsb_pc: if i=0 generate
-      attribute hblknm : string;                      
-      attribute hblknm of pc_xorcy : label is "kcpsm6_pc" & integer'image(i/4);	
-      attribute hblknm of pc_muxcy : label is "kcpsm6_pc" & integer'image(i/4);	
+      attribute hblknm : string;
+      attribute hblknm of pc_xorcy : label is "kcpsm6_pc" & integer'image(i/4);
+      attribute hblknm of pc_muxcy : label is "kcpsm6_pc" & integer'image(i/4);
     begin
 
       --
@@ -1326,8 +1327,8 @@ begin
       --
 
       low_int_vector: if interrupt_vector(i)='0' generate
-        attribute hblknm : string;                      
-        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);	
+        attribute hblknm : string;
+        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);
       begin
 
         pc_lut: LUT6
@@ -1337,16 +1338,16 @@ begin
                   I2 => pc(i),
                   I3 => pc_mode(0),
                   I4 => pc_mode(1),
-                  I5 => pc_mode(2), 
+                  I5 => pc_mode(2),
                    O => half_pc(i));
 
       end generate low_int_vector;
 
       high_int_vector: if interrupt_vector(i)='1' generate
-        attribute hblknm : string;                      
-        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);	
+        attribute hblknm : string;
+        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);
       begin
-    
+
         pc_lut: LUT6
         generic map (INIT => X"00AA00FF33CC0F00")
         port map( I0 => register_vector(i),
@@ -1354,7 +1355,7 @@ begin
                   I2 => pc(i),
                   I3 => pc_mode(0),
                   I4 => pc_mode(1),
-                  I5 => pc_mode(2), 
+                  I5 => pc_mode(2),
                    O => half_pc(i));
 
       end generate high_int_vector;
@@ -1377,8 +1378,8 @@ begin
     end generate lsb_pc;
 
     upper_pc: if i>0 generate
-      attribute hblknm : string;                      
-      attribute hblknm of pc_xorcy : label is "kcpsm6_pc" & integer'image(i/4);	
+      attribute hblknm : string;
+      attribute hblknm of pc_xorcy : label is "kcpsm6_pc" & integer'image(i/4);
     begin
 
       --
@@ -1387,10 +1388,10 @@ begin
       --
 
       low_int_vector: if interrupt_vector(i)='0' generate
-        attribute hblknm : string;                      
-        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);	
+        attribute hblknm : string;
+        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);
       begin
-    
+
         pc_lut: LUT6
         generic map (INIT => X"00AA0000CCCCF000")
         port map( I0 => register_vector(i),
@@ -1398,16 +1399,16 @@ begin
                   I2 => pc(i),
                   I3 => pc_mode(0),
                   I4 => pc_mode(1),
-                  I5 => pc_mode(2), 
+                  I5 => pc_mode(2),
                    O => half_pc(i));
 
       end generate low_int_vector;
 
       high_int_vector: if interrupt_vector(i)='1' generate
-        attribute hblknm : string;                      
-        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);	
+        attribute hblknm : string;
+        attribute hblknm of pc_lut : label is "kcpsm6_pc" & integer'image(i/4);
       begin
-    
+
         pc_lut: LUT6
         generic map (INIT => X"00AA00FFCCCCF000")
         port map( I0 => register_vector(i),
@@ -1415,7 +1416,7 @@ begin
                   I2 => pc(i),
                   I3 => pc_mode(0),
                   I4 => pc_mode(1),
-                  I5 => pc_mode(2), 
+                  I5 => pc_mode(2),
                    O => half_pc(i));
 
       end generate high_int_vector;
@@ -1433,8 +1434,8 @@ begin
       -- No MUXCY required at the top of the chain
       --
       mid_pc: if i<11 generate
-        attribute hblknm : string;                      
-        attribute hblknm of pc_muxcy : label is "kcpsm6_pc" & integer'image(i/4);	
+        attribute hblknm : string;
+        attribute hblknm of pc_muxcy : label is "kcpsm6_pc" & integer'image(i/4);
       begin
 
         pc_muxcy: MUXCY
@@ -1459,11 +1460,11 @@ begin
   --
   -------------------------------------------------------------------------------------------
   --
-  -- Stack 
+  -- Stack
   --  Preserves upto 31 nested values of the Program Counter during CALL and RETURN.
   --  Also preserves flags and bank selection during interrupt.
   --
-  --     2 x RAM32M 
+  --     2 x RAM32M
   --     4 x FD
   --     5 x FDR
   --     1 x LUT6
@@ -1500,47 +1501,47 @@ begin
               C => clk);
 
   stack_ram_low : RAM32M
-  generic map (INIT_A => X"0000000000000000", 
-               INIT_B => X"0000000000000000", 
-               INIT_C => X"0000000000000000", 
-               INIT_D => X"0000000000000000") 
-  port map ( DOA(0) => stack_carry_flag, 
+  generic map (INIT_A => X"0000000000000000",
+               INIT_B => X"0000000000000000",
+               INIT_C => X"0000000000000000",
+               INIT_D => X"0000000000000000")
+  port map ( DOA(0) => stack_carry_flag,
              DOA(1) => stack_zero_flag,
              DOB(0) => stack_bank,
              DOB(1) => stack_bit,
-                DOC => stack_memory(1 downto 0), 
+                DOC => stack_memory(1 downto 0),
                 DOD => stack_memory(3 downto 2),
-              ADDRA => stack_pointer(4 downto 0), 
-              ADDRB => stack_pointer(4 downto 0), 
-              ADDRC => stack_pointer(4 downto 0), 
+              ADDRA => stack_pointer(4 downto 0),
+              ADDRB => stack_pointer(4 downto 0),
+              ADDRC => stack_pointer(4 downto 0),
               ADDRD => stack_pointer(4 downto 0),
-             DIA(0) => carry_flag, 
+             DIA(0) => carry_flag,
              DIA(1) => zero_flag,
              DIB(0) => bank,
-             DIB(1) => run, 
+             DIB(1) => run,
                 DIC => pc(1 downto 0),
                 DID => pc(3 downto 2),
-                 WE => t_state(1), 
+                 WE => t_state(1),
                WCLK => clk );
 
   stack_ram_high : RAM32M
-  generic map (INIT_A => X"0000000000000000", 
-               INIT_B => X"0000000000000000", 
-               INIT_C => X"0000000000000000", 
-               INIT_D => X"0000000000000000") 
-  port map (    DOA => stack_memory(5 downto 4), 
+  generic map (INIT_A => X"0000000000000000",
+               INIT_B => X"0000000000000000",
+               INIT_C => X"0000000000000000",
+               INIT_D => X"0000000000000000")
+  port map (    DOA => stack_memory(5 downto 4),
                 DOB => stack_memory(7 downto 6),
                 DOC => stack_memory(9 downto 8),
                 DOD => stack_memory(11 downto 10),
-              ADDRA => stack_pointer(4 downto 0), 
-              ADDRB => stack_pointer(4 downto 0), 
-              ADDRC => stack_pointer(4 downto 0), 
+              ADDRA => stack_pointer(4 downto 0),
+              ADDRB => stack_pointer(4 downto 0),
+              ADDRC => stack_pointer(4 downto 0),
               ADDRD => stack_pointer(4 downto 0),
                 DIA => pc(5 downto 4),
                 DIB => pc(7 downto 6),
                 DIC => pc(9 downto 8),
                 DID => pc(11 downto 10),
-                 WE => t_state(1),  
+                 WE => t_state(1),
                WCLK => clk );
 
 
@@ -1550,8 +1551,8 @@ begin
 
 
     lsb_stack: if i=0 generate
-    attribute hblknm : string;                      
-    attribute hblknm of pointer_flop      : label is "kcpsm6_stack" & integer'image(i/4);	
+    attribute hblknm : string;
+    attribute hblknm of pointer_flop      : label is "kcpsm6_stack" & integer'image(i/4);
     attribute hblknm of stack_pointer_lut : label is "kcpsm6_stack" & integer'image(i/4);
     attribute hblknm of stack_xorcy       : label is "kcpsm6_stack" & integer'image(i/4);
     attribute hblknm of stack_muxcy       : label is "kcpsm6_stack" & integer'image(i/4);
@@ -1570,7 +1571,7 @@ begin
                 I2 => push_stack,
                 I3 => t_state(1),
                 I4 => t_state(2),
-                I5 => '1', 
+                I5 => '1',
                 O5 => feed_pointer_value(i),
                 O6 => half_pointer_value(i));
 
@@ -1588,8 +1589,8 @@ begin
     end generate lsb_stack;
 
     upper_stack: if i>0 generate
-    attribute hblknm : string;                      
-    attribute hblknm of pointer_flop      : label is "kcpsm6_stack" & integer'image(i/4);	
+    attribute hblknm : string;
+    attribute hblknm of pointer_flop      : label is "kcpsm6_stack" & integer'image(i/4);
     attribute hblknm of stack_pointer_lut : label is "kcpsm6_stack" & integer'image(i/4);
     attribute hblknm of stack_xorcy       : label is "kcpsm6_stack" & integer'image(i/4);
     attribute hblknm of stack_muxcy       : label is "kcpsm6_stack" & integer'image(i/4);
@@ -1608,7 +1609,7 @@ begin
                 I2 => push_stack,
                 I3 => t_state(1),
                 I4 => t_state(2),
-                I5 => '1', 
+                I5 => '1',
                 O5 => feed_pointer_value(i),
                 O6 => half_pointer_value(i));
 
@@ -1631,16 +1632,16 @@ begin
   --
   -------------------------------------------------------------------------------------------
   --
-  -- 8-bit Data Path 
+  -- 8-bit Data Path
   --
   -------------------------------------------------------------------------------------------
   --
 
   data_path_loop: for i in 0 to 7 generate
-    attribute hblknm : string;                      
-    attribute hblknm of  arith_logical_lut : label is "kcpsm6_add" & integer'image(i/4);	
-    attribute hblknm of arith_logical_flop : label is "kcpsm6_add" & integer'image(i/4);	
-    attribute hblknm of        alu_mux_lut : label is "kcpsm6_alu" & integer'image(i/4);	
+    attribute hblknm : string;
+    attribute hblknm of  arith_logical_lut : label is "kcpsm6_add" & integer'image(i/4);
+    attribute hblknm of arith_logical_flop : label is "kcpsm6_add" & integer'image(i/4);
+    attribute hblknm of        alu_mux_lut : label is "kcpsm6_alu" & integer'image(i/4);
   begin
 
     --
@@ -1650,7 +1651,7 @@ begin
     --
     -- instruction(12)
     --           0  Register sY
-    --           1  Constant kk 
+    --           1  Constant kk
     --
     --     4 x LUT6_2
     --
@@ -1661,8 +1662,8 @@ begin
     --
 
     output_data: if (i rem 2)=0 generate
-      attribute hblknm : string;                      
-      attribute hblknm of sy_kk_mux_lut : label is "kcpsm6_port_id";	
+      attribute hblknm : string;
+      attribute hblknm of sy_kk_mux_lut : label is "kcpsm6_port_id";
     begin
 
       sy_kk_mux_lut: LUT6_2
@@ -1696,8 +1697,8 @@ begin
     --
 
     second_operand: if (i rem 2)=0 generate
-      attribute hblknm : string;                      
-      attribute hblknm of out_port_lut : label is "kcpsm6_out_port";	
+      attribute hblknm : string;
+      attribute hblknm of out_port_lut : label is "kcpsm6_out_port";
     begin
 
       out_port_lut: LUT6_2
@@ -1758,9 +1759,9 @@ begin
                C => clk);
 
     lsb_arith_logical: if i=0 generate
-      attribute hblknm : string;                      
-      attribute hblknm of arith_logical_muxcy : label is "kcpsm6_add" & integer'image(i/4);	
-      attribute hblknm of arith_logical_xorcy : label is "kcpsm6_add" & integer'image(i/4);	
+      attribute hblknm : string;
+      attribute hblknm of arith_logical_muxcy : label is "kcpsm6_add" & integer'image(i/4);
+      attribute hblknm of arith_logical_xorcy : label is "kcpsm6_add" & integer'image(i/4);
     begin
       --
       -- Carry input to first MUXCY and XORCY
@@ -1779,12 +1780,12 @@ begin
     end generate lsb_arith_logical;
 
     upper_arith_logical: if i>0 generate
-      attribute hblknm : string;                      
-      attribute hblknm of arith_logical_muxcy : label is "kcpsm6_add" & integer'image(i/4);	
-      attribute hblknm of arith_logical_xorcy : label is "kcpsm6_add" & integer'image(i/4);	
+      attribute hblknm : string;
+      attribute hblknm of arith_logical_muxcy : label is "kcpsm6_add" & integer'image(i/4);
+      attribute hblknm of arith_logical_xorcy : label is "kcpsm6_add" & integer'image(i/4);
     begin
       --
-      -- Main carry chain  
+      -- Main carry chain
       --
       arith_logical_muxcy: MUXCY
       port map( DI => logical_carry_mask(i),
@@ -1805,12 +1806,12 @@ begin
     --
     -- Shift and Rotate operations
     --
-    -- Definition of SL0, SL1, SLX, SLA, RL, SR0, SR1, SRX, SRA, and RR 
+    -- Definition of SL0, SL1, SLX, SLA, RL, SR0, SR1, SRX, SRA, and RR
     --
     -- instruction (3) (2) (1) (0)
     --              0   1   1   0  - SL0
     --              0   1   1   1  - SL1
-    --              0   1   0   0  - SLX         
+    --              0   1   0   0  - SLX
     --              0   0   0   0  - SLA
     --              0   0   1   0  - RL
     --              1   1   1   0  - SR0
@@ -1819,11 +1820,11 @@ begin
     --              1   0   0   0  - SRA
     --              1   1   0   0  - RR
     --
-    -- instruction(3) 
+    -- instruction(3)
     --             0 - Left
     --             1 - Right
     --
-    -- instruction (2) (1)  Bit shifted in 
+    -- instruction (2) (1)  Bit shifted in
     --              0   0   Carry_flag
     --              0   1   sX(7)
     --              1   0   sX(0)
@@ -1839,11 +1840,11 @@ begin
     --
 
     low_hwbuild: if hwbuild(i)='0' generate
-      attribute hblknm : string;                      
-      attribute hblknm of shift_rotate_flop : label is "kcpsm6_sandr";	
+      attribute hblknm : string;
+      attribute hblknm of shift_rotate_flop : label is "kcpsm6_sandr";
     begin
       --
-      -- Reset Flip-flop to form '0' for this bit of HWBUILD 
+      -- Reset Flip-flop to form '0' for this bit of HWBUILD
       --
       shift_rotate_flop: FDR
       port map ( D => shift_rotate_value(i),
@@ -1854,11 +1855,11 @@ begin
     end generate low_hwbuild;
 
     high_hwbuild: if hwbuild(i)='1' generate
-      attribute hblknm : string;                      
-      attribute hblknm of shift_rotate_flop : label is "kcpsm6_sandr";	
+      attribute hblknm : string;
+      attribute hblknm of shift_rotate_flop : label is "kcpsm6_sandr";
     begin
       --
-      -- Set Flip-flop to form '1' for this bit of HWBUILD 
+      -- Set Flip-flop to form '1' for this bit of HWBUILD
       --
       shift_rotate_flop: FDS
       port map ( D => shift_rotate_value(i),
@@ -1870,7 +1871,7 @@ begin
 
 
     lsb_shift_rotate: if i=0 generate
-      attribute hblknm : string;                      
+      attribute hblknm : string;
       attribute hblknm of shift_rotate_lut : label is "kcpsm6_sandr";
       attribute hblknm of    shift_bit_lut : label is "kcpsm6_decode1";
     begin
@@ -1905,7 +1906,7 @@ begin
 
 
     mid_shift_rotate: if i=2 or i=4 generate
-      attribute hblknm : string;                      
+      attribute hblknm : string;
       attribute hblknm of shift_rotate_lut : label is "kcpsm6_sandr";
     begin
       --
@@ -1925,7 +1926,7 @@ begin
     end generate mid_shift_rotate;
 
     msb_shift_rotate: if i=6 generate
-      attribute hblknm : string;                      
+      attribute hblknm : string;
       attribute hblknm of shift_rotate_lut : label is "kcpsm6_sandr";
     begin
       --
@@ -1949,7 +1950,7 @@ begin
     --
     -- Multiplex outputs from ALU functions, scratch pad memory and input port.
     --
-    -- alu_mux_sel (1) (0)  
+    -- alu_mux_sel (1) (0)
     --              0   0  Arithmetic and Logical Instructions
     --              0   1  Shift and Rotate Instructions
     --              1   0  Input Port
@@ -1976,7 +1977,7 @@ begin
     -- Scratchpad Memory with output register.
     --
     -- The size of the scratch pad memory is defined by the 'scratch_pad_memory_size' generic.
-    -- The default size is 64 bytes the same as KCPSM3 but this can be increased to 128 or 256 
+    -- The default size is 64 bytes the same as KCPSM3 but this can be increased to 128 or 256
     -- bytes at an additional cost of 2 and 6 Slices.
     --
     --
@@ -1991,8 +1992,8 @@ begin
 
 
     small_spm: if scratch_pad_memory_size = 64 generate
-      attribute hblknm : string;                      
-      attribute hblknm of spm_flop : label is "kcpsm6_spm" & integer'image(i/4);	
+      attribute hblknm : string;
+      attribute hblknm of spm_flop : label is "kcpsm6_spm" & integer'image(i/4);
     begin
 
       spm_flop: FD
@@ -2001,14 +2002,14 @@ begin
                  C => clk);
 
       small_spm_ram: if (i=0 or i=4) generate
-        attribute hblknm of spm_ram  : label is "kcpsm6_spm" & integer'image(i/4);	
+        attribute hblknm of spm_ram  : label is "kcpsm6_spm" & integer'image(i/4);
       begin
 
         spm_ram: RAM64M
         generic map ( INIT_A => X"0000000000000000",
                       INIT_B => X"0000000000000000",
                       INIT_C => X"0000000000000000",
-                      INIT_D => X"0000000000000000") 
+                      INIT_D => X"0000000000000000")
         port map (   DOA => spm_ram_data(i),
                      DOB => spm_ram_data(i+1),
                      DOC => spm_ram_data(i+2),
@@ -2030,9 +2031,9 @@ begin
 
 
     medium_spm: if scratch_pad_memory_size = 128 generate
-      attribute hblknm : string;                      
-      attribute hblknm of spm_ram  : label is "kcpsm6_spm" & integer'image(i/2);	
-      attribute hblknm of spm_flop : label is "kcpsm6_spm" & integer'image(i/2);	
+      attribute hblknm : string;
+      attribute hblknm of spm_ram  : label is "kcpsm6_spm" & integer'image(i/2);
+      attribute hblknm of spm_flop : label is "kcpsm6_spm" & integer'image(i/2);
     begin
 
       spm_ram: RAM128X1S
@@ -2058,9 +2059,9 @@ begin
 
 
     large_spm: if scratch_pad_memory_size = 256 generate
-      attribute hblknm : string;                      
-      attribute hblknm of spm_ram  : label is "kcpsm6_spm" & integer'image(i);	
-      attribute hblknm of spm_flop : label is "kcpsm6_spm" & integer'image(i);	
+      attribute hblknm : string;
+      attribute hblknm of spm_ram  : label is "kcpsm6_spm" & integer'image(i);
+      attribute hblknm of spm_flop : label is "kcpsm6_spm" & integer'image(i);
     begin
 
       spm_ram: RAM256X1S
@@ -2102,43 +2103,43 @@ begin
   --
 
   lower_reg_banks : RAM32M
-  generic map (INIT_A => X"0000000000000000", 
-               INIT_B => X"0000000000000000", 
-               INIT_C => X"0000000000000000", 
-               INIT_D => X"0000000000000000") 
-  port map (    DOA => sy(1 downto 0), 
+  generic map (INIT_A => X"0000000000000000",
+               INIT_B => X"0000000000000000",
+               INIT_C => X"0000000000000000",
+               INIT_D => X"0000000000000000")
+  port map (    DOA => sy(1 downto 0),
                 DOB => sx(1 downto 0),
                 DOC => sy(3 downto 2),
                 DOD => sx(3 downto 2),
-              ADDRA => sy_addr, 
-              ADDRB => sx_addr, 
-              ADDRC => sy_addr, 
-              ADDRD => sx_addr, 
+              ADDRA => sy_addr,
+              ADDRB => sx_addr,
+              ADDRC => sy_addr,
+              ADDRD => sx_addr,
                 DIA => alu_result(1 downto 0),
                 DIB => alu_result(1 downto 0),
                 DIC => alu_result(3 downto 2),
                 DID => alu_result(3 downto 2),
-                 WE => register_enable, 
+                 WE => register_enable,
                WCLK => clk );
 
   upper_reg_banks : RAM32M
-  generic map (INIT_A => X"0000000000000000", 
-               INIT_B => X"0000000000000000", 
-               INIT_C => X"0000000000000000", 
-               INIT_D => X"0000000000000000") 
-  port map (    DOA => sy(5 downto 4), 
+  generic map (INIT_A => X"0000000000000000",
+               INIT_B => X"0000000000000000",
+               INIT_C => X"0000000000000000",
+               INIT_D => X"0000000000000000")
+  port map (    DOA => sy(5 downto 4),
                 DOB => sx(5 downto 4),
                 DOC => sy(7 downto 6),
                 DOD => sx(7 downto 6),
-              ADDRA => sy_addr, 
-              ADDRB => sx_addr, 
-              ADDRC => sy_addr, 
-              ADDRD => sx_addr, 
+              ADDRA => sy_addr,
+              ADDRB => sx_addr,
+              ADDRC => sy_addr,
+              ADDRD => sx_addr,
                 DIA => alu_result(5 downto 4),
                 DIB => alu_result(5 downto 4),
                 DIC => alu_result(7 downto 6),
                 DID => alu_result(7 downto 6),
-                 WE => register_enable, 
+                 WE => register_enable,
                WCLK => clk );
 
 
@@ -2155,7 +2156,7 @@ begin
 
   address <= pc;
   bram_enable <= t_state(2);
- 
+
   --
   -------------------------------------------------------------------------------------------
   --
@@ -2180,7 +2181,7 @@ begin
 --
 -- Disassemble the instruction codes to form a text string for display.
 -- Determine status of reset and flags and present in the form of a text string.
--- Provide signals to simulate the contents of each register and scratch pad memory 
+-- Provide signals to simulate the contents of each register and scratch pad memory
 -- location.
 --
 -------------------------------------------------------------------------------------------
@@ -2268,14 +2269,14 @@ begin
   -----------------------------------------------------------------------------------------
   --
   begin
-     
+
     -- decode first register sX
     sx_decode(1) := 's';
-    sx_decode(2) := hexcharacter(instruction(11 downto 8));             
+    sx_decode(2) := hexcharacter(instruction(11 downto 8));
 
     -- decode second register sY
     sy_decode(1) := 's';
-    sy_decode(2) := hexcharacter(instruction(7 downto 4));  
+    sy_decode(2) := hexcharacter(instruction(7 downto 4));
 
     -- decode constant value
     kk_decode(1) := hexcharacter(instruction(7 downto 4));
@@ -2384,7 +2385,7 @@ begin
 
 
     -- Flag status information
-    
+
     if zero_flag = '0' then
       kcpsm6_status(3 to 5) <= "NZ,";
      else
@@ -2403,9 +2404,9 @@ begin
       kcpsm6_status(9 to 10) <= "IE";
     end if;
 
-    -- Operational status 
+    -- Operational status
 
-    if clk'event and clk = '1' then 
+    if clk'event and clk = '1' then
       if internal_reset = '1' then
         kcpsm6_status(11 to 16) <= ",Reset";
        else
@@ -2419,7 +2420,7 @@ begin
 
 
     -- Simulation of register contents
-    if clk'event and clk = '1' then 
+    if clk'event and clk = '1' then
       if register_enable = '1' then
         case sx_addr is
           when "00000" => bank_a_s0 := alu_result;
@@ -2724,7 +2725,7 @@ begin
     end if;
 
     --
-    -- Assignment of internal register variables to active registers 
+    -- Assignment of internal register variables to active registers
     --
     if bank = '0' then
       kcpsm6_status(1 to 2) <= "A,";
@@ -2766,7 +2767,7 @@ begin
 
     --
   end process simulation;
-  
+
   --synthesis translate on
 --
 -- **************************

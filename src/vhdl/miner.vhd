@@ -5,7 +5,6 @@ entity miner is
     port
     (
         clk         : in std_logic;
-        miner_int   : in std_logic;
 
         uart_tx_pin : out std_logic;
         uart_rx_pin : in std_logic
@@ -145,10 +144,17 @@ architecture behavioral of miner is
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
 
     -- signals for the workers
+    signal worker_select      : std_logic_vector(7 downto 0) := (others => '0');
+
     signal worker1_data_in    : std_logic_vector(7 downto 0) := (others => '0');
     signal worker1_data_out   : std_logic_vector(7 downto 0) := (others => '0');
     signal worker1_status_in  : std_logic_vector(7 downto 0) := (others => '0');
     signal worker1_status_out : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker2_data_in    : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_data_out   : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_status_in  : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_status_out : std_logic_vector(7 downto 0) := (others => '0');
 
 begin
     bram_we      <= (others => '0');
@@ -158,6 +164,7 @@ begin
     parity_buf   <= (others => '0');
 
     interrupt    <= interrupt_ack;
+    kcpsm6_sleep <= '0';
 
     picoblaze : kcpsm6
         generic map
@@ -248,6 +255,18 @@ begin
             status_out => worker1_status_out
         );
 
+    worker2 : core
+        port map
+        (
+            clk        => clk,
+
+            data_in    => worker2_data_in,
+            data_out   => worker2_data_out,
+
+            status_in  => worker2_status_in,
+            status_out => worker2_status_out
+        );
+
     baud_rate: process(clk)
     begin
         if rising_edge(clk) then
@@ -286,7 +305,9 @@ begin
                         uart_buffer_write  <= '1';
                         uart_data_in       <= out_port;
 
-                    when others => null;
+                    when '1' => NULL;
+
+                    when others => NULL;
                 end case;
             end if;
 

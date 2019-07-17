@@ -6,19 +6,15 @@ entity miner_tb is
 end miner_tb;
 
 architecture behavioral of miner_tb is
-    component sim_clk_wrapper
-        port
-        (
-            sim_clk_out : out std_logic;
-            sim_rst_out : out std_logic
-        );
+    component sim_clk is
+        generic(PERIOD : time := 10 ns);
+        port(clk_out : out std_logic);
     end component;
 
     component miner is
         port
         (
             clk         : in std_logic;
-            miner_int   : in std_logic;
 
             uart_tx_pin : out std_logic;
             uart_rx_pin : in std_logic
@@ -57,7 +53,6 @@ architecture behavioral of miner_tb is
 
     -- signals for the clock
     signal clk             : std_logic := '0';
-    signal rst             : std_logic := '0';
 
     -- signals for the UART
     signal baud_count        : integer range 0 to 53        := 0;
@@ -76,8 +71,9 @@ architecture behavioral of miner_tb is
     signal uart_rx_pin       : std_logic                    := '0';
 
 begin
-    sim_clk_gen : sim_clk_wrapper
-        port map (sim_clk_out => clk);
+    sim_clk_gen : sim_clk
+        generic map (PERIOD => 10 ps)
+        port map (clk_out => clk);
 
     uart_tx: uart_tx6
         port map
@@ -111,7 +107,6 @@ begin
         port map
         (
             clk => clk,
-            miner_int => rst,
 
             uart_tx_pin => uart_rx_pin,
             uart_rx_pin => uart_tx_pin
@@ -132,8 +127,8 @@ begin
 
     simulate : process
     begin
-        uart_buffer_read <= '1';
         wait until rising_edge(clk);
+        uart_buffer_read <= '1';
 
         uart_buffer_write <= '1';
         uart_data_in      <= x"01";
@@ -241,7 +236,7 @@ begin
 
         uart_buffer_write <= '0';
         uart_data_in      <= (others => '0');
-        wait for 2000ms;
+        wait for 2000 ms;
     end process simulate;
 
 end behavioral;
