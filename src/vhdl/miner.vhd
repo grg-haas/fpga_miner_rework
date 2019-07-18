@@ -1,6 +1,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+use std.textio.all;
+
 entity miner is
     port
     (
@@ -283,11 +285,20 @@ begin
     uart_buffer_read <= read_strobe when port_id(2 downto 0) = "001" else '0';
 
     input_ports : process(clk)
+        variable l : line;
+
     begin
         if rising_edge(clk) then
             case port_id(0) is
-                when '0' => in_port <= uart_data_out;
-                when '1' => in_port <= "00" & uart_status;
+                when '0' =>
+                    in_port <= uart_data_out;
+                    write(l, String'("Miner is inputting UART data!"));
+                    writeline(output, l);
+
+                when '1' =>
+                    in_port <= "00" & uart_status;
+                    write(l, String'("Miner is checking UART status!"));
+                    writeline(output, l);
 
                 when others => in_port <= (others => '0');
             end case;

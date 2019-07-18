@@ -1,23 +1,28 @@
+# makefile settings
+MAIN_TB   := miner_tb
+STOP_TIME := 1ms
+
 KCPSM6_PROGRAMS := main core
 VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core
 VHDL_SIMULATION := sim_clk miner_tb
 
+# various forms of the module names
 OBJ_KCPSM6_PROGRAMS := $(addprefix out/obj/, $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)))
 OBJ_VHDL_DESIGN     := $(addprefix out/obj/, $(addsuffix .o, $(VHDL_DESIGN)))
 OBJ_VHDL_SIMULATION := $(addprefix out/obj/, $(addsuffix .o, $(VHDL_SIMULATION)))
 
 VHD_KCPSM6_PROGRAMS := $(addprefix out/vhdl/, $(addsuffix _prog.vhd, $(KCPSM6_PROGRAMS)))
 
+# command args
 GHDL_ARGS := --workdir=out/obj \
 			 --ieee=synopsys   \
-			 -fexplicit        \
+			 -fexplicit -Whide        \
 			 -P/home/grg/Projects/fpga/xilinx_libs -O2
 
-MAIN_TB   := miner_tb
-STOP_TIME := 10us
+SIM_ARGS := --stop-time=$(STOP_TIME) --wave=out/sim_wave.ghw --unbuffered
 
 simulate: out/$(MAIN_TB)
-	./out/$(MAIN_TB) --stop-time=$(STOP_TIME) --wave=out/sim_wave.ghw
+	./out/$(MAIN_TB) $(SIM_ARGS)
 	( gtkwave out/sim_wave.ghw ) &
 
 out/$(MAIN_TB) : $(addprefix out/obj/, 						 \
