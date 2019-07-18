@@ -157,6 +157,11 @@ architecture behavioral of miner is
     signal worker1_status_in  : std_logic_vector(7 downto 0) := (others => '0');
     signal worker1_status_out : std_logic_vector(7 downto 0) := (others => '0');
 
+    signal worker2_data_in    : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_data_out   : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_status_in  : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_status_out : std_logic_vector(7 downto 0) := (others => '0');
+
 begin
     bram_we      <= (others => '0');
     bram_addr_in <= (others => '0');
@@ -263,11 +268,33 @@ begin
             status_out => worker1_status_out
         );
 
-    self_data_in <= worker1_data_in when worker_select = "00000001"
+    worker2_data_in <= self_data_out when worker_select = "00000000" or
+                                          worker_select = "00000010"
+                                     else (others => '0');
+
+    worker2_status_in <= self_status_out when worker_select = "00000000" or
+                                              worker_select = "00000010"
+                                         else (others => '0');
+
+    worker2 : core
+        port map
+        (
+            clk        => clk,
+
+            data_in    => worker2_data_in,
+            data_out   => worker2_data_out,
+
+            status_in  => worker2_status_in,
+            status_out => worker2_status_out
+        );
+
+    self_data_in <= worker1_data_in when worker_select = "00000001" else
+                    worker2_data_in when worker_select = "00000010"
                                     else (others => '0');
 
-    self_status_in <= worker1_status_in when worker_select = "00000001"
-                                        else (others => '0');
+    self_status_in <= worker1_status_in when worker_select = "00000001" else
+                      worker2_status_in when worker_select = "00000010"
+                                        else "10000000"; -- so miner doesn't lock itself asleep
 
     baud_rate: process(clk)
     begin

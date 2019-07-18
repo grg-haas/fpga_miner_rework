@@ -97,6 +97,8 @@ architecture behavioral of core is
 
 begin
     bram_addr_in <= '1' & addr_buf(10 downto 0) & "1111";
+    bram_we      <= status_out_buf(6) & status_out_buf(6) &
+                    status_out_buf(6) & status_out_buf(6);
 
     interrupt    <= interrupt_ack;
     kcpsm6_sleep <= status_out_buf(7) and not status_in(7);
@@ -185,6 +187,12 @@ begin
                             parity_buf <= out_port(3 downto 0);
                         else
                             status_out_buf <= out_port;
+
+                            if out_port(5) = '1' then
+                                addr_buf   <= (others => '0');
+                                data_buf   <= (others => '0');
+                                parity_buf <= (others => '0');
+                            end if;
                         end if;
 
                     when "010" => addr_buf(7 downto 0)  <= out_port;

@@ -17,7 +17,17 @@ CONSTANT    op_bram_data_byte1, 00000101'b
 CONSTANT    op_bram_data_byte2, 00000110'b
 CONSTANT    op_bram_data_byte3, 00000111'b
 
-CONSTANT cmd_bram_we, 00010000'b
-CONSTANT cmd_reset_intf, 00100000'b
+CONSTANT    cmd_bram_we,        01000000'b
+CONSTANT    cmd_reset_intf,     00100000'b
 
-LOAD s0, s0
+init:
+    LOAD    s0,     00
+    LOAD    s1,     00
+    LOAD    sF,     00
+
+main:
+    ADD     s0,     01
+    SUB     s1,     01
+
+    ADD     sF,     s0
+    ADD     sF,     s1
