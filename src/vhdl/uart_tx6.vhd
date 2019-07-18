@@ -1,6 +1,7 @@
---
+-- args: --ieee=synopsys -P/home/grg/Projects/fpga/xilinx_libs
+
 -------------------------------------------------------------------------------------------
--- Copyright © 2011, Xilinx, Inc.
+-- Copyright ï¿½ 2011, Xilinx, Inc.
 -- This file contains confidential and proprietary information of Xilinx, Inc. and is
 -- protected under U.S. and international copyright and other intellectual property laws.
 -------------------------------------------------------------------------------------------
@@ -40,7 +41,7 @@
 --
 -- 8 bit, no parity, 1 stop bit
 --
--- This module was made for use with Spartan-6 Generation Devices and is also ideally 
+-- This module was made for use with Spartan-6 Generation Devices and is also ideally
 -- suited for use with Virtex-6 and 7-Series devices.
 --
 -- Version 1 - 31st March 2011.
@@ -60,11 +61,11 @@
 -- Format of this file.
 --
 -- The module defines the implementation of the logic using Xilinx primitives.
--- These ensure predictable synthesis results and maximise the density of the 
--- implementation. The Unisim Library is used to define Xilinx primitives. It is also 
--- used during simulation. 
+-- These ensure predictable synthesis results and maximise the density of the
+-- implementation. The Unisim Library is used to define Xilinx primitives. It is also
+-- used during simulation.
 -- The source can be viewed at %XILINX%\vhdl\src\unisims\unisim_VCOMP.vhd
--- 
+--
 -------------------------------------------------------------------------------------------
 --
 -- Library declarations
@@ -79,7 +80,7 @@ use unisim.vcomponents.all;
 --
 -------------------------------------------------------------------------------------------
 --
--- Main Entity for 
+-- Main Entity for
 --
 entity uart_tx6 is
   Port (             data_in : in std_logic_vector(7 downto 0);
@@ -96,7 +97,7 @@ entity uart_tx6 is
 -------------------------------------------------------------------------------------------
 --
 -- Start of Main Architecture for uart_tx6
---	 
+--
 architecture low_level_definition of uart_tx6 is
 --
 -------------------------------------------------------------------------------------------
@@ -133,7 +134,7 @@ signal        buffer_read : std_logic;
 -------------------------------------------------------------------------------------------
 --
 --
-attribute hblknm : string; 
+attribute hblknm : string;
 attribute hblknm of      pointer3_lut : label is "uart_tx6_1";
 attribute hblknm of     pointer3_flop : label is "uart_tx6_1";
 attribute hblknm of      pointer2_lut : label is "uart_tx6_1";
@@ -175,13 +176,13 @@ attribute hblknm of          full_lut : label is "uart_tx6_4";
 -- Start of uart_tx6 circuit description
 --
 -------------------------------------------------------------------------------------------
---	
+--
 begin
 
   -- SRL16E data storage
 
   data_width_loop: for i in 0 to 7 generate
-    attribute hblknm : string; 
+    attribute hblknm : string;
     attribute hblknm of  storage_srl : label is "uart_tx6_5";
     attribute hblknm of storage_flop : label is "uart_tx6_5";
 
@@ -204,7 +205,7 @@ begin
                 C => clk);
 
   end generate data_width_loop;
- 
+
 
   pointer3_lut: LUT6
   generic map (INIT => X"FF00FE00FF80FF00")
@@ -214,7 +215,7 @@ begin
             I3 => pointer(3),
             I4 => buffer_write,
             I5 => buffer_read,
-             O => pointer_value(3));                     
+             O => pointer_value(3));
 
   pointer3_flop: FDR
   port map (  D => pointer_value(3),
@@ -230,7 +231,7 @@ begin
             I3 => pointer(3),
             I4 => buffer_write,
             I5 => buffer_read,
-             O => pointer_value(2));                     
+             O => pointer_value(2));
 
   pointer2_flop: FDR
   port map (  D => pointer_value(2),
@@ -271,7 +272,7 @@ begin
             I4 => full_int,
             I5 => '1',
             O5 => en_pointer,
-            O6 => data_present_value);                     
+            O6 => data_present_value);
 
   data_present_flop: FDR
   port map (  D => data_present_value,
@@ -298,7 +299,7 @@ begin
             I3 => data(3),
             I4 => sm(0),
             I5 => sm(1),
-             O => lsb_data);                     
+             O => lsb_data);
 
 
   msb_data_lut: LUT6
@@ -309,7 +310,7 @@ begin
             I3 => data(7),
             I4 => sm(0),
             I5 => sm(1),
-             O => msb_data);                     
+             O => msb_data);
 
   serial_lut: LUT6_2
   generic map (INIT => X"CFAACC0F0FFFFFFF")
@@ -335,7 +336,7 @@ begin
             I3 => sm(3),
             I4 => data_present_int,
             I5 => next_bit,
-             O => sm_value(0));                     
+             O => sm_value(0));
 
   sm0_flop: FD
   port map (  D => sm_value(0),
@@ -350,7 +351,7 @@ begin
             I3 => sm(3),
             I4 => data_present_int,
             I5 => next_bit,
-             O => sm_value(1));                     
+             O => sm_value(1));
 
   sm1_flop: FD
   port map (  D => sm_value(1),
@@ -365,7 +366,7 @@ begin
             I3 => sm(3),
             I4 => data_present_int,
             I5 => next_bit,
-             O => sm_value(2));                     
+             O => sm_value(2));
 
   sm2_flop: FD
   port map (  D => sm_value(2),
@@ -380,7 +381,7 @@ begin
             I3 => sm(3),
             I4 => data_present_int,
             I5 => next_bit,
-             O => sm_value(3));                     
+             O => sm_value(3));
 
   sm3_flop: FD
   port map (  D => sm_value(3),
@@ -454,8 +455,8 @@ begin
 
   -- assign internal signals to outputs
 
-  buffer_full <= full_int;  
-  buffer_half_full <= pointer(3);  
+  buffer_full <= full_int;
+  buffer_half_full <= pointer(3);
   buffer_data_present <= data_present_int;
 
 end low_level_definition;
@@ -465,5 +466,3 @@ end low_level_definition;
 -- END OF FILE uart_tx6.vhd
 --
 -------------------------------------------------------------------------------------------
-
-

@@ -65,7 +65,7 @@ architecture behavioral of miner_tb is
     signal uart_data_in      : std_logic_vector(7 downto 0) := (others => '0');
     signal uart_data_out     : std_logic_vector(7 downto 0) := (others => '0');
     signal uart_buffer_write : std_logic                    := '0';
-    signal uart_buffer_read  : std_logic                    := '0';
+    signal uart_buffer_read  : std_logic                    := '1';
     signal uart_reset        : std_logic                    := '0';
 
     signal uart_tx_pin       : std_logic                    := '0';
@@ -73,7 +73,7 @@ architecture behavioral of miner_tb is
 
 begin
     sim_clk_gen : sim_clk
-        generic map (PERIOD => 10 ps)
+        generic map (PERIOD => 10 ns)
         port map (clk_out => clk);
 
     uart_tx: uart_tx6
