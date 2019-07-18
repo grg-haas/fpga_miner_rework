@@ -165,7 +165,7 @@ begin
     parity_buf   <= (others => '0');
 
     interrupt    <= interrupt_ack;
-    kcpsm6_sleep <= self_status_out(7);
+    kcpsm6_sleep <= self_status_out(7) and not self_status_in(7);
 
     picoblaze : kcpsm6
         generic map

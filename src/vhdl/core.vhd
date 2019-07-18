@@ -90,8 +90,19 @@ architecture behavioral of core is
     signal data_buf        : std_logic_vector(31 downto 0) := (others => '0');
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
 
+    -- status and data out buffers
+
+    signal status_out_buf : std_logic_vector(7 downto 0) := (others => '0');
+    signal data_out_buf   : std_logic_vector(7 downto 0) := (others => '0');
+
 begin
     bram_addr_in <= '1' & addr_buf(10 downto 0) & "1111";
+
+    interrupt    <= interrupt_ack;
+    kcpsm6_sleep <= status_out_buf(7) and not status_in(7);
+
+    data_out   <= data_out_buf;
+    status_out <= status_out_buf;
 
     picoblaze : kcpsm6
         generic map
@@ -168,12 +179,12 @@ begin
 
             if write_strobe = '1' or k_write_strobe = '1' then
                 case port_id(2 downto 0) is
-                    when "000" => data_out <= out_port;
+                    when "000" => data_out_buf <= out_port;
                     when "001" => -- not great but it works!
                         if out_port(7 downto 4) = "0000" then
                             parity_buf <= out_port(3 downto 0);
                         else
-                            status_out <= out_port;
+                            status_out_buf <= out_port;
                         end if;
 
                     when "010" => addr_buf(7 downto 0)  <= out_port;
