@@ -73,7 +73,6 @@ architecture behavioral of miner_tb is
 
 begin
     sim_clk_gen : sim_clk
-        generic map (PERIOD => 10 ns)
         port map (clk_out => clk);
 
     uart_tx: uart_tx6
