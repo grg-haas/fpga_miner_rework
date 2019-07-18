@@ -143,6 +143,20 @@ architecture behavioral of miner is
     signal data_buf        : std_logic_vector(31 downto 0) := (others => '0');
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
 
+    -- signals for managing the workers
+    signal worker_select      : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal self_data_in       : std_logic_vector(7 downto 0) := (others => '0');
+    signal self_data_out      : std_logic_vector(7 downto 0) := (others => '0');
+    signal self_status_in     : std_logic_vector(7 downto 0) := (others => '0');
+    signal self_status_out    : std_logic_vector(7 downto 0) := (others => '0');
+
+    -- signals for the workers
+    signal worker1_data_in    : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_data_out   : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_status_in  : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_status_out : std_logic_vector(7 downto 0) := (others => '0');
+
 begin
     bram_we      <= (others => '0');
     bram_addr_in <= (others => '0');
@@ -151,7 +165,7 @@ begin
     parity_buf   <= (others => '0');
 
     interrupt    <= interrupt_ack;
-    kcpsm6_sleep <= '0';
+    kcpsm6_sleep <= self_status_out(7);
 
     picoblaze : kcpsm6
         generic map
@@ -230,6 +244,31 @@ begin
             clk                 => clk
         );
 
+    worker1_data_in <= self_data_out when worker_select = "00000000" or
+                                          worker_select = "00000001"
+                                     else (others => '0');
+
+    worker1_status_in <= self_status_out when worker_select = "00000000" or
+                                              worker_select = "00000001"
+                                         else (others => '0');
+    worker1 : core
+        port map
+        (
+            clk        => clk,
+
+            data_in    => worker1_data_in,
+            data_out   => worker1_data_out,
+
+            status_in  => worker1_status_in,
+            status_out => worker1_status_out
+        );
+
+    self_data_in <= worker1_data_in when worker_select = "00000001"
+                                    else (others => '0');
+
+    self_status_in <= worker1_status_in when worker_select = "00000001"
+                                        else (others => '0');
+
     baud_rate: process(clk)
     begin
         if rising_edge(clk) then
@@ -248,9 +287,12 @@ begin
     input_ports : process(clk)
     begin
         if rising_edge(clk) then
-            case port_id(0) is
-                when '0' => in_port <= uart_data_out;
-                when '1' => in_port <= "00" & uart_status;
+            case port_id(1 downto 0) is
+                when "00" => in_port <= "00" & uart_status;
+                when "01" => in_port <= uart_data_out;
+
+                when "10" => in_port <= self_status_in;
+                when "11" => in_port <= self_data_in;
 
                 when others => in_port <= (others => '0');
             end case;
@@ -263,12 +305,14 @@ begin
             uart_buffer_write <= '0';
 
             if write_strobe = '1' or k_write_strobe = '1' then
-                case port_id(0) is
-                    when '0' =>
+                case port_id(1 downto 0) is
+                    when "00" =>
                         uart_buffer_write  <= '1';
                         uart_data_in       <= out_port;
 
-                    when '1' => NULL;
+                    when "01" => worker_select   <= out_port;
+                    when "10" => self_status_out <= out_port;
+                    when "11" => self_data_out   <= out_port;
 
                     when others => NULL;
                 end case;
