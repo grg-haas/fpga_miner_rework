@@ -89,6 +89,7 @@ architecture behavioral of core is
     signal addr_buf        : std_logic_vector(15 downto 0) := (others => '0');
     signal data_buf        : std_logic_vector(31 downto 0) := (others => '0');
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
+
 begin
     bram_addr_in <= '1' & addr_buf(10 downto 0) & "1111";
 
@@ -140,4 +141,52 @@ begin
             enable_b     => '1',
             we_b         => bram_we
         );
+
+    input_ports : process(clk)
+    begin
+        if rising_edge(clk) then
+            case port_id(2 downto 0) is
+                when "000" => in_port <= data_in;
+                when "001" => in_port <= status_in;
+
+                when "010" => in_port <= (others => '0'); --reserved
+
+                when "011" => in_port <= "0000" & parity_buf;
+                when "100" => in_port <= data_buf(7 downto 0);
+                when "101" => in_port <= data_buf(15 downto 8);
+                when "110" => in_port <= data_buf(23 downto 16);
+                when "111" => in_port <= data_buf(31 downto 24);
+
+                when others => in_port <= (others => '0');
+            end case;
+        end if;
+    end process input_ports;
+
+    output_ports : process(clk)
+    begin
+        if rising_edge(clk) then
+
+            if write_strobe = '1' or k_write_strobe = '1' then
+                case port_id(2 downto 0) is
+                    when "000" => data_out <= out_port;
+                    when "001" => -- not great but it works!
+                        if out_port(7 downto 4) = "0000" then
+                            parity_buf <= out_port(3 downto 0);
+                        else
+                            status_out <= out_port;
+                        end if;
+
+                    when "010" => addr_buf(7 downto 0)  <= out_port;
+                    when "011" => addr_buf(15 downto 8) <= out_port;
+
+                    when "100" => data_buf(7 downto 0) <= out_port;
+                    when "101" => data_buf(15 downto 8) <= out_port;
+                    when "110" => data_buf(23 downto 16) <= out_port;
+                    when "111" => data_buf(31 downto 24) <= out_port;
+
+                    when others => NULL;
+                end case;
+            end if;
+        end if;
+    end process output_ports;
 end behavioral;

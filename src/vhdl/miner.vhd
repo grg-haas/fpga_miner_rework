@@ -288,11 +288,11 @@ begin
     begin
         if rising_edge(clk) then
             case port_id(1 downto 0) is
-                when "00" => in_port <= "00" & uart_status;
-                when "01" => in_port <= uart_data_out;
+                when "00" => in_port <= uart_data_out;
+                when "01" => in_port <= "00" & uart_status;
 
-                when "10" => in_port <= self_status_in;
-                when "11" => in_port <= self_data_in;
+                when "10" => in_port <= self_data_in;
+                when "11" => in_port <= self_status_in;
 
                 when others => in_port <= (others => '0');
             end case;
@@ -311,8 +311,8 @@ begin
                         uart_data_in       <= out_port;
 
                     when "01" => worker_select   <= out_port;
-                    when "10" => self_status_out <= out_port;
-                    when "11" => self_data_out   <= out_port;
+                    when "10" => self_data_out   <= out_port;
+                    when "11" => self_status_out <= out_port;
 
                     when others => NULL;
                 end case;

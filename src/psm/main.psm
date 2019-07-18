@@ -1,12 +1,12 @@
-CONSTANT    ip_uart_status,     00000000'b
-CONSTANT    ip_uart_data,       00000001'b
-CONSTANT    ip_worker_status,   00000010'b
-CONSTANT    ip_worker_data,     00000011'b
+CONSTANT    ip_uart_data,       00000000'b
+CONSTANT    ip_uart_status,     00000001'b
+CONSTANT    ip_worker_data,     00000010'b
+CONSTANT    ip_worker_status,   00000011'b
 
 CONSTANT    op_uart_data,       00000000'b
 CONSTANT    op_worker_sel,      00000001'b
-CONSTANT    op_self_status,     00000010'b
-CONSTANT    op_self_data,       00000011'b
+CONSTANT    op_self_data,       00000010'b
+CONSTANT    op_self_status,     00000011'b
 
 CONSTANT    tx_bufd_pres,       00100000'b
 CONSTANT    tx_bufd_half,       00010000'b
