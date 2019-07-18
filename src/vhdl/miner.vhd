@@ -1,8 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-use std.textio.all;
-
 entity miner is
     port
     (
@@ -145,19 +143,6 @@ architecture behavioral of miner is
     signal data_buf        : std_logic_vector(31 downto 0) := (others => '0');
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
 
-    -- signals for the workers
-    signal worker_select      : std_logic_vector(7 downto 0) := (others => '0');
-
-    signal worker1_data_in    : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker1_data_out   : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker1_status_in  : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker1_status_out : std_logic_vector(7 downto 0) := (others => '0');
-
-    signal worker2_data_in    : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker2_data_out   : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker2_status_in  : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker2_status_out : std_logic_vector(7 downto 0) := (others => '0');
-
 begin
     bram_we      <= (others => '0');
     bram_addr_in <= (others => '0');
@@ -245,30 +230,6 @@ begin
             clk                 => clk
         );
 
-    worker1 : core
-        port map
-        (
-            clk        => clk,
-
-            data_in    => worker1_data_in,
-            data_out   => worker1_data_out,
-
-            status_in  => worker1_status_in,
-            status_out => worker1_status_out
-        );
-
-    worker2 : core
-        port map
-        (
-            clk        => clk,
-
-            data_in    => worker2_data_in,
-            data_out   => worker2_data_out,
-
-            status_in  => worker2_status_in,
-            status_out => worker2_status_out
-        );
-
     baud_rate: process(clk)
     begin
         if rising_edge(clk) then
@@ -285,20 +246,11 @@ begin
     uart_buffer_read <= read_strobe when port_id(2 downto 0) = "001" else '0';
 
     input_ports : process(clk)
-        variable l : line;
-
     begin
         if rising_edge(clk) then
             case port_id(0) is
-                when '0' =>
-                    in_port <= uart_data_out;
-                    write(l, String'("Miner is inputting UART data!"));
-                    writeline(output, l);
-
-                when '1' =>
-                    in_port <= "00" & uart_status;
-                    write(l, String'("Miner is checking UART status!"));
-                    writeline(output, l);
+                when '0' => in_port <= uart_data_out;
+                when '1' => in_port <= "00" & uart_status;
 
                 when others => in_port <= (others => '0');
             end case;

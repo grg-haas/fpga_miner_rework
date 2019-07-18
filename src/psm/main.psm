@@ -13,7 +13,6 @@ CONSTANT    rx_bufd_full,       00000001'b
 main:
     CALL    recv_uart_data
     CALL    send_uart_data
-    CALL    send_uart_data
     JUMP    main
 
 recv_uart_data:

@@ -26,8 +26,8 @@ simulate: out/$(MAIN_TB)
 	( gtkwave out/sim_wave.ghw ) &
 
 out/$(MAIN_TB) : $(addprefix out/obj/, 						 \
-				$(addsuffix _prog.o, $(KCPSM6_PROGRAMS)) \
-				$(addsuffix .o, $(VHDL_DESIGN) $(VHDL_SIMULATION)))
+				    $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)) \
+				    $(addsuffix .o, $(VHDL_DESIGN) $(VHDL_SIMULATION)))
 
 	ghdl -e $(GHDL_ARGS) -o $@ $(notdir $@)
 	@echo "Elaboration finished, beginning simulation..."
