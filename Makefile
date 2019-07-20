@@ -66,9 +66,10 @@ $(VHD_KCPSM6_PROGRAMS): out/vhdl/%_prog.vhd: src/psm/%.psm
 		    -t src/psm/templates/$(basename $(notdir $<))_form.vhd \
 		    -i $< -o out/vhdl/
 
-	@# rm out/vhdl/$(basename $(notdir $@)).log
-	@rm out/vhdl/$(basename $(notdir $@)).mem
-	@rm out/vhdl/$(basename $(notdir $<)).fmt
+	@mkdir -p out/debug
+	@mv out/vhdl/$(basename $(notdir $@)).log out/debug
+	@mv out/vhdl/$(basename $(notdir $@)).mem out/debug
+	@mv out/vhdl/$(basename $(notdir $<)).fmt out/debug
 
 clean:
 	rm -rf out
