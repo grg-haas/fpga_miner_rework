@@ -288,13 +288,13 @@ begin
             status_out => worker2_status_out
         );
 
-    self_data_in <= worker1_data_in when worker_select = "00000001" else
-                    worker2_data_in when worker_select = "00000010"
-                                    else (others => '0');
+    self_data_in <= worker1_data_out when worker_select = "00000001" else
+                    worker2_data_out when worker_select = "00000010"
+                                     else (others => '0');
 
-    self_status_in <= worker1_status_in when worker_select = "00000001" else
-                      worker2_status_in when worker_select = "00000010"
-                                        else "10000000"; -- so miner doesn't lock itself asleep
+    self_status_in <= worker1_status_out when worker_select = "00000001" else
+                      worker2_status_out when worker_select = "00000010"
+                                         else "10000000"; -- so miner doesn't lock itself asleep
 
     baud_rate: process(clk)
     begin

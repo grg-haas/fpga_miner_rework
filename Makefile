@@ -28,6 +28,7 @@ COLOR_BLUE  := \033[0;34m
 COLOR_NC    := \033[0m
 
 simulate: out/$(MAIN_TB)
+	@echo "$(COLOR_BLUE)~~~Elaboration finished, beginning simulation...~~~$(COLOR_NC)"
 	time -p ./out/$(MAIN_TB) $(SIM_ARGS)
 	@echo "$(COLOR_BLUE)~~~Simulation finished, launching viewer...~~~$(COLOR_NC)"
 	@gtkwave out/sim_wave.ghw conf/$(MAIN_TB).gtkw
@@ -39,7 +40,6 @@ out/$(MAIN_TB) : $(addprefix out/obj/, 						 \
 				    $(addsuffix .o, $(VHDL_DESIGN) $(VHDL_SIMULATION)))
 
 	ghdl -e $(GHDL_ARGS) -o $@ $(notdir $@)
-	@echo "$(COLOR_BLUE)~~~Elaboration finished, beginning simulation...~~~$(COLOR_NC)"
 
 $(OBJ_KCPSM6_PROGRAMS): out/obj/%.o: out/vhdl/%.vhd
 	@mkdir -p out/obj
