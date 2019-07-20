@@ -6,7 +6,7 @@ use std.textio.all;
 entity sim_clk is
     generic
     (
-        PERIOD : time := 10 ns;
+        PERIOD      : time := 10 ns;
         REPORT_TIME : time := 10 us
     );
     port(clk_out : out std_logic);

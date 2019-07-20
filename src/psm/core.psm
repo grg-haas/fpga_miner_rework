@@ -56,13 +56,17 @@ send_ipc_data_loop:
     OUTPUT  s0,     op_self_data
     COMPARE sF,     00
     JUMP    NZ,     send_ipc_data_loop
+
     OUTPUTK cmd_send_done, op_status_parity
+    OUTPUTK 00,     op_status_parity
+    RETURN
 
 recv_ipc_data:
     OUTPUTK cmd_request_sync, op_status_parity
     ADD     s0,     00
     ADD     s0,     00
     OUTPUTK 00,     op_status_parity
+    ADD     s0,     00
     ADD     s0,     00
     ADD     s0,     00
     ADD     s0,     00

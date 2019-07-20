@@ -24,13 +24,14 @@ CONSTANT    cmd_send_done,      01000000'b
 ; sF - SPM pointer
 
 init:
+    LOAD    sE,     00
     LOAD    sF,     00
 
 recv_bytes:
     CALL    recv_uart_data
     STORE   s0,     (sF)
     ADD     sF,     01
-    COMPARE sF,     41
+    COMPARE sF,     40
     JUMP    C,      recv_bytes
 
 process:
@@ -38,7 +39,17 @@ process:
     CALL    send_ipc_data
     CALL    recv_ipc_data
 
-    OUTPUTK 00000010'b, op_worker_sel
+process_loop:
+    FETCH   s0,     (sE)
+    ADD     s0,     01
+    STORE   s0,     (sE)
+
+    ADD     sE,     01
+    COMPARE sE,     sF
+    JUMP    C,      process_loop
+
+process_end:
+    OUTPUTK 00000001'b, op_worker_sel
     CALL    send_ipc_data
     CALL    recv_ipc_data
 
@@ -80,13 +91,17 @@ send_ipc_data_loop:
     OUTPUT  s0,     op_self_data
     COMPARE sF,     00
     JUMP    NZ,     send_ipc_data_loop
+
     OUTPUTK cmd_send_done, op_self_status
+    OUTPUTK 00,     op_self_status
+    RETURN
 
 recv_ipc_data:
     OUTPUTK cmd_request_sync, op_self_status
     ADD     s0,     00
     ADD     s0,     00
     OUTPUTK 00,     op_self_status
+    ADD     s0,     00
     ADD     s0,     00
     ADD     s0,     00
     ADD     s0,     00

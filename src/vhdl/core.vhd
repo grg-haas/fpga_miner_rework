@@ -183,16 +183,13 @@ begin
                 case port_id(2 downto 0) is
                     when "000" => data_out_buf <= out_port;
                     when "001" => -- not great but it works!
-                        if out_port(7 downto 4) = "0000" then
-                            parity_buf <= out_port(3 downto 0);
-                        else
-                            status_out_buf <= out_port;
+                        parity_buf <= out_port(3 downto 0);
+                        status_out_buf <= out_port;
 
-                            if out_port(4) = '1' then
-                                addr_buf   <= (others => '0');
-                                data_buf   <= (others => '0');
-                                parity_buf <= (others => '0');
-                            end if;
+                        if out_port(4) = '1' then
+                            addr_buf   <= (others => '0');
+                            data_buf   <= (others => '0');
+                            parity_buf <= (others => '0');
                         end if;
 
                     when "010" => addr_buf(7 downto 0)  <= out_port;
