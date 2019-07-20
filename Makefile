@@ -1,6 +1,6 @@
 # makefile settings
 MAIN_TB   := miner_tb
-STOP_TIME := 1ms
+STOP_TIME := 10ms
 
 KCPSM6_PROGRAMS := main core
 VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core
@@ -16,7 +16,7 @@ VHD_KCPSM6_PROGRAMS := $(addprefix out/vhdl/, $(addsuffix _prog.vhd, $(KCPSM6_PR
 # command args
 GHDL_ARGS := --workdir=out/obj \
 			 --ieee=synopsys   \
-			 -fexplicit        \
+			 -fexplicit -O2        \
 			 -P/home/grg/Projects/fpga/xilinx_libs
 
 SIM_ARGS := --stop-time=$(STOP_TIME) --wave=out/sim_wave.ghw --unbuffered
@@ -31,6 +31,8 @@ simulate: out/$(MAIN_TB)
 	time -p ./out/$(MAIN_TB) $(SIM_ARGS)
 	@echo "$(COLOR_BLUE)~~~Simulation finished, launching viewer...~~~$(COLOR_NC)"
 	@gtkwave out/sim_wave.ghw conf/$(MAIN_TB).gtkw
+
+build: out/$(MAIN_TB)
 
 out/$(MAIN_TB) : $(addprefix out/obj/, 						 \
 				    $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)) \

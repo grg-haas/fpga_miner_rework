@@ -6,28 +6,73 @@ CONSTANT	ip_bram_byte1,	    00000101'b
 CONSTANT    ip_bram_byte2,      00000110'b
 CONSTANT    ip_bram_byte3,      00000111'b
 
-
 CONSTANT    op_self_data,       00000000'b
-CONSTANT    op_stat_com_parity, 00000001'b
+CONSTANT    op_status_parity,   00000001'b
 CONSTANT    op_bram_addr_byte0, 00000010'b
 CONSTANT    op_bram_addr_byte1, 00000011'b
-
 CONSTANT    op_bram_data_byte0, 00000100'b
 CONSTANT    op_bram_data_byte1, 00000101'b
 CONSTANT    op_bram_data_byte2, 00000110'b
 CONSTANT    op_bram_data_byte3, 00000111'b
 
-CONSTANT    cmd_bram_we,        01000000'b
-CONSTANT    cmd_reset_intf,     00100000'b
+CONSTANT    cmd_request_sync,   10000000'b
+CONSTANT    cmd_send_done,      01000000'b
+CONSTANT    cmd_bram_we,        00100000'b
+CONSTANT    cmd_reset_intf,     00010000'b
+
+; register mapping
+; s0 - IPC data
+; s1 - IPC status
+; sF - SPM pointer
 
 init:
-    LOAD    s0,     00
-    LOAD    s1,     00
+    LOAD    sE,     00
     LOAD    sF,     00
+    CALL    recv_ipc_data
 
-main:
+process:
+    FETCH   s0,     (sE)
     ADD     s0,     01
-    SUB     s1,     01
+    STORE   s0,     (sE)
 
-    ADD     sF,     s0
-    ADD     sF,     s1
+    ADD     sE,     01
+    COMPARE sE,     sF
+    JUMP    C,      process
+
+fini:
+    CALL    send_ipc_data
+    JUMP    init
+
+send_ipc_data:
+    OUTPUTK cmd_request_sync, op_status_parity
+    ADD     s0,     00
+    ADD     s0,     00
+    OUTPUTK 00,     op_status_parity
+
+send_ipc_data_loop:
+    ADD     s0,     00
+    SUB     sF,     01
+    FETCH   s0,     (sF)
+    OUTPUT  s0,     op_self_data
+    COMPARE sF,     00
+    JUMP    NZ,     send_ipc_data_loop
+    OUTPUTK cmd_send_done, op_status_parity
+
+recv_ipc_data:
+    OUTPUTK cmd_request_sync, op_status_parity
+    ADD     s0,     00
+    ADD     s0,     00
+    OUTPUTK 00,     op_status_parity
+    ADD     s0,     00
+    ADD     s0,     00
+    ADD     s0,     00
+    ADD     s0,     00
+
+recv_ipc_data_loop:
+    INPUT   s0,     ip_miner_data
+    STORE   s0,     (sF)
+    ADD     sF,     01
+    INPUT   s1,     ip_miner_status
+    AND     s1,     cmd_send_done
+    JUMP    Z,      recv_ipc_data_loop
+    RETURN

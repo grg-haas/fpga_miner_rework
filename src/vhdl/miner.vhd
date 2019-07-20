@@ -309,7 +309,7 @@ begin
         end if;
     end process baud_rate;
 
-    uart_buffer_read <= read_strobe when port_id(2 downto 0) = "001" else '0';
+    uart_buffer_read <= read_strobe when port_id(1 downto 0) = "00" else '0';
 
     input_ports : process(clk)
     begin

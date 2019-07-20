@@ -130,6 +130,17 @@ begin
         wait until rising_edge(clk);
 
         uart_buffer_write <= '1';
+        uart_data_in      <= x"FF";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
         uart_data_in      <= x"01";
 
         wait until rising_edge(clk);
@@ -235,6 +246,592 @@ begin
 
         uart_buffer_write <= '0';
         uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0B";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0C";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0D";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0E";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0F";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"FF";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"01";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"02";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"03";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"04";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"05";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"06";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"07";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"08";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"09";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0A";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0B";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0C";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0D";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0E";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0F";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"FF";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"01";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"02";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"03";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"04";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"05";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"06";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"07";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"08";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"09";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0A";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0B";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0C";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0D";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0E";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0F";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"FF";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"01";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"02";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"03";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"04";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"05";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"06";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"07";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"08";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"09";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0A";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0B";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0C";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0D";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0E";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '1';
+        uart_data_in      <= x"0F";
+
+        wait until rising_edge(clk);
+
+        uart_buffer_write <= '0';
+        uart_data_in      <= (others => '0');
+
+        wait until uart_status(5) = '0';
+
         wait for 2000 ms;
     end process simulate;
 

@@ -15,21 +15,88 @@ CONSTANT    rx_bufd_pres,       00000100'b
 CONSTANT    rx_bufd_half,       00000010'b
 CONSTANT    rx_bufd_full,       00000001'b
 
-main:
+CONSTANT    cmd_request_sync,   10000000'b
+CONSTANT    cmd_send_done,      01000000'b
+
+; register mapping
+; s0 - data (UART or IPC)
+; s1 - status (UART or IPC)
+; sF - SPM pointer
+
+init:
+    LOAD    sF,     00
+
+recv_bytes:
     CALL    recv_uart_data
+    STORE   s0,     (sF)
+    ADD     sF,     01
+    COMPARE sF,     41
+    JUMP    C,      recv_bytes
+
+process:
+    OUTPUTK 00000001'b, op_worker_sel
+    CALL    send_ipc_data
+    CALL    recv_ipc_data
+
+    OUTPUTK 00000010'b, op_worker_sel
+    CALL    send_ipc_data
+    CALL    recv_ipc_data
+
+    SUB     sF,     01
+
+send_bytes:
+    FETCH   s0,     (sF)
     CALL    send_uart_data
-    JUMP    main
+    SUB     sF,     01
+    JUMP    NC,     send_bytes
+
+    LOAD    sF,     00
+    JUMP    recv_bytes
 
 recv_uart_data:
-    INPUT   s0,     ip_uart_status
-    AND     s0,     rx_bufd_pres
+    INPUT   s1,     ip_uart_status
+    AND     s1,     rx_bufd_pres
     JUMP    Z,      recv_uart_data
-    INPUT   s1,     ip_uart_data
+    INPUT   s0,     ip_uart_data
     RETURN
 
 send_uart_data:
-    INPUT   s0,     ip_uart_status
-    AND     s0,     tx_bufd_full
+    INPUT   s1,     ip_uart_status
+    AND     s1,     tx_bufd_full
     JUMP    NZ,     send_uart_data
-    OUTPUT  s1,     op_uart_data
+    OUTPUT  s0,     op_uart_data
+    RETURN
+
+send_ipc_data:
+    OUTPUTK cmd_request_sync, op_self_status
+    ADD     s0,     00
+    ADD     s0,     00
+    OUTPUTK 00,     op_self_status
+
+send_ipc_data_loop:
+    ADD     s0,     00
+    SUB     sF,     01
+    FETCH   s0,     (sF)
+    OUTPUT  s0,     op_self_data
+    COMPARE sF,     00
+    JUMP    NZ,     send_ipc_data_loop
+    OUTPUTK cmd_send_done, op_self_status
+
+recv_ipc_data:
+    OUTPUTK cmd_request_sync, op_self_status
+    ADD     s0,     00
+    ADD     s0,     00
+    OUTPUTK 00,     op_self_status
+    ADD     s0,     00
+    ADD     s0,     00
+    ADD     s0,     00
+    ADD     s0,     00
+
+recv_ipc_data_loop:
+    INPUT   s0,     ip_worker_data
+    STORE   s0,     (sF)
+    ADD     sF,     01
+    INPUT   s1,     ip_worker_status
+    AND     s1,     cmd_send_done
+    JUMP    Z,      recv_ipc_data_loop
     RETURN
