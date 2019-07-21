@@ -1,6 +1,6 @@
 # makefile settings
 MAIN_TB   := miner_tb
-STOP_TIME := 10ms
+STOP_TIME := 12ms
 
 KCPSM6_PROGRAMS := main core
 VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core
@@ -19,7 +19,7 @@ GHDL_ARGS := --workdir=out/obj \
 			 -fexplicit -O2        \
 			 -P/home/grg/Projects/fpga/xilinx_libs
 
-SIM_ARGS := --stop-time=$(STOP_TIME) --wave=out/sim_wave.ghw --unbuffered
+SIM_ARGS := --stop-time=$(STOP_TIME) --wave=out/$(MAIN_TB).ghw --unbuffered
 
 # formatting related
 COLOR_RED   := \033[0;31m
@@ -27,13 +27,18 @@ COLOR_GREEN := \033[0;32m
 COLOR_BLUE  := \033[0;34m
 COLOR_NC    := \033[0m
 
-simulate: out/$(MAIN_TB)
-	@echo "$(COLOR_BLUE)~~~Elaboration finished, beginning simulation...~~~$(COLOR_NC)"
-	time -p ./out/$(MAIN_TB) $(SIM_ARGS)
-	@echo "$(COLOR_BLUE)~~~Simulation finished, launching viewer...~~~$(COLOR_NC)"
-	@gtkwave out/sim_wave.ghw conf/$(MAIN_TB).gtkw
+simulate: out/$(MAIN_TB).ghw
+	@echo "$(COLOR_BLUE)~~~Simulation up to date, launching viewer...~~~$(COLOR_NC)"
+	@gtkwave out/$(MAIN_TB).ghw conf/$(MAIN_TB).gtkw
 
 build: out/$(MAIN_TB)
+
+clean:
+	rm -rf out
+
+out/$(MAIN_TB).ghw: out/$(MAIN_TB)
+	@echo "$(COLOR_BLUE)~~~Build is up to date, running simulation~~~$(COLOR_NC)"
+	time -p ./out/$(MAIN_TB) $(SIM_ARGS)
 
 out/$(MAIN_TB) : $(addprefix out/obj/, 						 \
 				    $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)) \
@@ -62,14 +67,11 @@ $(VHD_KCPSM6_PROGRAMS): out/vhdl/%_prog.vhd: src/psm/%.psm
 
 	@mkdir -p out/vhdl
 	@echo "$(COLOR_GREEN)~~~Assembling $<~~~$(COLOR_NC)"
-	@opbasm -n $(basename $(notdir $@)) -6 -q \
-		    -t src/psm/templates/$(basename $(notdir $<))_form.vhd \
-		    -i $< -o out/vhdl/
+	opbasm -n $(basename $(notdir $@)) -6 -q \
+		   -t src/psm/templates/$(basename $(notdir $<))_form.vhd \
+		   -i $< -o out/vhdl/
 
 	@mkdir -p out/debug
 	@mv out/vhdl/$(basename $(notdir $@)).log out/debug
 	@mv out/vhdl/$(basename $(notdir $@)).mem out/debug
 	@mv out/vhdl/$(basename $(notdir $<)).fmt out/debug
-
-clean:
-	rm -rf out

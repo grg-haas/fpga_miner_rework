@@ -49,18 +49,21 @@ process_loop:
     JUMP    C,      process_loop
 
 process_end:
-    OUTPUTK 00000001'b, op_worker_sel
+    OUTPUTK 00000010'b, op_worker_sel
     CALL    send_ipc_data
     CALL    recv_ipc_data
 
     SUB     sF,     01
+    LOAD    sE,     00
 
 send_bytes:
-    FETCH   s0,     (sF)
+    FETCH   s0,     (sE)
     CALL    send_uart_data
-    SUB     sF,     01
-    JUMP    NC,     send_bytes
+    ADD     sE,     01
+    COMPARE sE,     sF
+    JUMP    C,     send_bytes
 
+    LOAD    sE,     00
     LOAD    sF,     00
     JUMP    recv_bytes
 
