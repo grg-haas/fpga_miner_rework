@@ -170,7 +170,6 @@ begin
     parity_buf   <= (others => '0');
 
     interrupt    <= interrupt_ack;
-    kcpsm6_sleep <= self_status_out(7) and not self_status_in(7);
 
     picoblaze : kcpsm6
         generic map
@@ -296,7 +295,7 @@ begin
                       worker2_status_out when worker_select = "00000010"
                                          else "10000000"; -- so miner doesn't lock itself asleep
 
-    baud_rate: process(clk)
+    baud_rate : process(clk)
     begin
         if rising_edge(clk) then
             if baud_count = 53 then
@@ -308,6 +307,13 @@ begin
             end if;
         end if;
     end process baud_rate;
+
+    synchronize : process(clk)
+    begin
+        if rising_edge(clk) then
+            kcpsm6_sleep <= self_status_out(7) and not self_status_in(7);
+        end if;
+    end process synchronize;
 
     uart_buffer_read <= read_strobe when port_id(1 downto 0) = "00" else '0';
 

@@ -101,7 +101,6 @@ begin
                     status_out_buf(5) & status_out_buf(5);
 
     interrupt    <= interrupt_ack;
-    kcpsm6_sleep <= status_out_buf(7) and not status_in(7);
 
     data_out   <= data_out_buf;
     status_out <= status_out_buf;
@@ -154,6 +153,13 @@ begin
             enable_b     => '1',
             we_b         => bram_we
         );
+
+    synchronize : process(clk)
+    begin
+        if rising_edge(clk) then
+            kcpsm6_sleep <= status_out_buf(7) and not status_in(7);
+        end if;
+    end process synchronize;
 
     input_ports : process(clk)
     begin

@@ -1,8 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-use std.textio.all;
-
 entity miner_tb is
 end miner_tb;
 
@@ -53,7 +51,7 @@ architecture behavioral of miner_tb is
     end component uart_tx6;
 
     -- signals for the clock
-    signal clk               : std_logic := '0';
+    signal clk : std_logic := '0';
 
     -- signals for the UART
     signal baud_count        : integer range 0 to 53        := 0;

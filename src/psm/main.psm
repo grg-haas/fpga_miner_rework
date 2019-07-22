@@ -108,7 +108,6 @@ recv_ipc_data:
     ADD     s0,     00
     ADD     s0,     00
     ADD     s0,     00
-    ADD     s0,     00
 
 recv_ipc_data_loop:
     INPUT   s0,     ip_worker_data
