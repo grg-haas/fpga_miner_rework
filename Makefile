@@ -1,10 +1,10 @@
 # makefile settings
 MAIN_TB   := miner_tb
-STOP_TIME := 12ms
+SIM_TIME := 6ms
 
 KCPSM6_PROGRAMS := main core
 VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core
-VHDL_SIMULATION := sim_clk miner_tb
+VHDL_SIMULATION := sim_clk miner_tb core_tb
 
 # various forms of the module names
 OBJ_KCPSM6_PROGRAMS := $(addprefix out/obj/, $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)))
@@ -19,7 +19,7 @@ GHDL_ARGS := --workdir=out/obj \
 			 -fexplicit -O2        \
 			 -P/home/grg/Projects/fpga/xilinx_libs
 
-SIM_ARGS := --stop-time=$(STOP_TIME) --wave=out/$(MAIN_TB).ghw --unbuffered
+SIM_ARGS := --stop-time=$(SIM_TIME) --wave=out/$(MAIN_TB).ghw --unbuffered
 
 # formatting related
 COLOR_RED   := \033[0;31m
