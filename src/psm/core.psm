@@ -25,23 +25,25 @@ CONSTANT    cmd_reset_intf,     00010000'b
 ; s1 - IPC status
 ; sF - SPM pointer
 
-init:
+
+process:
+    .init:
     LOAD    sE,     00
     LOAD    sF,     00
     CALL    recv_ipc_data
 
-process:
+    .loop:
     FETCH   s0,     (sE)
     ADD     s0,     01
     STORE   s0,     (sE)
 
     ADD     sE,     01
     COMPARE sE,     sF
-    JUMP    C,      process
+    JUMP    C,      .loop
 
-fini:
+    .fini:
     CALL    send_ipc_data
-    JUMP    init
+    JUMP    .init
 
 send_ipc_data:
     OUTPUTK cmd_request_sync, op_status_parity

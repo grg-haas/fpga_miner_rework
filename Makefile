@@ -1,6 +1,6 @@
 # makefile settings
 MAIN_TB  := core_tb
-SIM_TIME := 1ms
+SIM_TIME := 12ms
 
 KCPSM6_PROGRAMS := main core
 VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core
@@ -14,10 +14,12 @@ OBJ_VHDL_SIMULATION := $(addprefix .out/obj/, $(addsuffix .o, $(VHDL_SIMULATION)
 VHD_KCPSM6_PROGRAMS := $(addprefix .out/vhdl/, $(addsuffix _prog.vhd, $(KCPSM6_PROGRAMS)))
 
 # command args
-GHDL_ARGS := --workdir=.out/obj \
-			 --ieee=synopsys   \
-			 -fexplicit -O2        \
-			 -P/home/grg/Projects/fpga/xilinx_libs
+GHDL_INS_ARGS  := --workdir=.out/obj
+GHDL_MAKE_ARGS := --workdir=.out/obj \
+			 	  --ieee=synopsys    \
+				  --warn-no-hide     \
+			 	  -fexplicit -O2     \
+			 	  -P/home/grg/Projects/fpga/xilinx_libs
 
 SIM_ARGS := --stop-time=$(SIM_TIME) --wave=.out/$(MAIN_TB).ghw --unbuffered
 
@@ -43,23 +45,20 @@ clean:
 .out/$(MAIN_TB) : $(addprefix .out/obj/, 						 \
 				    $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)) \
 				    $(addsuffix .o, $(VHDL_DESIGN) $(VHDL_SIMULATION)))
-
-	ghdl -e $(GHDL_ARGS) -o $@ $(notdir $@)
+	@echo "$(COLOR_BLUE)~~~Imported all files, starting elaboration~~~$(COLOR_NC)"
+	ghdl -m $(GHDL_MAKE_ARGS) -o $@ $(notdir $@)
 
 $(OBJ_KCPSM6_PROGRAMS): .out/obj/%.o: .out/vhdl/%.vhd
 	@mkdir -p .out/obj
-	@echo "$(COLOR_GREEN)~~~Compiling program VHDL file $<~~~$(COLOR_NC)"
-	ghdl -a $(GHDL_ARGS) $<
+	ghdl -i $(GHDL_INS_ARGS) $<
 
 $(OBJ_VHDL_DESIGN): .out/obj/%.o: src/vhdl/%.vhd
 	@mkdir -p .out/obj
-	@echo "$(COLOR_GREEN)~~~Compiling design VHDL file $<~~~$(COLOR_NC)"
-	ghdl -a $(GHDL_ARGS) $<
+	ghdl -i $(GHDL_INS_ARGS) $<
 
 $(OBJ_VHDL_SIMULATION): .out/obj/%.o: src/vhdl_sim/%.vhd
 	@mkdir -p .out/obj
-	@echo "$(COLOR_GREEN)~~~Compiling simulation VHDL file $<~~~$(COLOR_NC)"
-	ghdl -a $(GHDL_ARGS) $<
+	ghdl -i $(GHDL_INS_ARGS) $<
 
 $(VHD_KCPSM6_PROGRAMS): .out/vhdl/%_prog.vhd: src/psm/%.psm
 	@# here, $(basename $(notdir $<)) represents name without _prog
