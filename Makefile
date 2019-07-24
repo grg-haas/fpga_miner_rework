@@ -7,11 +7,10 @@ VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core
 VHDL_SIMULATION := sim_clk miner_tb core_tb
 
 # various forms of the module names
-OBJ_KCPSM6_PROGRAMS := $(addprefix .out/obj/, $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)))
-OBJ_VHDL_DESIGN     := $(addprefix .out/obj/, $(addsuffix .o, $(VHDL_DESIGN)))
-OBJ_VHDL_SIMULATION := $(addprefix .out/obj/, $(addsuffix .o, $(VHDL_SIMULATION)))
 
 VHD_KCPSM6_PROGRAMS := $(addprefix .out/vhdl/, $(addsuffix _prog.vhd, $(KCPSM6_PROGRAMS)))
+VHD_VHDL_DESIGN     := $(addprefix src/vhdl/, $(addsuffix .vhd, $(VHDL_DESIGN)))
+VHD_VHDL_SIMULATION := $(addprefix src/vhdl_sim/, $(addsuffix .vhd, $(VHDL_SIMULATION)))
 
 # command args
 GHDL_INS_ARGS  := --workdir=.out/obj
@@ -21,7 +20,9 @@ GHDL_MAKE_ARGS := --workdir=.out/obj \
 			 	  -fexplicit -O2     \
 			 	  -P/home/grg/Projects/fpga/xilinx_libs
 
-SIM_ARGS := --stop-time=$(SIM_TIME) --wave=.out/$(MAIN_TB).ghw --unbuffered
+SIM_ARGS       := --stop-time=$(SIM_TIME)    \
+                  --wave=.out/$(MAIN_TB).ghw \
+				  --unbuffered
 
 # formatting related
 COLOR_RED   := \033[0;31m
@@ -34,31 +35,20 @@ simulate: .out/$(MAIN_TB).ghw
 	@gtkwave .out/$(MAIN_TB).ghw conf/$(MAIN_TB).gtkw
 
 build: .out/$(MAIN_TB)
-
-clean:
-	rm -rf .out
+clean: ;rm -rf .out
 
 .out/$(MAIN_TB).ghw: .out/$(MAIN_TB)
 	@echo "$(COLOR_BLUE)~~~Build is up to date, running simulation~~~$(COLOR_NC)"
 	time -p .out/$(MAIN_TB) $(SIM_ARGS)
 
-.out/$(MAIN_TB) : $(addprefix .out/obj/, 						 \
-				    $(addsuffix _prog.o, $(KCPSM6_PROGRAMS)) \
-				    $(addsuffix .o, $(VHDL_DESIGN) $(VHDL_SIMULATION)))
-	@echo "$(COLOR_BLUE)~~~Imported all files, starting elaboration~~~$(COLOR_NC)"
+.out/$(MAIN_TB) : $(VHD_KCPSM6_PROGRAMS) \
+ 				  $(VHD_VHDL_DESIGN)     \
+				  $(VHD_VHDL_SIMULATION)
+	@echo "$(COLOR_BLUE)~~~Importing files and beginning elaboration~~~$(COLOR_NC)"
+
+	@mkdir -p .out/obj
+	ghdl -i $(GHDL_INS_ARGS) $?
 	ghdl -m $(GHDL_MAKE_ARGS) -o $@ $(notdir $@)
-
-$(OBJ_KCPSM6_PROGRAMS): .out/obj/%.o: .out/vhdl/%.vhd
-	@mkdir -p .out/obj
-	ghdl -i $(GHDL_INS_ARGS) $<
-
-$(OBJ_VHDL_DESIGN): .out/obj/%.o: src/vhdl/%.vhd
-	@mkdir -p .out/obj
-	ghdl -i $(GHDL_INS_ARGS) $<
-
-$(OBJ_VHDL_SIMULATION): .out/obj/%.o: src/vhdl_sim/%.vhd
-	@mkdir -p .out/obj
-	ghdl -i $(GHDL_INS_ARGS) $<
 
 $(VHD_KCPSM6_PROGRAMS): .out/vhdl/%_prog.vhd: src/psm/%.psm
 	@# here, $(basename $(notdir $<)) represents name without _prog
