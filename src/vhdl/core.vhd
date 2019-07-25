@@ -112,19 +112,20 @@ architecture behavioral of core is
     signal data_out_buf   : std_logic_vector(7 downto 0) := (others => '0');
 
     -- random other buffers
-    signal buf_select  : std_logic_vector(3 downto 0)  := (others => '0');
-    signal read_buf    : std_logic_vector(31 downto 0) := (others => '0');
+    signal buf_select   : std_logic_vector(3 downto 0)  := (others => '0');
+    signal read_buf     : std_logic_vector(31 downto 0) := (others => '0');
+    signal write_buf    : std_logic_vector(31 downto 0) := (others => '0');
 
-    signal msa_out_buf : std_logic_vector(31 downto 0) := (others => '0');
+    signal msa_out_buf  : std_logic_vector(31 downto 0) := (others => '0');
 
-    signal hash_a_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hash_b_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hash_c_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hash_d_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hash_e_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hash_f_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hash_g_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hash_h_buf  : std_logic_vector(31 downto 0) := (others => '0');
+    signal hash_a_buf   : std_logic_vector(31 downto 0) := x"6A09E667";
+    signal hash_b_buf   : std_logic_vector(31 downto 0) := x"BB67AE85";
+    signal hash_c_buf   : std_logic_vector(31 downto 0) := x"3C6EF372";
+    signal hash_d_buf   : std_logic_vector(31 downto 0) := x"A54FF53A";
+    signal hash_e_buf   : std_logic_vector(31 downto 0) := x"510E527F";
+    signal hash_f_buf   : std_logic_vector(31 downto 0) := x"9B05688C";
+    signal hash_g_buf   : std_logic_vector(31 downto 0) := x"1F83D9AB";
+    signal hash_h_buf   : std_logic_vector(31 downto 0) := x"5BE0CD19";
 
     signal hash_rc_buf  : std_logic_vector(31 downto 0) := (others => '0');
     signal hash_msa_buf : std_logic_vector(31 downto 0) := (others => '0');
@@ -203,7 +204,7 @@ begin
             reset    => status_out_buf(4),
 
             data_val => status_out_buf(3),
-            data_in  => bram_data_out,
+            data_in  => read_buf,
 
             msa_out  => msa_out_buf
         );
@@ -233,82 +234,28 @@ begin
         if rising_edge(clk) then
             -- update hash buffers if they're currently being written to
             if write_strobe = '1' or k_write_strobe = '1' then
-                case port_id(2 downto 0) is
-                    when "001" =>
-                        if out_port(4) = '1' then
-                            hash_a_buf <= (others => '0');
-                            hash_b_buf <= (others => '0');
-                            hash_c_buf <= (others => '0');
-                            hash_d_buf <= (others => '0');
-                            hash_e_buf <= (others => '0');
-                            hash_f_buf <= (others => '0');
-                            hash_g_buf <= (others => '0');
-                            hash_h_buf <= (others => '0');
-                        end if;
-
-                    when "100" =>
-                        case buf_select is
-                            when "0010" => hash_a_buf(7 downto 0) <= out_port;
-                            when "0011" => hash_b_buf(7 downto 0) <= out_port;
-                            when "0100" => hash_c_buf(7 downto 0) <= out_port;
-                            when "0101" => hash_d_buf(7 downto 0) <= out_port;
-                            when "0110" => hash_e_buf(7 downto 0) <= out_port;
-                            when "0111" => hash_f_buf(7 downto 0) <= out_port;
-                            when "1000" => hash_g_buf(7 downto 0) <= out_port;
-                            when "1001" => hash_h_buf(7 downto 0) <= out_port;
-                            when others => NULL;
-                        end case;
-
-                    when "101" =>
-                        case buf_select is
-                            when "0010" => hash_a_buf(15 downto 8) <= out_port;
-                            when "0011" => hash_b_buf(15 downto 8) <= out_port;
-                            when "0100" => hash_c_buf(15 downto 8) <= out_port;
-                            when "0101" => hash_d_buf(15 downto 8) <= out_port;
-                            when "0110" => hash_e_buf(15 downto 8) <= out_port;
-                            when "0111" => hash_f_buf(15 downto 8) <= out_port;
-                            when "1000" => hash_g_buf(15 downto 8) <= out_port;
-                            when "1001" => hash_h_buf(15 downto 8) <= out_port;
-                            when others => NULL;
-                        end case;
-
-                    when "110" =>
-                        case buf_select is
-                            when "0010" => hash_a_buf(23 downto 16) <= out_port;
-                            when "0011" => hash_b_buf(23 downto 16) <= out_port;
-                            when "0100" => hash_c_buf(23 downto 16) <= out_port;
-                            when "0101" => hash_d_buf(23 downto 16) <= out_port;
-                            when "0110" => hash_e_buf(23 downto 16) <= out_port;
-                            when "0111" => hash_f_buf(23 downto 16) <= out_port;
-                            when "1000" => hash_g_buf(23 downto 16) <= out_port;
-                            when "1001" => hash_h_buf(23 downto 16) <= out_port;
-                            when others => NULL;
-                        end case;
-
-                    when "111" =>
-                        case buf_select is
-                            when "0010" => hash_a_buf(31 downto 24) <= out_port;
-                            when "0011" => hash_b_buf(31 downto 24) <= out_port;
-                            when "0100" => hash_c_buf(31 downto 24) <= out_port;
-                            when "0101" => hash_d_buf(31 downto 24) <= out_port;
-                            when "0110" => hash_e_buf(31 downto 24) <= out_port;
-                            when "0111" => hash_f_buf(31 downto 24) <= out_port;
-                            when "1000" => hash_g_buf(31 downto 24) <= out_port;
-                            when "1001" => hash_h_buf(31 downto 24) <= out_port;
-                            when others => NULL;
-                        end case;
-
-                    when others => NULL;
-                end case;
+                if port_id(2) = '1' then
+                    case buf_select is
+                        when "0010" => hash_a_buf <= write_buf;
+                        when "0011" => hash_b_buf <= write_buf;
+                        when "0100" => hash_c_buf <= write_buf;
+                        when "0101" => hash_d_buf <= write_buf;
+                        when "0110" => hash_e_buf <= write_buf;
+                        when "0111" => hash_f_buf <= write_buf;
+                        when "1000" => hash_g_buf <= write_buf;
+                        when "1001" => hash_h_buf <= write_buf;
+                        when others => NULL;
+                    end case;
+                end if;
             end if;
 
             -- update msa and rc values
             if status_out_buf(2) = '1' then
-                hash_rc_buf <= bram_data_out;
+                hash_rc_buf <= read_buf;
             end if;
 
             if status_out_buf(1) = '1' then
-                hash_msa_buf <= bram_data_out;
+                hash_msa_buf <= read_buf;
             end if;
 
             -- run a hash iteration
@@ -336,7 +283,9 @@ begin
                 hash_f_buf    when buf_select = "0111" else
                 hash_g_buf    when buf_select = "1000" else
                 hash_h_buf    when buf_select = "1001" else
-                (others => '0');
+                read_buf;
+
+    data_buf <= write_buf     when buf_select = "0000" else data_buf;
 
     input_ports : process(clk)
     begin
@@ -364,6 +313,10 @@ begin
             -- reset various commands that don't need to go out
             status_out_buf(5 downto 0) <= (others => '0');
 
+            if buf_select = "1010" then
+                write_buf <= read_buf;
+            end if;
+
             if write_strobe = '1' or k_write_strobe = '1' then
                 case port_id(2 downto 0) is
                     when "000" => data_out_buf <= out_port;
@@ -372,40 +325,19 @@ begin
 
                         if out_port(4) = '1' then
                             addr_buf   <= (others => '0');
-                            data_buf   <= (others => '0');
+                            write_buf  <= (others => '0');
                             parity_buf <= (others => '0');
                         end if;
 
-                    when "010" => addr_buf(7 downto 0) <= out_port;
+                    when "010" => addr_buf <= out_port;
                     when "011" =>
                         parity_buf <= out_port(3 downto 0);
                         buf_select <= out_port(7 downto 4);
 
-                    when "100" =>
-                        case buf_select is
-                            when "0000" => data_buf(7 downto 0) <= out_port;
-                            when others => NULL;
-                        end case;
-
-                    when "101" =>
-                        case buf_select is
-                            when "0000" => data_buf(15 downto 8) <= out_port;
-                            when others => NULL;
-                        end case;
-
-                    when "110" =>
-                        case buf_select is
-                            when "0000" => data_buf(23 downto 16) <= out_port;
-                            when others => NULL;
-                        end case;
-
-                    when "111" =>
-                        case buf_select is
-                            when "0000" => data_buf(31 downto 24) <= out_port;
-                            when others => NULL;
-                        end case;
-
-
+                    when "100" => write_buf(7 downto 0)   <= out_port;
+                    when "101" => write_buf(15 downto 8)  <= out_port;
+                    when "110" => write_buf(23 downto 16) <= out_port;
+                    when "111" => write_buf(31 downto 24) <= out_port;
                     when others => NULL;
                 end case;
             end if;

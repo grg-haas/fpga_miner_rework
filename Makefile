@@ -1,6 +1,6 @@
 # makefile settings
 MAIN_TB  := core_tb
-SIM_TIME := 2ms
+SIM_TIME := 100us
 
 KCPSM6_PROGRAMS := main core
 VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core msa_extender

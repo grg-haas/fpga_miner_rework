@@ -970,6 +970,18 @@ begin
         core_status_in <= "00000000";
         wait until rising_edge(clk);
 
+        wait until rising_edge(clk);
+        core_status_in <= "10000000";
+        wait until core_status_out = "10000000";
+        wait until rising_edge(clk); -- needed for the processor to wake up
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- OUTPUTK 00,     op_self_status
+        core_status_in <= "00000000";
+        wait until rising_edge(clk);
+
         wait for 2000 ms;
 
     end process simulate;

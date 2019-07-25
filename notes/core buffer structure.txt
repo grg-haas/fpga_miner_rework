@@ -1,0 +1,8 @@
+global read buf
+    modified in handle_rw_bufs based on buf_select
+
+global write buf
+    modified in output_ports based on out_port
+
+    changes in write buf need to be propagated to other buffers based on buf select
+        includes bram data in buf and all hash buffers
