@@ -1,26 +1,39 @@
 CONSTANT    ip_miner_data,      00000000'b
 CONSTANT    ip_miner_status,    00000001'b
 CONSTANT    ip_bram_parity,     00000011'b
-CONSTANT    ip_bram_byte0,      00000100'b
-CONSTANT	ip_bram_byte1,	    00000101'b
-CONSTANT    ip_bram_byte2,      00000110'b
-CONSTANT    ip_bram_byte3,      00000111'b
+CONSTANT    ip_buf_byte0,       00000100'b
+CONSTANT	ip_buf_byte1,	    00000101'b
+CONSTANT    ip_buf_byte2,       00000110'b
+CONSTANT    ip_buf_byte3,       00000111'b
 
 CONSTANT    op_self_data,       00000000'b
 CONSTANT    op_self_status,     00000001'b
 CONSTANT    op_bram_addr,       00000010'b
-CONSTANT    op_bram_parity,     00000011'b
-CONSTANT    op_bram_data_byte0, 00000100'b
-CONSTANT    op_bram_data_byte1, 00000101'b
-CONSTANT    op_bram_data_byte2, 00000110'b
-CONSTANT    op_bram_data_byte3, 00000111'b
+CONSTANT    op_bufsel_parity,   00000011'b
+CONSTANT    op_buf_byte0,       00000100'b
+CONSTANT    op_buf_byte1,       00000101'b
+CONSTANT    op_buf_byte2,       00000110'b
+CONSTANT    op_buf_byte3,       00000111'b
 
 CONSTANT    cmd_request_sync,   10000000'b
 CONSTANT    cmd_send_done,      01000000'b
 CONSTANT    cmd_bram_we,        00100000'b
 CONSTANT    cmd_reset_all,      00010000'b
 CONSTANT    cmd_msa_valid,      00001000'b
-CONSTANT    cmd_msa_save_buf,   00000100'b
+CONSTANT    cmd_hash_rc_valid,  00000100'b
+CONSTANT    cmd_hash_msa_valid, 00000010'b
+CONSTANT    cmd_hash_ready,     00000001'b
+
+CONSTANT    buf_bram,           00000000'b
+CONSTANT    buf_msa,            00010000'b
+CONSTANT    buf_hash_a,         00100000'b
+CONSTANT    buf_hash_b,         00110000'b
+CONSTANT    buf_hash_c,         01000000'b
+CONSTANT    buf_hash_d,         01010000'b
+CONSTANT    buf_hash_e,         01100000'b
+CONSTANT    buf_hash_f,         01110000'b
+CONSTANT    buf_hash_g,         10000000'b
+CONSTANT    buf_hash_h,         10010000'b
 
 CONSTANT    baseaddr_rc,        00000000'b
 CONSTANT    baseaddr_msa,       01000000'b
@@ -29,6 +42,16 @@ CONSTANT    baseaddr_free,      10000000'b
 ; register mapping
 ; s0 - IPC data
 ; s1 - IPC status
+; s2 - 32bit number byte0
+; s3 - 32bit number byte1
+; s4 - 32bit number byte2
+; s5 - 32bit number byte3
+; s6
+; s7
+; s8
+; s9
+; sA
+; sB
 ; sC - RC address
 ; sD - MSA addres
 ; sE - misc iterator
@@ -40,25 +63,26 @@ main:
     LOAD    sF,     00
     CALL    recv_ipc_data
 
+    OUTPUTK buf_bram, op_bufsel_parity
     SUB     sF,     01
     LOAD    sE,     sF
 
     ; write received data into memory
     .bram_write_loop:
     FETCH   s0,     (sE)
-    OUTPUT  s0,     op_bram_data_byte3
+    OUTPUT  s0,     op_buf_byte3
     SUB     sE,     01
 
     FETCH   s0,     (sE)
-    OUTPUT  s0,     op_bram_data_byte2
+    OUTPUT  s0,     op_buf_byte2
     SUB     sE,     01
 
     FETCH   s0,     (sE)
-    OUTPUT  s0,     op_bram_data_byte1
+    OUTPUT  s0,     op_buf_byte1
     SUB     sE,     01
 
     FETCH   s0,     (sE)
-    OUTPUT  s0,     op_bram_data_byte0
+    OUTPUT  s0,     op_buf_byte0
 
     OUTPUT  sD,     op_bram_addr
     ADD     sD,     01
@@ -88,14 +112,91 @@ main:
     OUTPUT  sE,     op_bram_addr
     OUTPUTK cmd_msa_valid, op_self_status
 
+    OUTPUTK buf_msa, op_bufsel_parity
+    INPUT   s2,     ip_buf_byte0
+    INPUT   s3,     ip_buf_byte1
+    INPUT   s4,     ip_buf_byte2
+    INPUT   s5,     ip_buf_byte3
+
+    OUTPUTK buf_bram, op_bufsel_parity
+    OUTPUT  s2,     op_buf_byte0
+    OUTPUT  s3,     op_buf_byte1
+    OUTPUT  s4,     op_buf_byte2
+    OUTPUT  s5,     op_buf_byte3
+
     OUTPUT  sD,     op_bram_addr
-    OUTPUTK cmd_msa_save_buf, op_self_status
     OUTPUTK cmd_bram_we, op_self_status
     OUTPUTK cmd_reset_all, op_self_status
 
     ADD     sD,     01
     COMPARE sD,     baseaddr_free
     JUMP    NZ,     .msa_extend_loop
+
+    LOAD    sC,     baseaddr_rc
+    LOAD    sD,     baseaddr_msa
+
+    .init_hash:
+    OUTPUTK buf_hash_a, op_bufsel_parity
+    OUTPUTK 6A,     op_buf_byte3
+    OUTPUTK 09,     op_buf_byte2
+    OUTPUTK E6,     op_buf_byte1
+    OUTPUTK 67,     op_buf_byte0
+
+    OUTPUTK buf_hash_b, op_bufsel_parity
+    OUTPUTK BB,     op_buf_byte3
+    OUTPUTK 67,     op_buf_byte2
+    OUTPUTK AE,     op_buf_byte1
+    OUTPUTK 85,     op_buf_byte0
+
+    OUTPUTK buf_hash_c, op_bufsel_parity
+    OUTPUTK 3C,     op_buf_byte3
+    OUTPUTK 6E,     op_buf_byte2
+    OUTPUTK F3,     op_buf_byte1
+    OUTPUTK 72,     op_buf_byte0
+
+    OUTPUTK buf_hash_d, op_bufsel_parity
+    OUTPUTK A5,     op_buf_byte3
+    OUTPUTK 4F,     op_buf_byte2
+    OUTPUTK F5,     op_buf_byte1
+    OUTPUTK 3A,     op_buf_byte0
+
+    OUTPUTK buf_hash_e, op_bufsel_parity
+    OUTPUTK 51,     op_buf_byte3
+    OUTPUTK 0E,     op_buf_byte2
+    OUTPUTK 52,     op_buf_byte1
+    OUTPUTK 7F,     op_buf_byte0
+
+    OUTPUTK buf_hash_f, op_bufsel_parity
+    OUTPUTK 9B,     op_buf_byte3
+    OUTPUTK 05,     op_buf_byte2
+    OUTPUTK 68,     op_buf_byte1
+    OUTPUTK 8C,     op_buf_byte0
+
+    OUTPUTK buf_hash_g, op_bufsel_parity
+    OUTPUTK 1F,     op_buf_byte3
+    OUTPUTK 83,     op_buf_byte2
+    OUTPUTK D9,     op_buf_byte1
+    OUTPUTK AB,     op_buf_byte0
+
+    OUTPUTK buf_hash_h, op_bufsel_parity
+    OUTPUTK 5B,     op_buf_byte3
+    OUTPUTK E0,     op_buf_byte2
+    OUTPUTK CD,     op_buf_byte1
+    OUTPUTK 19,     op_buf_byte0
+
+    OUTPUTK buf_bram, op_bufsel_parity
+
+    .hash_loop:
+    OUTPUT  sC,     op_bram_addr
+    OUTPUTK cmd_hash_rc_valid, op_self_status
+    OUTPUT  sD,     op_bram_addr
+    OUTPUTK cmd_hash_msa_valid, op_self_status
+    OUTPUTK cmd_hash_ready, op_self_status;
+
+    ADD     sC,     01
+    ADD     sD,     01
+    COMPARE sD,     baseaddr_free
+    JUMP    NZ,     .hash_loop
 
     JUMP    main
 

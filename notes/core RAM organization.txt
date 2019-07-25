@@ -33,4 +33,19 @@ alternatively, could squeeze everything into last part
     init 60 - 7F: various hash data
         300 - 33F: round constants
         340 - 37F: msa
-        380 - 3F8: unused currently
+        380 - 3F8: hash values a -> h!
+            use pointers to "rotate"! saves hardware costs and complexity
+            need to bring out msa, rc, a, b, c, e, f, g, h each round... slow
+
+            dependencies:
+                a -> h, e, f, g, msa, rc, a, b, c
+                b -> a
+                c -> b
+                d -> c
+                e -> d, h, e, f, g, msa, rc
+                f -> e
+                g -> f
+                h -> g
+
+            need smart buffering in order to be worthwhile
+            so really no point...
