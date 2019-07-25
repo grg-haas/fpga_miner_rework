@@ -74,7 +74,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0F";
+        core_data_in <= x"C8";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -88,7 +88,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0E";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -102,7 +102,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -116,7 +116,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0C";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -130,7 +130,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -144,7 +144,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0A";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -158,7 +158,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -172,7 +172,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"08";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -186,7 +186,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -200,7 +200,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -214,7 +214,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -228,7 +228,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -242,7 +242,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -256,7 +256,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -270,7 +270,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -284,7 +284,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -298,7 +298,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0F";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -312,7 +312,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0E";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -326,7 +326,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -340,7 +340,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0C";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -354,7 +354,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -368,7 +368,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0A";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -382,7 +382,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -396,7 +396,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"08";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -410,7 +410,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -424,7 +424,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -438,7 +438,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -452,7 +452,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -466,7 +466,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -480,7 +480,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -494,7 +494,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -508,7 +508,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -522,7 +522,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0F";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -536,7 +536,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0E";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -550,7 +550,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -564,7 +564,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0C";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -578,7 +578,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -592,7 +592,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0A";
+        core_data_in <= x"00";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -606,7 +606,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
+        core_data_in <= x"80";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -620,7 +620,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"08";
+        core_data_in <= x"61";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -634,7 +634,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
+        core_data_in <= x"6B";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -648,7 +648,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
+        core_data_in <= x"63";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -662,7 +662,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
+        core_data_in <= x"75";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -676,7 +676,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
+        core_data_in <= x"66";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -690,7 +690,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
+        core_data_in <= x"61";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -704,7 +704,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
+        core_data_in <= x"68";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -718,7 +718,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
+        core_data_in <= x"74";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -732,7 +732,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
+        core_data_in <= x"75";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -746,7 +746,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0F";
+        core_data_in <= x"6D";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -760,7 +760,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0E";
+        core_data_in <= x"20";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -774,7 +774,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
+        core_data_in <= x"74";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -788,7 +788,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0C";
+        core_data_in <= x"73";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -802,7 +802,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
+        core_data_in <= x"65";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -816,7 +816,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0A";
+        core_data_in <= x"74";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -830,7 +830,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
+        core_data_in <= x"20";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -844,7 +844,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"08";
+        core_data_in <= x"61";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -858,7 +858,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
+        core_data_in <= x"20";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -872,7 +872,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
+        core_data_in <= x"73";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -886,7 +886,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
+        core_data_in <= x"69";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -900,7 +900,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
+        core_data_in <= x"20";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -914,7 +914,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
+        core_data_in <= x"73";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -928,7 +928,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
+        core_data_in <= x"69";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -942,7 +942,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
+        core_data_in <= x"68";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -956,7 +956,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
+        core_data_in <= x"74";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);

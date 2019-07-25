@@ -48,7 +48,10 @@ begin
                     when 3 => res_buf <= res_buf + data_in;
                 end case;
 
-                state <= state + 1;
+                if state /= 3 then
+                    state <= state + 1;
+                end if;
+
             elsif reset = '1' then
                 res_buf <= (others => '0');
                 state   <= 0;
