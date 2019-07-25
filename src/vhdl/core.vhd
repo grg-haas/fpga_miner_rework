@@ -65,6 +65,19 @@ architecture behavioral of core is
         );
     end component core_prog;
 
+    component msa_extender is
+        port
+        (
+            clk      : in std_logic;
+            reset    : in std_logic;
+
+            data_val : in std_logic;
+            data_in  : in std_logic_vector(31 downto 0);
+
+            msa_out  :  out std_logic_vector(31 downto 0)
+        );
+    end component msa_extender;
+
     -- signals for the processor
     signal address        : std_logic_vector(11 downto 0) := (others => '0');
     signal instruction    : std_logic_vector(17 downto 0) := (others => '0');
@@ -86,24 +99,25 @@ architecture behavioral of core is
     signal bram_data_out   : std_logic_vector(31 downto 0) := (others => '0');
     signal bram_parity_out : std_logic_vector(3 downto 0)  := (others => '0');
 
-    signal addr_buf        : std_logic_vector(15 downto 0) := (others => '0');
+    signal addr_buf        : std_logic_vector(7 downto 0) := (others => '0');
     signal data_buf        : std_logic_vector(31 downto 0) := (others => '0');
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
 
     -- status and data out buffers
-
     signal status_out_buf : std_logic_vector(7 downto 0) := (others => '0');
     signal data_out_buf   : std_logic_vector(7 downto 0) := (others => '0');
 
+    -- random other buffers
+    signal msa_out_buf : std_logic_vector(31 downto 0) := (others => '0');
 begin
-    bram_addr_in <= '1' & addr_buf(10 downto 0) & "1111";
+    bram_addr_in <= "111" & addr_buf & "11111";
     bram_we      <= status_out_buf(5) & status_out_buf(5) &
                     status_out_buf(5) & status_out_buf(5);
 
-    interrupt    <= interrupt_ack;
-
     data_out   <= data_out_buf;
     status_out <= status_out_buf;
+
+    interrupt <= interrupt_ack;
 
     picoblaze : kcpsm6
         generic map
@@ -154,6 +168,18 @@ begin
             we_b         => bram_we
         );
 
+    extend_msa : msa_extender
+        port map
+        (
+            clk      => clk,
+            reset    => status_out_buf(4),
+
+            data_val => status_out_buf(3),
+            data_in  => bram_data_out,
+
+            msa_out  => msa_out_buf
+        );
+
     synchronize : process(clk)
     begin
         if rising_edge(clk) then
@@ -171,10 +197,10 @@ begin
                 when "010" => in_port <= (others => '0'); --reserved
 
                 when "011" => in_port <= "0000" & parity_buf;
-                when "100" => in_port <= data_buf(7 downto 0);
-                when "101" => in_port <= data_buf(15 downto 8);
-                when "110" => in_port <= data_buf(23 downto 16);
-                when "111" => in_port <= data_buf(31 downto 24);
+                when "100" => in_port <= bram_data_out(7 downto 0);
+                when "101" => in_port <= bram_data_out(15 downto 8);
+                when "110" => in_port <= bram_data_out(23 downto 16);
+                when "111" => in_port <= bram_data_out(31 downto 24);
 
                 when others => in_port <= (others => '0');
             end case;
@@ -184,13 +210,17 @@ begin
     output_ports : process(clk)
     begin
         if rising_edge(clk) then
+            -- reset various commands that don't need to go out
+            status_out_buf(5 downto 0) <= (others => '0');
 
             if write_strobe = '1' or k_write_strobe = '1' then
                 case port_id(2 downto 0) is
                     when "000" => data_out_buf <= out_port;
-                    when "001" => -- not great but it works!
-                        parity_buf <= out_port(3 downto 0);
+                    when "001" =>
                         status_out_buf <= out_port;
+                        if out_port(2) = '1' then
+                            data_buf <= msa_out_buf;
+                        end if;
 
                         if out_port(4) = '1' then
                             addr_buf   <= (others => '0');
@@ -198,11 +228,11 @@ begin
                             parity_buf <= (others => '0');
                         end if;
 
-                    when "010" => addr_buf(7 downto 0)  <= out_port;
-                    when "011" => addr_buf(15 downto 8) <= out_port;
+                    when "010" => addr_buf(7 downto 0) <= out_port;
+                    when "011" => parity_buf <= out_port(3 downto 0);
 
-                    when "100" => data_buf(7 downto 0) <= out_port;
-                    when "101" => data_buf(15 downto 8) <= out_port;
+                    when "100" => data_buf(7 downto 0)   <= out_port;
+                    when "101" => data_buf(15 downto 8)  <= out_port;
                     when "110" => data_buf(23 downto 16) <= out_port;
                     when "111" => data_buf(31 downto 24) <= out_port;
 

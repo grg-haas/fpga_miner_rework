@@ -1,0 +1,36 @@
+init    addr18_hex  addr36_hex  addr18_bin      addr36_bin
+00      000         000         000 0000 0000   00 0000 0000
+01      010         008         000 0001 0000   00 0000 1000
+02      020         010         000 0010 0000   00 0001 0000
+03      030         018         000 0011 0000   00 0001 1000
+...
+20      200         100         010 0000 0000   01 0000 0000
+...
+40      400         200         100 0000 0000   10 0000 0000
+...
+60      600         300         110 0000 0000   11 0000 0000
+...
+7F      7F0         3F8         111 1111 0000   11 1111 1000
+
+address ranges:
+    init 00 - 1F: 496 instructions
+
+    init 20 - 3F: message schedule array
+        enough room for 255 32bit words
+        msa is only 64 32bit words - could store a couple backups?
+            100 - 13F: active MSA
+            140 - 17F: free
+            180 - 1BF: free
+            1C0 - 1FF: free
+
+    init 40 - 5F: round constants
+        also enough room for 255 32bit words
+        again, need only 64 32bit words
+            200 - 23F: round constants
+
+alternatively, could squeeze everything into last part
+    -> could bake "11 XXXX XXXX" into addr buf and open up a new port!
+    init 60 - 7F: various hash data
+        300 - 33F: round constants
+        340 - 37F: msa
+        380 - 3F8: unused currently

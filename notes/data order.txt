@@ -1,0 +1,47 @@
+in: data0[byte3 byte2 byte1 byte0] data1[byte3 byte2 byte1 byte0] ...
+
+miner stack:
+00:	data0.3
+01:	data0.2
+02:	data0.1
+03:	data0.0
+
+04:	data1.3
+05:	data1.2
+06:	data1.1
+07:	data1.0
+
+08:	data2.3
+09:	data2.2
+0A:	data2.1
+0B:	data2.0
+
+...
+
+7C:	data31.3
+7D:	data31.2
+7E:	data31.1
+7F:	data31.0
+
+core stack:
+00:	data31.0
+01:	data31.1
+02:	data31.2
+03:	data31.3
+
+04:	data30.0
+05:	data30.1
+06:	data30.2
+07:	data30.3
+
+08:	data29.0
+09:	data29.1
+0A:	data29.2
+0B:	data29.3
+
+...
+
+7C:	data0.0
+7D:	data0.1
+7E:	data0.2
+7F:	data0.3

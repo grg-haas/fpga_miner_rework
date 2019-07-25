@@ -7,9 +7,9 @@ CONSTANT    ip_bram_byte2,      00000110'b
 CONSTANT    ip_bram_byte3,      00000111'b
 
 CONSTANT    op_self_data,       00000000'b
-CONSTANT    op_status_parity,   00000001'b
-CONSTANT    op_bram_addr_byte0, 00000010'b
-CONSTANT    op_bram_addr_byte1, 00000011'b
+CONSTANT    op_self_status,     00000001'b
+CONSTANT    op_bram_addr,       00000010'b
+CONSTANT    op_bram_parity,     00000011'b
 CONSTANT    op_bram_data_byte0, 00000100'b
 CONSTANT    op_bram_data_byte1, 00000101'b
 CONSTANT    op_bram_data_byte2, 00000110'b
@@ -18,38 +18,74 @@ CONSTANT    op_bram_data_byte3, 00000111'b
 CONSTANT    cmd_request_sync,   10000000'b
 CONSTANT    cmd_send_done,      01000000'b
 CONSTANT    cmd_bram_we,        00100000'b
-CONSTANT    cmd_reset_intf,     00010000'b
+CONSTANT    cmd_reset_all,      00010000'b
+CONSTANT    cmd_msa_valid,      00001000'b
+CONSTANT    cmd_msa_save_buf,   00000100'b
+
+CONSTANT    baseaddr_rc,        00000000'b
+CONSTANT    baseaddr_msa,       01000000'b
 
 ; register mapping
 ; s0 - IPC data
 ; s1 - IPC status
+; sC - RC address
+; sD - MSA addres
+; sE - SPM iterator
 ; sF - SPM pointer
 
-
-process:
-    .init:
-    LOAD    sE,     00
+main:
+    LOAD    sC,     baseaddr_rc
+    LOAD    sD,     baseaddr_msa
     LOAD    sF,     00
     CALL    recv_ipc_data
 
-    .loop:
+    SUB     sF,     01
+    LOAD    sE,     sF
+
+    ; write received data into memory
+    .bram_write_loop:
     FETCH   s0,     (sE)
-    ADD     s0,     01
-    STORE   s0,     (sE)
+    OUTPUT  s0,     op_bram_data_byte3
+    SUB     sE,     01
+
+    FETCH   s0,     (sE)
+    OUTPUT  s0,     op_bram_data_byte2
+    SUB     sE,     01
+
+    FETCH   s0,     (sE)
+    OUTPUT  s0,     op_bram_data_byte1
+    SUB     sE,     01
+
+    FETCH   s0,     (sE)
+    OUTPUT  s0,     op_bram_data_byte0
+
+    OUTPUT  sD,     op_bram_addr
+    ADD     sD,     01
+
+    OUTPUTK cmd_bram_we, op_self_status
+    OUTPUTK cmd_reset_all, op_self_status
+
+    SUB     sE,     01                  ; use the underflow to jump
+    JUMP    NC,     .bram_write_loop
+
+    LOAD    sD,     baseaddr_msa
+    LOAD    sE,     00
+
+    .bram_read_loop:
+    OUTPUT  sD,     op_bram_addr
+    ADD     sD,     01
 
     ADD     sE,     01
-    COMPARE sE,     sF
-    JUMP    C,      .loop
+    COMPARE sE,     10
+    JUMP    NZ,     .bram_read_loop
 
-    .fini:
-    CALL    send_ipc_data
-    JUMP    .init
+    JUMP    main
 
 send_ipc_data:
-    OUTPUTK cmd_request_sync, op_status_parity
+    OUTPUTK cmd_request_sync, op_self_status
     ADD     s0,     00
     ADD     s0,     00
-    OUTPUTK 00,     op_status_parity
+    OUTPUTK 00,     op_self_status
 
 send_ipc_data_loop:
     ADD     s0,     00
@@ -59,15 +95,15 @@ send_ipc_data_loop:
     COMPARE sF,     00
     JUMP    NZ,     send_ipc_data_loop
 
-    OUTPUTK cmd_send_done, op_status_parity
-    OUTPUTK 00,     op_status_parity
+    OUTPUTK cmd_send_done, op_self_status
+    OUTPUTK 00,     op_self_status
     RETURN
 
 recv_ipc_data:
-    OUTPUTK cmd_request_sync, op_status_parity
+    OUTPUTK cmd_request_sync, op_self_status
     ADD     s0,     00
     ADD     s0,     00
-    OUTPUTK 00,     op_status_parity
+    OUTPUTK 00,     op_self_status
     ADD     s0,     00
     ADD     s0,     00
     ADD     s0,     00

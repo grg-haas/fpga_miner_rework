@@ -78,7 +78,7 @@ architecture low_level_definition of {name} is
     signal data_out_a : std_logic_vector(35 downto 0);
 
     signal we_b_val   : std_logic_vector(7 downto 0);
-    
+
 begin
 
     ram_2k_generate : if (C_RAM_SIZE_KWORDS = 2) generate
@@ -96,8 +96,8 @@ begin
                                 RSTREG_PRIORITY_A => "REGCE",
                                 SRVAL_A => X"000000000",
                                 WRITE_MODE_A => "WRITE_FIRST",
-                                READ_WIDTH_B => 18,
-                                WRITE_WIDTH_B => 18,
+                                READ_WIDTH_B => 36,
+                                WRITE_WIDTH_B => 36,
                                 DOB_REG => 0,
                                 INIT_B => X"000000000",
                                 RSTREG_PRIORITY_B => "REGCE",
@@ -209,14 +209,16 @@ begin
                                 INIT_5D => X"{INIT_5D}",
                                 INIT_5E => X"{INIT_5E}",
                                 INIT_5F => X"{INIT_5F}",
-                                INIT_60 => X"{INIT_60}",
-                                INIT_61 => X"{INIT_61}",
-                                INIT_62 => X"{INIT_62}",
-                                INIT_63 => X"{INIT_63}",
-                                INIT_64 => X"{INIT_64}",
-                                INIT_65 => X"{INIT_65}",
-                                INIT_66 => X"{INIT_66}",
-                                INIT_67 => X"{INIT_67}",
+                                -- reserved for round constants
+                                INIT_60 => X"ab1c5ed5923f82a459f111f13956c25be9b5dba5b5c0fbcf71374491428a2f98",
+                                INIT_61 => X"c19bf1749bdc06a780deb1fe72be5d74550c7dc3243185be12835b01d807aa98",
+                                INIT_62 => X"76f988da5cb0a9dc4a7484aa2de92c6f240ca1cc0fc19dc6efbe4786e49b69c1",
+                                INIT_63 => X"1429296706ca6351d5a79147c6e00bf3bf597fc7b00327c8a831c66d983e5152",
+                                INIT_64 => X"92722c8581c2c92e766a0abb650a735453380d134d2c6dfc2e1b213827b70a85",
+                                INIT_65 => X"106aa070f40e3585d6990624d192e819c76c51a3c24b8b70a81a664ba2bfe8a1",
+                                INIT_66 => X"682e6ff35b9cca4f4ed8aa4a391c0cb334b0bcb52748774c1e376c0819a4c116",
+                                INIT_67 => X"c67178f2bef9a3f7a4506ceb90befffa8cc7020884c8781478a5636f748f82ee",
+                                -- reserved for MSA
                                 INIT_68 => X"{INIT_68}",
                                 INIT_69 => X"{INIT_69}",
                                 INIT_6A => X"{INIT_6A}",
@@ -225,6 +227,7 @@ begin
                                 INIT_6D => X"{INIT_6D}",
                                 INIT_6E => X"{INIT_6E}",
                                 INIT_6F => X"{INIT_6F}",
+                                -- reserved for future use
                                 INIT_70 => X"{INIT_70}",
                                 INIT_71 => X"{INIT_71}",
                                 INIT_72 => X"{INIT_72}",

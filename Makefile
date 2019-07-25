@@ -1,9 +1,9 @@
 # makefile settings
 MAIN_TB  := core_tb
-SIM_TIME := 12ms
+SIM_TIME := 2ms
 
 KCPSM6_PROGRAMS := main core
-VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core
+VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core msa_extender
 VHDL_SIMULATION := sim_clk miner_tb core_tb
 
 # various forms of the module names
@@ -30,12 +30,12 @@ COLOR_GREEN := \033[0;32m
 COLOR_BLUE  := \033[0;34m
 COLOR_NC    := \033[0m
 
+build: .out/$(MAIN_TB)
+clean: ;rm -rf .out
+
 simulate: .out/$(MAIN_TB).ghw
 	@echo "$(COLOR_BLUE)~~~Simulation up to date, launching viewer...~~~$(COLOR_NC)"
 	@gtkwave .out/$(MAIN_TB).ghw conf/$(MAIN_TB).gtkw
-
-build: .out/$(MAIN_TB)
-clean: ;rm -rf .out
 
 .out/$(MAIN_TB).ghw: .out/$(MAIN_TB)
 	@echo "$(COLOR_BLUE)~~~Build is up to date, running simulation~~~$(COLOR_NC)"
