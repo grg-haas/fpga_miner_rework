@@ -74,189 +74,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"08";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0A";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0C";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
+        core_data_in <= x"0F";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -284,175 +102,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0F";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"08";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0A";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
+        core_data_in <= x"0D";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -480,175 +130,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0E";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0F";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"08";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
+        core_data_in <= x"0B";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -676,175 +158,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0C";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0E";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0F";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"FF";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"01";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"02";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"03";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"04";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"05";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"06";
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- COMPARE sF,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- ADD     s0,     00
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- SUB     sF,     01
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- FETCH   s0,     (sF)
-        wait until rising_edge(clk);
-        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"07";
+        core_data_in <= x"09";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -872,7 +186,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"09";
+        core_data_in <= x"07";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -886,7 +200,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0A";
+        core_data_in <= x"06";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -900,7 +214,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0B";
+        core_data_in <= x"05";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -914,7 +228,7 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0C";
+        core_data_in <= x"04";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -928,7 +242,63 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
-        core_data_in <= x"0D";
+        core_data_in <= x"03";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"02";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"01";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"FF";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0F";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
@@ -956,7 +326,637 @@ begin
         wait until rising_edge(clk); -- FETCH   s0,     (sF)
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0D";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0C";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0B";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0A";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"09";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"08";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"07";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"06";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"05";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"04";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"03";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"02";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"01";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"FF";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
         core_data_in <= x"0F";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0E";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0D";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0C";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0B";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0A";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"09";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"08";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"07";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"06";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"05";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"04";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"03";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"02";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"01";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"FF";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0F";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0E";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0D";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0C";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0B";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"0A";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"09";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"08";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"07";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"06";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"05";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"04";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"03";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"02";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"01";
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- COMPARE sF,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
+        wait until rising_edge(clk);
+
+        wait until rising_edge(clk); -- ADD     s0,     00
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- SUB     sF,     01
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- FETCH   s0,     (sF)
+        wait until rising_edge(clk);
+        wait until rising_edge(clk); -- OUTPUT  s0,     op_self_data
+        core_data_in <= x"FF";
         wait until rising_edge(clk);
         wait until rising_edge(clk); -- COMPARE sF,     00
         wait until rising_edge(clk);
