@@ -24,13 +24,14 @@ CONSTANT    cmd_msa_save_buf,   00000100'b
 
 CONSTANT    baseaddr_rc,        00000000'b
 CONSTANT    baseaddr_msa,       01000000'b
+CONSTANT    baseaddr_free,      10000000'b
 
 ; register mapping
 ; s0 - IPC data
 ; s1 - IPC status
 ; sC - RC address
 ; sD - MSA addres
-; sE - SPM iterator
+; sE - misc iterator
 ; sF - SPM pointer
 
 main:
@@ -68,16 +69,33 @@ main:
     SUB     sE,     01                  ; use the underflow to jump
     JUMP    NC,     .bram_write_loop
 
-    LOAD    sD,     baseaddr_msa
-    LOAD    sE,     00
+    .msa_extend_loop:
+    LOAD    sE,     sD
 
-    .bram_read_loop:
+    SUB     sE,     0F
+    OUTPUT  sE,     op_bram_addr
+    OUTPUTK cmd_msa_valid, op_self_status
+
+    ADD     sE,     0D
+    OUTPUT  sE,     op_bram_addr
+    OUTPUTK cmd_msa_valid, op_self_status
+
+    SUB     sE,     0E
+    OUTPUT  sE,     op_bram_addr
+    OUTPUTK cmd_msa_valid, op_self_status
+
+    ADD     sE,     09
+    OUTPUT  sE,     op_bram_addr
+    OUTPUTK cmd_msa_valid, op_self_status
+
     OUTPUT  sD,     op_bram_addr
-    ADD     sD,     01
+    OUTPUTK cmd_msa_save_buf, op_self_status
+    OUTPUTK cmd_bram_we, op_self_status
+    OUTPUTK cmd_reset_all, op_self_status
 
-    ADD     sE,     01
-    COMPARE sE,     10
-    JUMP    NZ,     .bram_read_loop
+    ADD     sD,     01
+    COMPARE sD,     baseaddr_free
+    JUMP    NZ,     .msa_extend_loop
 
     JUMP    main
 
