@@ -59,8 +59,6 @@ architecture behavioral of core_hash_wrapper is
     component hash_circuity is
         port
         (
-            clk : in std_logic;
-
             hash_a_val   : out std_logic_vector(31 downto 0);
             hash_b_val   : out std_logic_vector(31 downto 0);
             hash_c_val   : out std_logic_vector(31 downto 0);
@@ -486,8 +484,6 @@ begin
     hasher_crct : hash_circuity
         port map
         (
-            clk => clk,
-
             hash_a_val => hasher_a_in,
             hash_b_val => hasher_b_in,
             hash_c_val => hasher_c_in,

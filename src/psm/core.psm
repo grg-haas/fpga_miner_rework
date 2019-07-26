@@ -17,12 +17,10 @@ CONSTANT    op_buf_byte3,       00000111'b
 
 CONSTANT    cmd_request_sync,   10000000'b
 CONSTANT    cmd_send_done,      01000000'b
-CONSTANT    cmd_bram_we,        00100000'b
-CONSTANT    cmd_reset_all,      00010000'b
-CONSTANT    cmd_msa_valid,      00001000'b
-CONSTANT    cmd_hash_rc_valid,  00000100'b
-CONSTANT    cmd_hash_msa_valid, 00000010'b
-CONSTANT    cmd_hash_ready,     00000001'b
+CONSTANT    cmd_msa_req_int,    00100000'b
+CONSTANT    cmd_hash_req_int,   00010000'b
+CONSTANT    cmd_bram_we,        00001000'b
+CONSTANT    cmd_reset_all,      00000100'b
 
 CONSTANT    buf_bram,           00000000'b
 CONSTANT    buf_msa,            00010000'b

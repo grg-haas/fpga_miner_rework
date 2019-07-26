@@ -87,19 +87,6 @@ architecture behavioral of core is
         );
     end component core_prog;
 
-    component msa_extender is
-        port
-        (
-            clk      : in std_logic;
-            reset    : in std_logic;
-
-            data_val : in std_logic;
-            data_in  : in std_logic_vector(31 downto 0);
-
-            msa_out  :  out std_logic_vector(31 downto 0)
-        );
-    end component msa_extender;
-
     -- signals for the processor
     signal address        : std_logic_vector(11 downto 0) := (others => '0');
     signal instruction    : std_logic_vector(17 downto 0) := (others => '0');
@@ -133,8 +120,6 @@ architecture behavioral of core is
     signal buf_select   : std_logic_vector(3 downto 0)  := (others => '0');
     signal read_buf     : std_logic_vector(31 downto 0) := (others => '0');
     signal write_buf    : std_logic_vector(31 downto 0) := (others => '0');
-
-    signal msa_out_buf  : std_logic_vector(31 downto 0) := (others => '0');
 
     signal hash_a_buf   : std_logic_vector(31 downto 0) := x"6A09E667";
     signal hash_b_buf   : std_logic_vector(31 downto 0) := x"BB67AE85";
@@ -207,18 +192,6 @@ begin
             we_b         => bram_we
         );
 
-    extend_msa : msa_extender
-        port map
-        (
-            clk      => clk,
-            reset    => status_out_buf(4),
-
-            data_val => status_out_buf(3),
-            data_in  => read_buf,
-
-            msa_out  => msa_out_buf
-        );
-
     synchronize : process(clk)
     begin
         if rising_edge(clk) then
@@ -226,52 +199,9 @@ begin
         end if;
     end process synchronize;
 
-    handle_hashing : process(clk)
-    begin
-        if rising_edge(clk) then
-            -- update hash buffers if they're currently being written to
-            if write_strobe = '1' or k_write_strobe = '1' then
-                if port_id(2) = '1' then
-                    case buf_select is
-                        when "0010" => hash_a_buf <= write_buf;
-                        when "0011" => hash_b_buf <= write_buf;
-                        when "0100" => hash_c_buf <= write_buf;
-                        when "0101" => hash_d_buf <= write_buf;
-                        when "0110" => hash_e_buf <= write_buf;
-                        when "0111" => hash_f_buf <= write_buf;
-                        when "1000" => hash_g_buf <= write_buf;
-                        when "1001" => hash_h_buf <= write_buf;
-                        when others => NULL;
-                    end case;
-                end if;
-            end if;
-
-            -- update msa and rc values
-            if status_out_buf(2) = '1' then
-                hash_rc_buf <= read_buf;
-            end if;
-
-            if status_out_buf(1) = '1' then
-                hash_msa_buf <= read_buf;
-            end if;
-
-            -- run a hash iteration
-            if status_out_buf(0) = '1' then
-                hash_h_buf <= hash_g_buf;
-                hash_g_buf <= hash_f_buf;
-                hash_f_buf <= hash_e_buf;
-                hash_e_buf <= hash_d_buf + temp1;
-                hash_d_buf <= hash_c_buf;
-                hash_c_buf <= hash_b_buf;
-                hash_b_buf <= hash_a_buf;
-                hash_a_buf <= temp1 + temp2;
-            end if;
-
-        end if;
-    end process handle_hashing;
 
     read_buf <= bram_data_out when buf_select = "0000" else
-                msa_out_buf   when buf_select = "0001" else
+                msa_val_new   when buf_select = "0001" else
                 hash_a_buf    when buf_select = "0010" else
                 hash_b_buf    when buf_select = "0011" else
                 hash_c_buf    when buf_select = "0100" else
@@ -320,7 +250,7 @@ begin
                     when "001" =>
                         status_out_buf <= out_port;
 
-                        if out_port(4) = '1' then
+                        if out_port(2) = '1' then
                             addr_buf   <= (others => '0');
                             write_buf  <= (others => '0');
                             parity_buf <= (others => '0');

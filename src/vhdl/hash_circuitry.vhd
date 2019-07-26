@@ -8,8 +8,6 @@ use ieee.numeric_std.all;
 entity hash_circuity is
     port
     (
-        clk : in std_logic;
-
         hash_a_val   : out std_logic_vector(31 downto 0);
         hash_b_val   : out std_logic_vector(31 downto 0);
         hash_c_val   : out std_logic_vector(31 downto 0);
