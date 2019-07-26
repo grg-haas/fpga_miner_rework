@@ -277,7 +277,212 @@ architecture behavioral of core_hash_wrapper is
     signal worker8_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker8_new_e  : std_logic_vector(31 downto 0) := (others => '0');
 begin
+    -- map hashing signals
+    hasher_a_in <= worker1_a_in when worker_sel = "1000" else
+                   worker2_a_in when worker_sel = "1001" else
+                   worker3_a_in when worker_sel = "1010" else
+                   worker4_a_in when worker_sel = "1011" else
+                   worker5_a_in when worker_sel = "1100" else
+                   worker6_a_in when worker_sel = "1101" else
+                   worker7_a_in when worker_sel = "1110" else
+                   worker8_a_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_b_in <= worker1_b_in when worker_sel = "1000" else
+                   worker2_b_in when worker_sel = "1001" else
+                   worker3_b_in when worker_sel = "1010" else
+                   worker4_b_in when worker_sel = "1011" else
+                   worker5_b_in when worker_sel = "1100" else
+                   worker6_b_in when worker_sel = "1101" else
+                   worker7_b_in when worker_sel = "1110" else
+                   worker8_b_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_c_in <= worker1_c_in when worker_sel = "1000" else
+                   worker2_c_in when worker_sel = "1001" else
+                   worker3_c_in when worker_sel = "1010" else
+                   worker4_c_in when worker_sel = "1011" else
+                   worker5_c_in when worker_sel = "1100" else
+                   worker6_c_in when worker_sel = "1101" else
+                   worker7_c_in when worker_sel = "1110" else
+                   worker8_c_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_d_in <= worker1_d_in when worker_sel = "1000" else
+                   worker2_d_in when worker_sel = "1001" else
+                   worker3_d_in when worker_sel = "1010" else
+                   worker4_d_in when worker_sel = "1011" else
+                   worker5_d_in when worker_sel = "1100" else
+                   worker6_d_in when worker_sel = "1101" else
+                   worker7_d_in when worker_sel = "1110" else
+                   worker8_d_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_e_in <= worker1_e_in when worker_sel = "1000" else
+                   worker2_e_in when worker_sel = "1001" else
+                   worker3_e_in when worker_sel = "1010" else
+                   worker4_e_in when worker_sel = "1011" else
+                   worker5_e_in when worker_sel = "1100" else
+                   worker6_e_in when worker_sel = "1101" else
+                   worker7_e_in when worker_sel = "1110" else
+                   worker8_e_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_f_in <= worker1_f_in when worker_sel = "1000" else
+                   worker2_f_in when worker_sel = "1001" else
+                   worker3_f_in when worker_sel = "1010" else
+                   worker4_f_in when worker_sel = "1011" else
+                   worker5_f_in when worker_sel = "1100" else
+                   worker6_f_in when worker_sel = "1101" else
+                   worker7_f_in when worker_sel = "1110" else
+                   worker8_f_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_g_in <= worker1_g_in when worker_sel = "1000" else
+                   worker2_g_in when worker_sel = "1001" else
+                   worker3_g_in when worker_sel = "1010" else
+                   worker4_g_in when worker_sel = "1011" else
+                   worker5_g_in when worker_sel = "1100" else
+                   worker6_g_in when worker_sel = "1101" else
+                   worker7_g_in when worker_sel = "1110" else
+                   worker8_g_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_h_in <= worker1_h_in when worker_sel = "1000" else
+                   worker2_h_in when worker_sel = "1001" else
+                   worker3_h_in when worker_sel = "1010" else
+                   worker4_h_in when worker_sel = "1011" else
+                   worker5_h_in when worker_sel = "1100" else
+                   worker6_h_in when worker_sel = "1101" else
+                   worker7_h_in when worker_sel = "1110" else
+                   worker8_h_in when worker_sel = "1111" else
+                   (others => '0');
+    hasher_msa_in <= worker1_msa_in when worker_sel = "1000" else
+                     worker2_msa_in when worker_sel = "1001" else
+                     worker3_msa_in when worker_sel = "1010" else
+                     worker4_msa_in when worker_sel = "1011" else
+                     worker5_msa_in when worker_sel = "1100" else
+                     worker6_msa_in when worker_sel = "1101" else
+                     worker7_msa_in when worker_sel = "1110" else
+                     worker8_msa_in when worker_sel = "1111" else
+                     (others => '0');
+    hasher_rc_in <= worker1_rc_in when worker_sel = "1000" else
+                    worker2_rc_in when worker_sel = "1001" else
+                    worker3_rc_in when worker_sel = "1010" else
+                    worker4_rc_in when worker_sel = "1011" else
+                    worker5_rc_in when worker_sel = "1100" else
+                    worker6_rc_in when worker_sel = "1101" else
+                    worker7_rc_in when worker_sel = "1110" else
+                    worker8_rc_in when worker_sel = "1111" else
+                    (others => '0');
 
+    -- map worker input signals
+    worker1_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1000" else
+                       (others => '0');
+    worker2_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1001" else
+                       (others => '0');
+    worker3_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1010" else
+                       (others => '0');
+    worker4_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1011" else
+                       (others => '0');
+    worker5_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1100" else
+                       (others => '0');
+    worker6_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1101" else
+                       (others => '0');
+    worker7_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1110" else
+                       (others => '0');
+    worker8_data_in <= data_in when worker_sel = "0000" or
+                                    worker_sel = "1111" else
+                       (others => '0');
+
+    worker1_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1000" else
+                       (others => '0');
+    worker2_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1001" else
+                       (others => '0');
+    worker3_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1010" else
+                       (others => '0');
+    worker4_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1011" else
+                       (others => '0');
+    worker5_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1100" else
+                       (others => '0');
+    worker6_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1101" else
+                       (others => '0');
+    worker7_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1110" else
+                       (others => '0');
+    worker8_stat_in <= status_in when worker_sel = "0000" or
+                                      worker_sel = "1111" else
+                       (others => '0');
+
+    worker1_msa_new <= msa_val_new when worker_sel = "1000" else (others => '0');
+    worker2_msa_new <= msa_val_new when worker_sel = "1001" else (others => '0');
+    worker3_msa_new <= msa_val_new when worker_sel = "1010" else (others => '0');
+    worker4_msa_new <= msa_val_new when worker_sel = "1011" else (others => '0');
+    worker5_msa_new <= msa_val_new when worker_sel = "1100" else (others => '0');
+    worker6_msa_new <= msa_val_new when worker_sel = "1101" else (others => '0');
+    worker7_msa_new <= msa_val_new when worker_sel = "1110" else (others => '0');
+    worker8_msa_new <= msa_val_new when worker_sel = "1111" else (others => '0');
+
+    -- map worker output signals
+    data_out <= worker1_data_out when worker_sel = "1000" else
+                worker2_data_out when worker_sel = "1001" else
+                worker3_data_out when worker_sel = "1010" else
+                worker4_data_out when worker_sel = "1011" else
+                worker5_data_out when worker_sel = "1100" else
+                worker6_data_out when worker_sel = "1101" else
+                worker7_data_out when worker_sel = "1110" else
+                worker8_data_out when worker_sel = "1111" else
+                (others => '0');
+    status_out <= worker1_stat_out when worker_sel = "1000" else
+                  worker2_stat_out when worker_sel = "1001" else
+                  worker3_stat_out when worker_sel = "1010" else
+                  worker4_stat_out when worker_sel = "1011" else
+                  worker5_stat_out when worker_sel = "1100" else
+                  worker6_stat_out when worker_sel = "1101" else
+                  worker7_stat_out when worker_sel = "1110" else
+                  worker8_stat_out when worker_sel = "1111" else
+                  (others => '0');
+
+    msa_val_i_16 <= worker1_msa_i16 when worker_sel = "1000" else
+                    worker2_msa_i16 when worker_sel = "1001" else
+                    worker3_msa_i16 when worker_sel = "1010" else
+                    worker4_msa_i16 when worker_sel = "1100" else
+                    worker5_msa_i16 when worker_sel = "1101" else
+                    worker6_msa_i16 when worker_sel = "1110" else
+                    worker7_msa_i16 when worker_sel = "1111" else
+                    (others => '0');
+    msa_val_i_15 <= worker1_msa_i15 when worker_sel = "1000" else
+                    worker2_msa_i15 when worker_sel = "1001" else
+                    worker3_msa_i15 when worker_sel = "1010" else
+                    worker4_msa_i15 when worker_sel = "1100" else
+                    worker5_msa_i15 when worker_sel = "1101" else
+                    worker6_msa_i15 when worker_sel = "1110" else
+                    worker7_msa_i15 when worker_sel = "1111" else
+                    (others => '0');
+    msa_val_i_7 <= worker1_msa_i7 when worker_sel = "1000" else
+                    worker2_msa_i7 when worker_sel = "1001" else
+                    worker3_msa_i7 when worker_sel = "1010" else
+                    worker4_msa_i7 when worker_sel = "1100" else
+                    worker5_msa_i7 when worker_sel = "1101" else
+                    worker6_msa_i7 when worker_sel = "1110" else
+                    worker7_msa_i7 when worker_sel = "1111" else
+                    (others => '0');
+    msa_val_i_2 <= worker1_msa_i2 when worker_sel = "1000" else
+                    worker2_msa_i2 when worker_sel = "1001" else
+                    worker3_msa_i2 when worker_sel = "1010" else
+                    worker4_msa_i2 when worker_sel = "1100" else
+                    worker5_msa_i2 when worker_sel = "1101" else
+                    worker6_msa_i2 when worker_sel = "1110" else
+                    worker7_msa_i2 when worker_sel = "1111" else
+                    (others => '0');
+
+    -- instantiate submodules
     hasher_crct : hash_circuity
         port map
         (
@@ -327,7 +532,6 @@ begin
             hash_new_a   => worker1_new_a,
             hash_new_e   => worker1_new_e
         );
-
     worker2 : core
         port map
         (
@@ -359,7 +563,6 @@ begin
             hash_new_a   => worker2_new_a,
             hash_new_e   => worker2_new_e
         );
-
     worker3 : core
         port map
         (
@@ -391,7 +594,6 @@ begin
             hash_new_a   => worker3_new_a,
             hash_new_e   => worker3_new_e
         );
-
     worker4 : core
         port map
         (
@@ -423,7 +625,6 @@ begin
             hash_new_a   => worker4_new_a,
             hash_new_e   => worker4_new_e
         );
-
     worker5 : core
         port map
         (
@@ -455,7 +656,6 @@ begin
             hash_new_a   => worker5_new_a,
             hash_new_e   => worker5_new_e
         );
-
     worker6 : core
         port map
         (
@@ -487,7 +687,6 @@ begin
             hash_new_a   => worker6_new_a,
             hash_new_e   => worker6_new_e
         );
-
     worker7 : core
         port map
         (
@@ -519,7 +718,6 @@ begin
             hash_new_a   => worker7_new_a,
             hash_new_e   => worker7_new_e
         );
-
     worker8 : core
         port map
         (
