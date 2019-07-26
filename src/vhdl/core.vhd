@@ -8,13 +8,33 @@ use ieee.numeric_std.all;
 entity core is
     port
     (
-        clk        : in std_logic;
+        clk          : in std_logic;
 
-        data_in    : in std_logic_vector(7 downto 0);
-        data_out   : out std_logic_vector(7 downto 0);
+        data_in      : in std_logic_vector(7 downto 0);
+        status_in    : in std_logic_vector(7 downto 0);
 
-        status_in  : in std_logic_vector(7 downto 0);
-        status_out : out std_logic_vector(7 downto 0)
+        data_out     : out std_logic_vector(7 downto 0);
+        status_out   : out std_logic_vector(7 downto 0);
+
+        msa_val_i_16 : out std_logic_vector(31 downto 0);
+        msa_val_i_15 : out std_logic_vector(31 downto 0);
+        msa_val_i_7  : out std_logic_vector(31 downto 0);
+        msa_val_i_2  : out std_logic_vector(31 downto 0);
+        msa_val_new  : in std_logic_vector(31 downto 0);
+
+        hash_a_val   : out std_logic_vector(31 downto 0);
+        hash_b_val   : out std_logic_vector(31 downto 0);
+        hash_c_val   : out std_logic_vector(31 downto 0);
+        hash_d_val   : out std_logic_vector(31 downto 0);
+        hash_e_val   : out std_logic_vector(31 downto 0);
+        hash_f_val   : out std_logic_vector(31 downto 0);
+        hash_g_val   : out std_logic_vector(31 downto 0);
+        hash_h_val   : out std_logic_vector(31 downto 0);
+        hash_msa_val : out std_logic_vector(31 downto 0);
+        hash_rc_val  : out std_logic_vector(31 downto 0);
+
+        hash_new_a   : in std_logic_vector(31 downto 0);
+        hash_new_e   : in std_logic_vector(31 downto 0)
     );
 end core;
 

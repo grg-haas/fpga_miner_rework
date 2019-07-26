@@ -111,9 +111,9 @@ main:
     OUTPUTK cmd_msa_valid, op_self_status
 
     ; semi hacky but pretty cool
-    OUTPUTK buf_msa, op_bufsel_parity
-    OUTPUTK buf_r_to_w, op_bufsel_parity
-    OUTPUTK buf_bram, op_bufsel_parity
+    OUTPUTK buf_msa, op_bufsel_parity       ; fill read buffer with msa output
+    OUTPUTK buf_r_to_w, op_bufsel_parity    ; transfer it to the write buffer
+    OUTPUTK buf_bram, op_bufsel_parity      ; transfer write buffer to bram input
 
     OUTPUT  sD,     op_bram_addr
     OUTPUTK cmd_bram_we, op_self_status

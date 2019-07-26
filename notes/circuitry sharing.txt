@@ -1,0 +1,62 @@
+msa extension and hashing circuitry use the most compute resources
+what if worker cores could share these?
+
+msa extension process:
+    retrieve 4 entries from RAM (8-12 instructions)
+    manipulate 2 of them and keep 2 as-is (combinatorial so fast)
+    pull result into RAM (3 instructions, but only 1 depends on msa extender)
+    update registers and loop (3 instructions)
+
+    so overall, circuitry only being "used" for 1 instruction out of 15
+
+hashing process:
+    pull 2 values from RAM (4 instructions)
+    pass everything into hash unit and extract new values (mostly combinatorial, 1 instruction)
+    update registers and loop (4 instructions)
+
+    this circuit is only used for 1 instruction out of 9
+
+cores could take turns "round robin" style to share these resources
+    problem is that sleeping isn't super reliable
+    could be tough to synchronize access in same way as stack communication
+
+    possible though:
+        core wrapper waits for all cores to go to sleep
+        then begins a round robin counter
+            first, wake up cores with 1 clock cycle delays
+            then rotate the inputs and outputs of hash circuitry s.t. everything lines up
+
+8 cores can share hashing circuitry but 16 cores can share msa extension
+if cores sync before anything else for the msa extension, they'll still be \
+synced for hashing... could exploit?
+
+
+msa extender module
+    msa access sync
+    msa circuitry
+
+    hash extender module
+        hash access sync
+        hash circuitry
+
+        core0
+        core1
+        core2
+        core3
+        core4
+        core5
+        core6
+        core7
+
+    hash extender module
+        hash access sync
+        hash circuitry
+
+        core0
+        core1
+        core2
+        core3
+        core4
+        core5
+        core6
+        core7

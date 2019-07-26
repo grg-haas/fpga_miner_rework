@@ -1,18 +1,18 @@
 [*]
 [*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
-[*] Thu Jul 25 21:41:34 2019
+[*] Thu Jul 25 22:34:56 2019
 [*]
 [dumpfile] "/mnt/shared/Projects/fpga/fpga_miner_rework/atom_proj/.out/core_tb.ghw"
-[dumpfile_mtime] "Thu Jul 25 21:40:38 2019"
-[dumpfile_size] 18284496
+[dumpfile_mtime] "Thu Jul 25 22:32:01 2019"
+[dumpfile_size] 3502768
 [savefile] "/mnt/shared/Projects/fpga/fpga_miner_rework/atom_proj/conf/core_tb.gtkw"
-[timestart] 7625300000
+[timestart] 0
 [size] 2192 1205
 [pos] -1 -1
-*-26.000000 7880000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] top.
+*-34.000000 280000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.core_tb.
 [treeopen] top.core_tb.uut.
+[treeopen] top.core_tb.uut.extend_msa.
 [sst_width] 346
 [signals_width] 281
 [sst_expanded] 1
@@ -45,7 +45,7 @@ top.core_tb.uut.k_write_strobe
 #{top.core_tb.uut.buf_select[3:0]} top.core_tb.uut.buf_select[3] top.core_tb.uut.buf_select[2] top.core_tb.uut.buf_select[1] top.core_tb.uut.buf_select[0]
 #{top.core_tb.uut.read_buf[31:0]} top.core_tb.uut.read_buf[31] top.core_tb.uut.read_buf[30] top.core_tb.uut.read_buf[29] top.core_tb.uut.read_buf[28] top.core_tb.uut.read_buf[27] top.core_tb.uut.read_buf[26] top.core_tb.uut.read_buf[25] top.core_tb.uut.read_buf[24] top.core_tb.uut.read_buf[23] top.core_tb.uut.read_buf[22] top.core_tb.uut.read_buf[21] top.core_tb.uut.read_buf[20] top.core_tb.uut.read_buf[19] top.core_tb.uut.read_buf[18] top.core_tb.uut.read_buf[17] top.core_tb.uut.read_buf[16] top.core_tb.uut.read_buf[15] top.core_tb.uut.read_buf[14] top.core_tb.uut.read_buf[13] top.core_tb.uut.read_buf[12] top.core_tb.uut.read_buf[11] top.core_tb.uut.read_buf[10] top.core_tb.uut.read_buf[9] top.core_tb.uut.read_buf[8] top.core_tb.uut.read_buf[7] top.core_tb.uut.read_buf[6] top.core_tb.uut.read_buf[5] top.core_tb.uut.read_buf[4] top.core_tb.uut.read_buf[3] top.core_tb.uut.read_buf[2] top.core_tb.uut.read_buf[1] top.core_tb.uut.read_buf[0]
 #{top.core_tb.uut.write_buf[31:0]} top.core_tb.uut.write_buf[31] top.core_tb.uut.write_buf[30] top.core_tb.uut.write_buf[29] top.core_tb.uut.write_buf[28] top.core_tb.uut.write_buf[27] top.core_tb.uut.write_buf[26] top.core_tb.uut.write_buf[25] top.core_tb.uut.write_buf[24] top.core_tb.uut.write_buf[23] top.core_tb.uut.write_buf[22] top.core_tb.uut.write_buf[21] top.core_tb.uut.write_buf[20] top.core_tb.uut.write_buf[19] top.core_tb.uut.write_buf[18] top.core_tb.uut.write_buf[17] top.core_tb.uut.write_buf[16] top.core_tb.uut.write_buf[15] top.core_tb.uut.write_buf[14] top.core_tb.uut.write_buf[13] top.core_tb.uut.write_buf[12] top.core_tb.uut.write_buf[11] top.core_tb.uut.write_buf[10] top.core_tb.uut.write_buf[9] top.core_tb.uut.write_buf[8] top.core_tb.uut.write_buf[7] top.core_tb.uut.write_buf[6] top.core_tb.uut.write_buf[5] top.core_tb.uut.write_buf[4] top.core_tb.uut.write_buf[3] top.core_tb.uut.write_buf[2] top.core_tb.uut.write_buf[1] top.core_tb.uut.write_buf[0]
-@201
+@200
 -
 @22
 #{top.core_tb.uut.addr_buf[7:0]} top.core_tb.uut.addr_buf[7] top.core_tb.uut.addr_buf[6] top.core_tb.uut.addr_buf[5] top.core_tb.uut.addr_buf[4] top.core_tb.uut.addr_buf[3] top.core_tb.uut.addr_buf[2] top.core_tb.uut.addr_buf[1] top.core_tb.uut.addr_buf[0]
@@ -55,6 +55,17 @@ top.core_tb.uut.k_write_strobe
 #{top.core_tb.uut.bram_data_out[31:0]} top.core_tb.uut.bram_data_out[31] top.core_tb.uut.bram_data_out[30] top.core_tb.uut.bram_data_out[29] top.core_tb.uut.bram_data_out[28] top.core_tb.uut.bram_data_out[27] top.core_tb.uut.bram_data_out[26] top.core_tb.uut.bram_data_out[25] top.core_tb.uut.bram_data_out[24] top.core_tb.uut.bram_data_out[23] top.core_tb.uut.bram_data_out[22] top.core_tb.uut.bram_data_out[21] top.core_tb.uut.bram_data_out[20] top.core_tb.uut.bram_data_out[19] top.core_tb.uut.bram_data_out[18] top.core_tb.uut.bram_data_out[17] top.core_tb.uut.bram_data_out[16] top.core_tb.uut.bram_data_out[15] top.core_tb.uut.bram_data_out[14] top.core_tb.uut.bram_data_out[13] top.core_tb.uut.bram_data_out[12] top.core_tb.uut.bram_data_out[11] top.core_tb.uut.bram_data_out[10] top.core_tb.uut.bram_data_out[9] top.core_tb.uut.bram_data_out[8] top.core_tb.uut.bram_data_out[7] top.core_tb.uut.bram_data_out[6] top.core_tb.uut.bram_data_out[5] top.core_tb.uut.bram_data_out[4] top.core_tb.uut.bram_data_out[3] top.core_tb.uut.bram_data_out[2] top.core_tb.uut.bram_data_out[1] top.core_tb.uut.bram_data_out[0]
 #{top.core_tb.uut.bram_parity_out[3:0]} top.core_tb.uut.bram_parity_out[3] top.core_tb.uut.bram_parity_out[2] top.core_tb.uut.bram_parity_out[1] top.core_tb.uut.bram_parity_out[0]
 #{top.core_tb.uut.bram_we[3:0]} top.core_tb.uut.bram_we[3] top.core_tb.uut.bram_we[2] top.core_tb.uut.bram_we[1] top.core_tb.uut.bram_we[0]
+@200
+-
+@421
+top.core_tb.uut.extend_msa.state
+@28
+top.core_tb.uut.extend_msa.data_val
+@22
+#{top.core_tb.uut.extend_msa.data_in[31:0]} top.core_tb.uut.extend_msa.data_in[31] top.core_tb.uut.extend_msa.data_in[30] top.core_tb.uut.extend_msa.data_in[29] top.core_tb.uut.extend_msa.data_in[28] top.core_tb.uut.extend_msa.data_in[27] top.core_tb.uut.extend_msa.data_in[26] top.core_tb.uut.extend_msa.data_in[25] top.core_tb.uut.extend_msa.data_in[24] top.core_tb.uut.extend_msa.data_in[23] top.core_tb.uut.extend_msa.data_in[22] top.core_tb.uut.extend_msa.data_in[21] top.core_tb.uut.extend_msa.data_in[20] top.core_tb.uut.extend_msa.data_in[19] top.core_tb.uut.extend_msa.data_in[18] top.core_tb.uut.extend_msa.data_in[17] top.core_tb.uut.extend_msa.data_in[16] top.core_tb.uut.extend_msa.data_in[15] top.core_tb.uut.extend_msa.data_in[14] top.core_tb.uut.extend_msa.data_in[13] top.core_tb.uut.extend_msa.data_in[12] top.core_tb.uut.extend_msa.data_in[11] top.core_tb.uut.extend_msa.data_in[10] top.core_tb.uut.extend_msa.data_in[9] top.core_tb.uut.extend_msa.data_in[8] top.core_tb.uut.extend_msa.data_in[7] top.core_tb.uut.extend_msa.data_in[6] top.core_tb.uut.extend_msa.data_in[5] top.core_tb.uut.extend_msa.data_in[4] top.core_tb.uut.extend_msa.data_in[3] top.core_tb.uut.extend_msa.data_in[2] top.core_tb.uut.extend_msa.data_in[1] top.core_tb.uut.extend_msa.data_in[0]
+#{top.core_tb.uut.extend_msa.s0[31:0]} top.core_tb.uut.extend_msa.s0[31] top.core_tb.uut.extend_msa.s0[30] top.core_tb.uut.extend_msa.s0[29] top.core_tb.uut.extend_msa.s0[28] top.core_tb.uut.extend_msa.s0[27] top.core_tb.uut.extend_msa.s0[26] top.core_tb.uut.extend_msa.s0[25] top.core_tb.uut.extend_msa.s0[24] top.core_tb.uut.extend_msa.s0[23] top.core_tb.uut.extend_msa.s0[22] top.core_tb.uut.extend_msa.s0[21] top.core_tb.uut.extend_msa.s0[20] top.core_tb.uut.extend_msa.s0[19] top.core_tb.uut.extend_msa.s0[18] top.core_tb.uut.extend_msa.s0[17] top.core_tb.uut.extend_msa.s0[16] top.core_tb.uut.extend_msa.s0[15] top.core_tb.uut.extend_msa.s0[14] top.core_tb.uut.extend_msa.s0[13] top.core_tb.uut.extend_msa.s0[12] top.core_tb.uut.extend_msa.s0[11] top.core_tb.uut.extend_msa.s0[10] top.core_tb.uut.extend_msa.s0[9] top.core_tb.uut.extend_msa.s0[8] top.core_tb.uut.extend_msa.s0[7] top.core_tb.uut.extend_msa.s0[6] top.core_tb.uut.extend_msa.s0[5] top.core_tb.uut.extend_msa.s0[4] top.core_tb.uut.extend_msa.s0[3] top.core_tb.uut.extend_msa.s0[2] top.core_tb.uut.extend_msa.s0[1] top.core_tb.uut.extend_msa.s0[0]
+#{top.core_tb.uut.extend_msa.s1[31:0]} top.core_tb.uut.extend_msa.s1[31] top.core_tb.uut.extend_msa.s1[30] top.core_tb.uut.extend_msa.s1[29] top.core_tb.uut.extend_msa.s1[28] top.core_tb.uut.extend_msa.s1[27] top.core_tb.uut.extend_msa.s1[26] top.core_tb.uut.extend_msa.s1[25] top.core_tb.uut.extend_msa.s1[24] top.core_tb.uut.extend_msa.s1[23] top.core_tb.uut.extend_msa.s1[22] top.core_tb.uut.extend_msa.s1[21] top.core_tb.uut.extend_msa.s1[20] top.core_tb.uut.extend_msa.s1[19] top.core_tb.uut.extend_msa.s1[18] top.core_tb.uut.extend_msa.s1[17] top.core_tb.uut.extend_msa.s1[16] top.core_tb.uut.extend_msa.s1[15] top.core_tb.uut.extend_msa.s1[14] top.core_tb.uut.extend_msa.s1[13] top.core_tb.uut.extend_msa.s1[12] top.core_tb.uut.extend_msa.s1[11] top.core_tb.uut.extend_msa.s1[10] top.core_tb.uut.extend_msa.s1[9] top.core_tb.uut.extend_msa.s1[8] top.core_tb.uut.extend_msa.s1[7] top.core_tb.uut.extend_msa.s1[6] top.core_tb.uut.extend_msa.s1[5] top.core_tb.uut.extend_msa.s1[4] top.core_tb.uut.extend_msa.s1[3] top.core_tb.uut.extend_msa.s1[2] top.core_tb.uut.extend_msa.s1[1] top.core_tb.uut.extend_msa.s1[0]
+#{top.core_tb.uut.extend_msa.res_buf[31:0]} top.core_tb.uut.extend_msa.res_buf[31] top.core_tb.uut.extend_msa.res_buf[30] top.core_tb.uut.extend_msa.res_buf[29] top.core_tb.uut.extend_msa.res_buf[28] top.core_tb.uut.extend_msa.res_buf[27] top.core_tb.uut.extend_msa.res_buf[26] top.core_tb.uut.extend_msa.res_buf[25] top.core_tb.uut.extend_msa.res_buf[24] top.core_tb.uut.extend_msa.res_buf[23] top.core_tb.uut.extend_msa.res_buf[22] top.core_tb.uut.extend_msa.res_buf[21] top.core_tb.uut.extend_msa.res_buf[20] top.core_tb.uut.extend_msa.res_buf[19] top.core_tb.uut.extend_msa.res_buf[18] top.core_tb.uut.extend_msa.res_buf[17] top.core_tb.uut.extend_msa.res_buf[16] top.core_tb.uut.extend_msa.res_buf[15] top.core_tb.uut.extend_msa.res_buf[14] top.core_tb.uut.extend_msa.res_buf[13] top.core_tb.uut.extend_msa.res_buf[12] top.core_tb.uut.extend_msa.res_buf[11] top.core_tb.uut.extend_msa.res_buf[10] top.core_tb.uut.extend_msa.res_buf[9] top.core_tb.uut.extend_msa.res_buf[8] top.core_tb.uut.extend_msa.res_buf[7] top.core_tb.uut.extend_msa.res_buf[6] top.core_tb.uut.extend_msa.res_buf[5] top.core_tb.uut.extend_msa.res_buf[4] top.core_tb.uut.extend_msa.res_buf[3] top.core_tb.uut.extend_msa.res_buf[2] top.core_tb.uut.extend_msa.res_buf[1] top.core_tb.uut.extend_msa.res_buf[0]
 @200
 -
 @22
