@@ -2,8 +2,6 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
-use ieee.numeric_std.all;
 
 entity core is
     port
@@ -150,14 +148,6 @@ architecture behavioral of core is
     signal hash_rc_buf  : std_logic_vector(31 downto 0) := (others => '0');
     signal hash_msa_buf : std_logic_vector(31 downto 0) := (others => '0');
 
-    signal S1           : std_logic_vector(31 downto 0) := (others => '0');
-    signal ch           : std_logic_vector(31 downto 0) := (others => '0');
-    signal temp1        : std_logic_vector(31 downto 0) := (others => '0');
-
-    signal S0           : std_logic_vector(31 downto 0) := (others => '0');
-    signal maj          : std_logic_vector(31 downto 0) := (others => '0');
-    signal temp2        : std_logic_vector(31 downto 0) := (others => '0');
-
 begin
     bram_addr_in <= "111" & addr_buf & "11111";
     bram_we      <= status_out_buf(5) & status_out_buf(5) &
@@ -235,19 +225,6 @@ begin
             kcpsm6_sleep <= status_out_buf(7) and not status_in(7);
         end if;
     end process synchronize;
-
-    S1    <= std_logic_vector(rotate_right(unsigned(hash_e_buf), 6))  xor
-             std_logic_vector(rotate_right(unsigned(hash_e_buf), 11)) xor
-             std_logic_vector(rotate_right(unsigned(hash_e_buf), 25));
-    ch    <= (hash_e_buf and hash_f_buf) xor ((not hash_e_buf) and hash_g_buf);
-    temp1 <= hash_h_buf + S1 + ch + hash_rc_buf + hash_msa_buf;
-
-    S0    <= std_logic_vector(rotate_right(unsigned(hash_a_buf), 2))  xor
-             std_logic_vector(rotate_right(unsigned(hash_a_buf), 13)) xor
-             std_logic_vector(rotate_right(unsigned(hash_a_buf), 22));
-    maj   <= (hash_a_buf and hash_b_buf) xor (hash_a_buf and hash_c_buf) xor
-             (hash_b_buf and hash_c_buf);
-    temp2 <= S0 + maj;
 
     handle_hashing : process(clk)
     begin

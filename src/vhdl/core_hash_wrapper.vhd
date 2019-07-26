@@ -93,6 +93,16 @@ architecture behavioral of core_hash_wrapper is
     signal hasher_new_e  : std_logic_vector(31 downto 0) := (others => '0');
 
     -- signals for the workers
+    signal worker1_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker1_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker1_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker1_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker1_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker1_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker1_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker1_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker1_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
+
     signal worker1_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker1_b_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker1_c_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -105,6 +115,16 @@ architecture behavioral of core_hash_wrapper is
     signal worker1_rc_in  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker1_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker1_new_e  : std_logic_vector(31 downto 0) := (others => '0');
+
+    signal worker2_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker2_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker2_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker2_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker2_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker2_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker2_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker2_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker2_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
 
     signal worker2_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker2_b_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -119,6 +139,16 @@ architecture behavioral of core_hash_wrapper is
     signal worker2_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker2_new_e  : std_logic_vector(31 downto 0) := (others => '0');
 
+    signal worker3_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker3_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker3_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker3_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker3_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker3_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker3_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker3_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker3_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
+
     signal worker3_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker3_b_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker3_c_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -131,6 +161,16 @@ architecture behavioral of core_hash_wrapper is
     signal worker3_rc_in  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker3_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker3_new_e  : std_logic_vector(31 downto 0) := (others => '0');
+
+    signal worker4_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker4_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker4_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker4_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker4_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker4_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker4_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker4_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker4_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
 
     signal worker4_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker4_b_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -145,6 +185,16 @@ architecture behavioral of core_hash_wrapper is
     signal worker4_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker4_new_e  : std_logic_vector(31 downto 0) := (others => '0');
 
+    signal worker5_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker5_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker5_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker5_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker5_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker5_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker5_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker5_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker5_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
+
     signal worker5_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker5_b_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker5_c_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -157,6 +207,16 @@ architecture behavioral of core_hash_wrapper is
     signal worker5_rc_in  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker5_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker5_new_e  : std_logic_vector(31 downto 0) := (others => '0');
+
+    signal worker6_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker6_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker6_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker6_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker6_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker6_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker6_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker6_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker6_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
 
     signal worker6_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker6_b_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -171,6 +231,16 @@ architecture behavioral of core_hash_wrapper is
     signal worker6_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker6_new_e  : std_logic_vector(31 downto 0) := (others => '0');
 
+    signal worker7_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker7_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker7_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker7_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker7_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker7_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker7_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker7_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker7_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
+
     signal worker7_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker7_b_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker7_c_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -183,6 +253,16 @@ architecture behavioral of core_hash_wrapper is
     signal worker7_rc_in  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker7_new_a  : std_logic_vector(31 downto 0) := (others => '0');
     signal worker7_new_e  : std_logic_vector(31 downto 0) := (others => '0');
+
+    signal worker8_data_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker8_stat_in  : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker8_data_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker8_stat_out : std_logic_vector(7 downto 0)  := (others => '0');
+    signal worker8_msa_i16  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker8_msa_i15  : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker8_msa_i7   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker8_msa_i2   : std_logic_vector(31 downto 0) := (others => '0');
+    signal worker8_msa_new  : std_logic_vector(31 downto 0) := (others => '0');
 
     signal worker8_a_in   : std_logic_vector(31 downto 0) := (others => '0');
     signal worker8_b_in   : std_logic_vector(31 downto 0) := (others => '0');
@@ -214,6 +294,262 @@ begin
 
             hash_new_a => hasher_new_a,
             hash_new_e => hasher_new_e
+        );
+
+    worker1 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker1_data_in,
+            status_in    => worker1_stat_in,
+
+            data_out     => worker1_data_out,
+            status_out   => worker1_stat_out,
+
+            msa_val_i_16 => worker1_msa_i16,
+            msa_val_i_15 => worker1_msa_i15,
+            msa_val_i_7  => worker1_msa_i7,
+            msa_val_i_2  => worker1_msa_i2,
+            msa_val_new  => worker1_msa_new,
+
+            hash_a_val   => worker1_a_in,
+            hash_b_val   => worker1_b_in,
+            hash_c_val   => worker1_c_in,
+            hash_d_val   => worker1_d_in,
+            hash_e_val   => worker1_e_in,
+            hash_f_val   => worker1_f_in,
+            hash_g_val   => worker1_g_in,
+            hash_h_val   => worker1_h_in,
+            hash_msa_val => worker1_msa_in,
+            hash_rc_val  => worker1_rc_in,
+
+            hash_new_a   => worker1_new_a,
+            hash_new_e   => worker1_new_e
+        );
+
+    worker2 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker2_data_in,
+            status_in    => worker2_stat_in,
+
+            data_out     => worker2_data_out,
+            status_out   => worker2_stat_out,
+
+            msa_val_i_16 => worker2_msa_i16,
+            msa_val_i_15 => worker2_msa_i15,
+            msa_val_i_7  => worker2_msa_i7,
+            msa_val_i_2  => worker2_msa_i2,
+            msa_val_new  => worker2_msa_new,
+
+            hash_a_val   => worker2_a_in,
+            hash_b_val   => worker2_b_in,
+            hash_c_val   => worker2_c_in,
+            hash_d_val   => worker2_d_in,
+            hash_e_val   => worker2_e_in,
+            hash_f_val   => worker2_f_in,
+            hash_g_val   => worker2_g_in,
+            hash_h_val   => worker2_h_in,
+            hash_msa_val => worker2_msa_in,
+            hash_rc_val  => worker2_rc_in,
+
+            hash_new_a   => worker2_new_a,
+            hash_new_e   => worker2_new_e
+        );
+
+    worker3 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker3_data_in,
+            status_in    => worker3_stat_in,
+
+            data_out     => worker3_data_out,
+            status_out   => worker3_stat_out,
+
+            msa_val_i_16 => worker3_msa_i16,
+            msa_val_i_15 => worker3_msa_i15,
+            msa_val_i_7  => worker3_msa_i7,
+            msa_val_i_2  => worker3_msa_i2,
+            msa_val_new  => worker3_msa_new,
+
+            hash_a_val   => worker3_a_in,
+            hash_b_val   => worker3_b_in,
+            hash_c_val   => worker3_c_in,
+            hash_d_val   => worker3_d_in,
+            hash_e_val   => worker3_e_in,
+            hash_f_val   => worker3_f_in,
+            hash_g_val   => worker3_g_in,
+            hash_h_val   => worker3_h_in,
+            hash_msa_val => worker3_msa_in,
+            hash_rc_val  => worker3_rc_in,
+
+            hash_new_a   => worker3_new_a,
+            hash_new_e   => worker3_new_e
+        );
+
+    worker4 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker4_data_in,
+            status_in    => worker4_stat_in,
+
+            data_out     => worker4_data_out,
+            status_out   => worker4_stat_out,
+
+            msa_val_i_16 => worker4_msa_i16,
+            msa_val_i_15 => worker4_msa_i15,
+            msa_val_i_7  => worker4_msa_i7,
+            msa_val_i_2  => worker4_msa_i2,
+            msa_val_new  => worker4_msa_new,
+
+            hash_a_val   => worker4_a_in,
+            hash_b_val   => worker4_b_in,
+            hash_c_val   => worker4_c_in,
+            hash_d_val   => worker4_d_in,
+            hash_e_val   => worker4_e_in,
+            hash_f_val   => worker4_f_in,
+            hash_g_val   => worker4_g_in,
+            hash_h_val   => worker4_h_in,
+            hash_msa_val => worker4_msa_in,
+            hash_rc_val  => worker4_rc_in,
+
+            hash_new_a   => worker4_new_a,
+            hash_new_e   => worker4_new_e
+        );
+
+    worker5 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker5_data_in,
+            status_in    => worker5_stat_in,
+
+            data_out     => worker5_data_out,
+            status_out   => worker5_stat_out,
+
+            msa_val_i_16 => worker5_msa_i16,
+            msa_val_i_15 => worker5_msa_i15,
+            msa_val_i_7  => worker5_msa_i7,
+            msa_val_i_2  => worker5_msa_i2,
+            msa_val_new  => worker5_msa_new,
+
+            hash_a_val   => worker5_a_in,
+            hash_b_val   => worker5_b_in,
+            hash_c_val   => worker5_c_in,
+            hash_d_val   => worker5_d_in,
+            hash_e_val   => worker5_e_in,
+            hash_f_val   => worker5_f_in,
+            hash_g_val   => worker5_g_in,
+            hash_h_val   => worker5_h_in,
+            hash_msa_val => worker5_msa_in,
+            hash_rc_val  => worker5_rc_in,
+
+            hash_new_a   => worker5_new_a,
+            hash_new_e   => worker5_new_e
+        );
+
+    worker6 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker6_data_in,
+            status_in    => worker6_stat_in,
+
+            data_out     => worker6_data_out,
+            status_out   => worker6_stat_out,
+
+            msa_val_i_16 => worker6_msa_i16,
+            msa_val_i_15 => worker6_msa_i15,
+            msa_val_i_7  => worker6_msa_i7,
+            msa_val_i_2  => worker6_msa_i2,
+            msa_val_new  => worker6_msa_new,
+
+            hash_a_val   => worker6_a_in,
+            hash_b_val   => worker6_b_in,
+            hash_c_val   => worker6_c_in,
+            hash_d_val   => worker6_d_in,
+            hash_e_val   => worker6_e_in,
+            hash_f_val   => worker6_f_in,
+            hash_g_val   => worker6_g_in,
+            hash_h_val   => worker6_h_in,
+            hash_msa_val => worker6_msa_in,
+            hash_rc_val  => worker6_rc_in,
+
+            hash_new_a   => worker6_new_a,
+            hash_new_e   => worker6_new_e
+        );
+
+    worker7 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker7_data_in,
+            status_in    => worker7_stat_in,
+
+            data_out     => worker7_data_out,
+            status_out   => worker7_stat_out,
+
+            msa_val_i_16 => worker7_msa_i16,
+            msa_val_i_15 => worker7_msa_i15,
+            msa_val_i_7  => worker7_msa_i7,
+            msa_val_i_2  => worker7_msa_i2,
+            msa_val_new  => worker7_msa_new,
+
+            hash_a_val   => worker7_a_in,
+            hash_b_val   => worker7_b_in,
+            hash_c_val   => worker7_c_in,
+            hash_d_val   => worker7_d_in,
+            hash_e_val   => worker7_e_in,
+            hash_f_val   => worker7_f_in,
+            hash_g_val   => worker7_g_in,
+            hash_h_val   => worker7_h_in,
+            hash_msa_val => worker7_msa_in,
+            hash_rc_val  => worker7_rc_in,
+
+            hash_new_a   => worker7_new_a,
+            hash_new_e   => worker7_new_e
+        );
+
+    worker8 : core
+        port map
+        (
+            clk          => clk,
+
+            data_in      => worker8_data_in,
+            status_in    => worker8_stat_in,
+
+            data_out     => worker8_data_out,
+            status_out   => worker8_stat_out,
+
+            msa_val_i_16 => worker8_msa_i16,
+            msa_val_i_15 => worker8_msa_i15,
+            msa_val_i_7  => worker8_msa_i7,
+            msa_val_i_2  => worker8_msa_i2,
+            msa_val_new  => worker8_msa_new,
+
+            hash_a_val   => worker8_a_in,
+            hash_b_val   => worker8_b_in,
+            hash_c_val   => worker8_c_in,
+            hash_d_val   => worker8_d_in,
+            hash_e_val   => worker8_e_in,
+            hash_f_val   => worker8_f_in,
+            hash_g_val   => worker8_g_in,
+            hash_h_val   => worker8_h_in,
+            hash_msa_val => worker8_msa_in,
+            hash_rc_val  => worker8_rc_in,
+
+            hash_new_a   => worker8_new_a,
+            hash_new_e   => worker8_new_e
         );
 
 end behavioral;
