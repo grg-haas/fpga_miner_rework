@@ -185,6 +185,7 @@ architecture behavioral of core_msa_wrapper_tb is
     signal worker16_o_stat : std_logic_vector(7 downto 0) := (others => '0');
 begin
     sim_clk_gen : sim_clk
+        generic map (REPORT_TIME => 1 us)
         port map (clk_out => clk);
 
     UUT : core_msa_wrapper
