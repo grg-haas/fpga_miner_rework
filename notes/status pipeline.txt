@@ -1,0 +1,72 @@
+need to organize status buffers for cores
+data can pass all the way down and all the way up unimpeded, but \
+hashing and msa cores need their own status bits
+
+
+MINER LAYER------------------------------------------------
+sync_req    sync_done
+   ^            ^
+   ^            ^
+   ^            ^
+   ^            ^
+   ^            ^
+MSA EXTENDER LAYER-----------------------------------------
+   ^            ^       msa_req/ack_int
+   ^            ^            ^
+   ^            ^            ^
+   ^            ^            ^
+   ^            ^            ^
+   ^            ^            ^
+HASHING LAYER----------------------------------------------
+   ^            ^            ^          hash_req/ack_int
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+CORE LAYER-------------------------------------------------
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+   ^            ^            ^                ^
+output buffer. signals for reset, bram_we, also travel up to miner layer
+i'd like all signals to travel all the way up actually, for analytics
+
+so core layer passes up SR SD XX XX BE RE UU UU
+hashing layer passes up SR SD XX RH BE RE UU UU
+extend layer passes up  SR SD RM RH BE RE UU UU
+
+
+MINER LAYER------------------------------------------------
+sync_req    sync_done
+   v            v
+   v            v
+   v            v
+   v            v
+   v            v
+MSA EXTENDER LAYER-----------------------------------------
+   v            v       msa_interrupt
+   v            v            v
+   v            v            v
+   v            v            v
+   v            v            v
+   v            v            v
+HASHING LAYER----------------------------------------------
+   v            v            v          hash_interrupt
+   v            v            v                v
+   v            v            v                v
+   v            v            v                v
+   v            v            v                v
+   v            v            v                v
+CORE LAYER-------------------------------------------------
+   v            v            v                v
+   v            v            v                v
+   v            v            v                v
+   v            v            v                v
+   v            v            v                v
+input buffer
+
+miner layer passes down  SR SD XX XX UU UU UU UU
+extend layer passes down SR SD MI XX UU UU UU UU
+hash layer passes down   SR SD MI HI UU UU UU UU

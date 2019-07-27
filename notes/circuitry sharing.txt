@@ -16,20 +16,63 @@ hashing process:
 
     this circuit is only used for 1 instruction out of 9
 
-cores could take turns "round robin" style to share these resources
-    problem is that sleeping isn't super reliable
-    could be tough to synchronize access in same way as stack communication
+lets see what msa and hashing process could look like from core perspective
+    msa extension
+        buffer i16, i15, i7, i2 and present to outputs
+        select msa output buffer
+            OUTPUTK buf_msa, op_bufsel_parity
 
-    possible though:
-        core wrapper waits for all cores to go to sleep
-        then begins a round robin counter
-            first, wake up cores with 1 clock cycle delays
-            then rotate the inputs and outputs of hash circuitry s.t. everything lines up
+        notify msa extension unit that it is ready (somehow)
+        trap self in loop
+            .trap:
+            JUMP    .trap
 
-8 cores can share hashing circuitry but 16 cores can share msa extension
-if cores sync before anything else for the msa extension, they'll still be \
-synced for hashing... could exploit?
+        eventually core is recognized with interrupt
+        when interrupt_ack goes high, write read_buf with the msa out value!!
 
+    hashing
+        really similar
+        buffer msa and rc values and present all to outputs
+
+        notify hashing unit that it is ready
+        trap self in loop, similarly to msa
+
+        eventually core is interrupted
+        when interrupt_ack goes high, hardware can simply update a and e bufs
+
+    interrupt can be the same for both and dummy routine
+        interrupt:
+            RETURNI enable
+
+interrupt process
+    only want to interrupt cores that are actually ready, otherwise wasting time
+    can interrupt at most one core each clock cycle
+        interrupt_acks will then come in each clock cycle as well
+
+    need signals from unit to worker
+        interrupt
+
+    need signals from worker to unit
+        interrupt request
+        interrupt ack - can combine? probably!
+
+    so each core needs 2 signals in
+        msa_interrupt
+        hash_interrupt
+
+    and 2 signals out
+        msa_interrupt_req
+        hash_interrupt_req
+
+process from msa / hash module perspective
+    sequential logic
+        check which cores are requesting access
+        interrupt one core each clock cycle
+
+    combinatorial logic
+        can exploit since only one interrupt_ack will be high at a time
+        depending on which interrupt_ack is high, route inputs and outputs \
+        through circuitry. all hashing/msa circuitry is combinatorial itself
 
 msa extender module
     msa access sync

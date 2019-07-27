@@ -8,31 +8,31 @@ entity core is
     (
         clk          : in std_logic;
 
-        data_in      : in std_logic_vector(7 downto 0);
-        status_in    : in std_logic_vector(7 downto 0);
+        i_data       : in std_logic_vector(7 downto 0);
+        i_stat       : in std_logic_vector(7 downto 0);
 
-        data_out     : out std_logic_vector(7 downto 0);
-        status_out   : out std_logic_vector(7 downto 0);
+        o_data       : out std_logic_vector(7 downto 0);
+        o_stat       : out std_logic_vector(7 downto 0);
 
-        msa_val_i_16 : out std_logic_vector(31 downto 0);
-        msa_val_i_15 : out std_logic_vector(31 downto 0);
-        msa_val_i_7  : out std_logic_vector(31 downto 0);
-        msa_val_i_2  : out std_logic_vector(31 downto 0);
-        msa_val_new  : in std_logic_vector(31 downto 0);
+        o_msa_i16    : out std_logic_vector(31 downto 0);
+        o_msa_i15    : out std_logic_vector(31 downto 0);
+        o_msa_i7     : out std_logic_vector(31 downto 0);
+        o_msa_i2     : out std_logic_vector(31 downto 0);
+        i_msa_new    : in std_logic_vector(31 downto 0);
 
-        hash_a_val   : out std_logic_vector(31 downto 0);
-        hash_b_val   : out std_logic_vector(31 downto 0);
-        hash_c_val   : out std_logic_vector(31 downto 0);
-        hash_d_val   : out std_logic_vector(31 downto 0);
-        hash_e_val   : out std_logic_vector(31 downto 0);
-        hash_f_val   : out std_logic_vector(31 downto 0);
-        hash_g_val   : out std_logic_vector(31 downto 0);
-        hash_h_val   : out std_logic_vector(31 downto 0);
-        hash_msa_val : out std_logic_vector(31 downto 0);
-        hash_rc_val  : out std_logic_vector(31 downto 0);
+        o_hash_a     : out std_logic_vector(31 downto 0);
+        o_hash_b     : out std_logic_vector(31 downto 0);
+        o_hash_c     : out std_logic_vector(31 downto 0);
+        o_hash_d     : out std_logic_vector(31 downto 0);
+        o_hash_e     : out std_logic_vector(31 downto 0);
+        o_hash_f     : out std_logic_vector(31 downto 0);
+        o_hash_g     : out std_logic_vector(31 downto 0);
+        o_hash_h     : out std_logic_vector(31 downto 0);
+        o_hash_msa   : out std_logic_vector(31 downto 0);
+        o_hash_rc    : out std_logic_vector(31 downto 0);
 
-        hash_new_a   : in std_logic_vector(31 downto 0);
-        hash_new_e   : in std_logic_vector(31 downto 0)
+        i_hash_new_a : in std_logic_vector(31 downto 0);
+        i_hash_new_e : in std_logic_vector(31 downto 0)
     );
 end core;
 
@@ -138,10 +138,12 @@ begin
     bram_we      <= status_out_buf(5) & status_out_buf(5) &
                     status_out_buf(5) & status_out_buf(5);
 
-    data_out   <= data_out_buf;
-    status_out <= status_out_buf;
+    o_data <= data_out_buf;
+    o_stat <= status_out_buf;
 
-    interrupt <= interrupt_ack;
+    interrupt <= i_stat(5)     or i_stat(4);
+    o_stat(5) <= interrupt_ack or status_out_buf(5);
+    o_stat(4) <= interrupt_ack or status_out_buf(4);
 
     picoblaze : kcpsm6
         generic map
@@ -195,13 +197,33 @@ begin
     synchronize : process(clk)
     begin
         if rising_edge(clk) then
-            kcpsm6_sleep <= status_out_buf(7) and not status_in(7);
+            kcpsm6_sleep <= status_out_buf(7) and not i_stat(7);
         end if;
     end process synchronize;
 
+    handle_interrupts : process(clk)
+    begin
+        if rising_edge(clk) then
+            if interrupt_ack = '1' and i_stat(5) = '1' then
+                -- nothing needs to be done, handled in read_buf combinatorial
+                -- logic below
+            end if;
+
+            if interrupt_ack = '1' and i_stat(5) = '1' then
+                hash_h_buf <= hash_g_buf;
+                hash_g_buf <= hash_f_buf;
+                hash_f_buf <= hash_e_buf;
+                hash_e_buf <= i_hash_new_e;
+                hash_d_buf <= hash_c_buf;
+                hash_c_buf <= hash_b_buf;
+                hash_b_buf <= hash_a_buf;
+                hash_a_buf <= i_hash_new_a;
+            end if;
+        end if;
+    end process handle_interrupts;
 
     read_buf <= bram_data_out when buf_select = "0000" else
-                msa_val_new   when buf_select = "0001" else
+                i_msa_new     when buf_select = "0001" else
                 hash_a_buf    when buf_select = "0010" else
                 hash_b_buf    when buf_select = "0011" else
                 hash_c_buf    when buf_select = "0100" else
@@ -218,8 +240,8 @@ begin
     begin
         if rising_edge(clk) then
             case port_id(2 downto 0) is
-                when "000" => in_port <= data_in;
-                when "001" => in_port <= status_in;
+                when "000" => in_port <= i_data;
+                when "001" => in_port <= i_stat;
 
                 when "010" => in_port <= (others => '0'); --reserved
 
