@@ -23,16 +23,21 @@ CONSTANT    cmd_bram_we,        00001000'b
 CONSTANT    cmd_reset_all,      00000100'b
 
 CONSTANT    buf_bram,           00000000'b
-CONSTANT    buf_msa,            00010000'b
-CONSTANT    buf_hash_a,         00100000'b
-CONSTANT    buf_hash_b,         00110000'b
-CONSTANT    buf_hash_c,         01000000'b
-CONSTANT    buf_hash_d,         01010000'b
-CONSTANT    buf_hash_e,         01100000'b
-CONSTANT    buf_hash_f,         01110000'b
-CONSTANT    buf_hash_g,         10000000'b
-CONSTANT    buf_hash_h,         10010000'b
-CONSTANT    buf_r_to_w,         10100000'b
+CONSTANT    buf_hash_a,         00010000'b
+CONSTANT    buf_hash_b,         00100000'b
+CONSTANT    buf_hash_c,         00110000'b
+CONSTANT    buf_hash_d,         01000000'b
+CONSTANT    buf_hash_e,         01010000'b
+CONSTANT    buf_hash_f,         01100000'b
+CONSTANT    buf_hash_g,         01110000'b
+CONSTANT    buf_hash_h,         10000000'b
+CONSTANT    buf_hash_rc,        10010000'b
+CONSTANT    buf_hash_msa,       10100000'b
+CONSTANT    buf_msa_i16,        10110000'b
+CONSTANT    buf_msa_i15,        11000000'b
+CONSTANT    buf_msa_i7,         11010000'b
+CONSTANT    buf_msa_i2,         11100000'b
+CONSTANT    buf_r_to_w,         11110000'b
 
 CONSTANT    baseaddr_rc,        00000000'b
 CONSTANT    baseaddr_msa,       01000000'b
@@ -92,26 +97,36 @@ main:
     .msa_extend_loop:
     LOAD    sE,     sD
 
+    OUTPUTK buf_bram, op_bufsel_parity
     SUB     sE,     0F
     OUTPUT  sE,     op_bram_addr
-    OUTPUTK cmd_msa_valid, op_self_status
+    OUTPUTK buf_r_to_w, op_bufsel_parity
+    OUTPUTK buf_msa_i16, op_bufsel_parity
 
+    OUTPUTK buf_bram, op_bufsel_parity
     ADD     sE,     0D
     OUTPUT  sE,     op_bram_addr
-    OUTPUTK cmd_msa_valid, op_self_status
+    OUTPUTK buf_r_to_w, op_bufsel_parity
+    OUTPUTK buf_msa_i15, op_bufsel_parity
 
+    OUTPUTK buf_bram, op_bufsel_parity
     SUB     sE,     0E
     OUTPUT  sE,     op_bram_addr
-    OUTPUTK cmd_msa_valid, op_self_status
+    OUTPUTK buf_r_to_w, op_bufsel_parity
+    OUTPUTK buf_msa_i7, op_bufsel_parity
 
+    OUTPUTK buf_bram, op_bufsel_parity
     ADD     sE,     09
     OUTPUT  sE,     op_bram_addr
-    OUTPUTK cmd_msa_valid, op_self_status
+    OUTPUTK buf_r_to_w, op_bufsel_parity
+    OUTPUTK buf_msa_i7, op_bufsel_parity
 
-    ; semi hacky but pretty cool
-    OUTPUTK buf_msa, op_bufsel_parity       ; fill read buffer with msa output
-    OUTPUTK buf_r_to_w, op_bufsel_parity    ; transfer it to the write buffer
-    OUTPUTK buf_bram, op_bufsel_parity      ; transfer write buffer to bram input
+    ; request msa extension
+    OUTPUTK buf_bram, op_bufsel_parity
+    OUTPUTK cmd_msa_req_int, op_self_status
+
+    .msa_trap:
+    JUMP    .msa_trap
 
     OUTPUT  sD,     op_bram_addr
     OUTPUTK cmd_bram_we, op_self_status
@@ -121,15 +136,23 @@ main:
     COMPARE sD,     baseaddr_free
     JUMP    NZ,     .msa_extend_loop
 
+    .hash_init:
     LOAD    sC,     baseaddr_rc
     LOAD    sD,     baseaddr_msa
 
     .hash_loop:
+    OUTPUTK buf_bram, op_bufsel_parity
     OUTPUT  sC,     op_bram_addr
-    OUTPUTK cmd_hash_rc_valid, op_self_status
+    OUTPUTK buf_r_to_w, op_bufsel_parity
+    OUTPUTK buf_hash_rc, op_bufsel_parity
+
+    OUTPUTK buf_bram, op_bufsel_parity
     OUTPUT  sD,     op_bram_addr
-    OUTPUTK cmd_hash_msa_valid, op_self_status
-    OUTPUTK cmd_hash_ready, op_self_status;
+    OUTPUTK buf_r_to_w, op_bufsel_parity
+    OUTPUTK buf_hash_msa, op_bufsel_parity
+
+    .hash_trap:
+    JUMP    .hash_trap
 
     ADD     sC,     01
     ADD     sD,     01
@@ -161,7 +184,7 @@ fetch_hash_data:
     ADD     sF,     01
 
     SUB     sE,     00010000'b
-    COMPARE sE,     buf_msa
+    COMPARE sE,     buf_bram
     JUMP    NZ,     .loop
 
     RETURN
@@ -202,3 +225,6 @@ recv_ipc_data:
     AND     s1,     cmd_send_done
     JUMP    Z,      .loop
     RETURN
+
+ADDRESS 3FF
+    RETURNI ENABLE

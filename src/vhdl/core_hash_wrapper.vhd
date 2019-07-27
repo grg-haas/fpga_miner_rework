@@ -125,19 +125,21 @@ architecture behavioral of core_hash_wrapper is
     component hash_circuity is
         port
         (
-            hash_a_val   : out std_logic_vector(31 downto 0);
-            hash_b_val   : out std_logic_vector(31 downto 0);
-            hash_c_val   : out std_logic_vector(31 downto 0);
-            hash_d_val   : out std_logic_vector(31 downto 0);
-            hash_e_val   : out std_logic_vector(31 downto 0);
-            hash_f_val   : out std_logic_vector(31 downto 0);
-            hash_g_val   : out std_logic_vector(31 downto 0);
-            hash_h_val   : out std_logic_vector(31 downto 0);
-            hash_msa_val : out std_logic_vector(31 downto 0);
-            hash_rc_val  : out std_logic_vector(31 downto 0);
+            clk          : in std_logic;
 
-            hash_new_a   : in std_logic_vector(31 downto 0);
-            hash_new_e   : in std_logic_vector(31 downto 0)
+            hash_a_val   : in std_logic_vector(31 downto 0);
+            hash_b_val   : in std_logic_vector(31 downto 0);
+            hash_c_val   : in std_logic_vector(31 downto 0);
+            hash_d_val   : in std_logic_vector(31 downto 0);
+            hash_e_val   : in std_logic_vector(31 downto 0);
+            hash_f_val   : in std_logic_vector(31 downto 0);
+            hash_g_val   : in std_logic_vector(31 downto 0);
+            hash_h_val   : in std_logic_vector(31 downto 0);
+            hash_msa_val : in std_logic_vector(31 downto 0);
+            hash_rc_val  : in std_logic_vector(31 downto 0);
+
+            hash_new_a   : out std_logic_vector(31 downto 0);
+            hash_new_e   : out std_logic_vector(31 downto 0)
         );
     end component;
 
@@ -307,6 +309,8 @@ begin
     hasher_crct : hash_circuity
         port map
         (
+            clk          => clk,
+            
             hash_a_val   => hasher_a_in,
             hash_b_val   => hasher_b_in,
             hash_c_val   => hasher_c_in,

@@ -1,9 +1,11 @@
 # makefile settings
-MAIN_TB  := core_tb
-SIM_TIME := 100us
+MAIN_TB  := miner_tb
+SIM_TIME := 1ms
 
 KCPSM6_PROGRAMS := main core
-VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core msa_extender
+VHDL_DESIGN     := kcpsm6 uart_tx6 uart_rx6 miner core \
+			       msa_extender hash_circuitry         \
+				   core_hash_wrapper core_msa_wrapper
 VHDL_SIMULATION := sim_clk miner_tb core_tb
 
 # various forms of the module names

@@ -179,6 +179,8 @@ architecture behavioral of core_msa_wrapper is
     component msa_extender is
         port
         (
+            clk     : in std_logic;
+
             msa_i16 : in std_logic_vector(31 downto 0);
             msa_i15 : in std_logic_vector(31 downto 0);
             msa_i7  : in std_logic_vector(31 downto 0);
@@ -371,6 +373,8 @@ begin
     msa_xtnd : msa_extender
         port map
         (
+            clk     => clk,
+            
             msa_i16 => msa_i16_in,
             msa_i15 => msa_i15_in,
             msa_i7  => msa_i7_in,

@@ -92,18 +92,92 @@ architecture behavioral of miner is
         );
     end component uart_tx6;
 
-    component core is
+    component core_msa_wrapper is
         port
         (
             clk        : in std_logic;
 
-            data_in    : in std_logic_vector(7 downto 0);
-            data_out   : out std_logic_vector(7 downto 0);
+            wrk1_i_data  : in std_logic_vector(7 downto 0);
+            wrk1_i_stat  : in std_logic_vector(5 downto 0);
+            wrk1_o_data  : out std_logic_vector(7 downto 0);
+            wrk1_o_stat  : out std_logic_vector(7 downto 0);
 
-            status_in  : in std_logic_vector(7 downto 0);
-            status_out : out std_logic_vector(7 downto 0)
+            wrk2_i_data  : in std_logic_vector(7 downto 0);
+            wrk2_i_stat  : in std_logic_vector(5 downto 0);
+            wrk2_o_data  : out std_logic_vector(7 downto 0);
+            wrk2_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk3_i_data  : in std_logic_vector(7 downto 0);
+            wrk3_i_stat  : in std_logic_vector(5 downto 0);
+            wrk3_o_data  : out std_logic_vector(7 downto 0);
+            wrk3_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk4_i_data  : in std_logic_vector(7 downto 0);
+            wrk4_i_stat  : in std_logic_vector(5 downto 0);
+            wrk4_o_data  : out std_logic_vector(7 downto 0);
+            wrk4_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk5_i_data  : in std_logic_vector(7 downto 0);
+            wrk5_i_stat  : in std_logic_vector(5 downto 0);
+            wrk5_o_data  : out std_logic_vector(7 downto 0);
+            wrk5_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk6_i_data  : in std_logic_vector(7 downto 0);
+            wrk6_i_stat  : in std_logic_vector(5 downto 0);
+            wrk6_o_data  : out std_logic_vector(7 downto 0);
+            wrk6_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk7_i_data  : in std_logic_vector(7 downto 0);
+            wrk7_i_stat  : in std_logic_vector(5 downto 0);
+            wrk7_o_data  : out std_logic_vector(7 downto 0);
+            wrk7_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk8_i_data  : in std_logic_vector(7 downto 0);
+            wrk8_i_stat  : in std_logic_vector(5 downto 0);
+            wrk8_o_data  : out std_logic_vector(7 downto 0);
+            wrk8_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk9_i_data  : in std_logic_vector(7 downto 0);
+            wrk9_i_stat  : in std_logic_vector(5 downto 0);
+            wrk9_o_data  : out std_logic_vector(7 downto 0);
+            wrk9_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk10_i_data  : in std_logic_vector(7 downto 0);
+            wrk10_i_stat  : in std_logic_vector(5 downto 0);
+            wrk10_o_data  : out std_logic_vector(7 downto 0);
+            wrk10_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk11_i_data  : in std_logic_vector(7 downto 0);
+            wrk11_i_stat  : in std_logic_vector(5 downto 0);
+            wrk11_o_data  : out std_logic_vector(7 downto 0);
+            wrk11_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk12_i_data  : in std_logic_vector(7 downto 0);
+            wrk12_i_stat  : in std_logic_vector(5 downto 0);
+            wrk12_o_data  : out std_logic_vector(7 downto 0);
+            wrk12_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk13_i_data  : in std_logic_vector(7 downto 0);
+            wrk13_i_stat  : in std_logic_vector(5 downto 0);
+            wrk13_o_data  : out std_logic_vector(7 downto 0);
+            wrk13_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk14_i_data  : in std_logic_vector(7 downto 0);
+            wrk14_i_stat  : in std_logic_vector(5 downto 0);
+            wrk14_o_data  : out std_logic_vector(7 downto 0);
+            wrk14_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk15_i_data  : in std_logic_vector(7 downto 0);
+            wrk15_i_stat  : in std_logic_vector(5 downto 0);
+            wrk15_o_data  : out std_logic_vector(7 downto 0);
+            wrk15_o_stat  : out std_logic_vector(7 downto 0);
+
+            wrk16_i_data  : in std_logic_vector(7 downto 0);
+            wrk16_i_stat  : in std_logic_vector(5 downto 0);
+            wrk16_o_data  : out std_logic_vector(7 downto 0);
+            wrk16_o_stat  : out std_logic_vector(7 downto 0)
         );
-    end component core;
+    end component;
 
     -- signals for the processor
     signal address        : std_logic_vector(11 downto 0) := (others => '0');
@@ -144,23 +218,93 @@ architecture behavioral of miner is
     signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
 
     -- signals for managing the workers
-    signal worker_select      : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker_select : std_logic_vector(7 downto 0) := (others => '0');
 
-    signal self_data_in       : std_logic_vector(7 downto 0) := (others => '0');
-    signal self_data_out      : std_logic_vector(7 downto 0) := (others => '0');
-    signal self_status_in     : std_logic_vector(7 downto 0) := (others => '0');
-    signal self_status_out    : std_logic_vector(7 downto 0) := (others => '0');
+    signal self_i_data   : std_logic_vector(7 downto 0) := (others => '0');
+    signal self_o_data   : std_logic_vector(7 downto 0) := (others => '0');
+    signal self_i_stat   : std_logic_vector(7 downto 0) := (others => '0');
+    signal self_o_stat   : std_logic_vector(5 downto 0) := (others => '0');
 
     -- signals for the workers
-    signal worker1_data_in    : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker1_data_out   : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker1_status_in  : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker1_status_out : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker1_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker1_o_stat : std_logic_vector(7 downto 0) := (others => '0');
 
-    signal worker2_data_in    : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker2_data_out   : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker2_status_in  : std_logic_vector(7 downto 0) := (others => '0');
-    signal worker2_status_out : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker2_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker2_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker3_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker3_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker3_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker3_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker4_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker4_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker4_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker4_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker5_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker5_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker5_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker5_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker6_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker6_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker6_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker6_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker7_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker7_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker7_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker7_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker8_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker8_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker8_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker8_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker9_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker9_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker9_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker9_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker10_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker10_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker10_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker10_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker11_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker11_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker11_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker11_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker12_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker12_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker12_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker12_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker13_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker13_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker13_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker13_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker14_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker14_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker14_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker14_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker15_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker15_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker15_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker15_o_stat : std_logic_vector(7 downto 0) := (others => '0');
+
+    signal worker16_i_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker16_i_stat : std_logic_vector(5 downto 0) := (others => '0');
+    signal worker16_o_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal worker16_o_stat : std_logic_vector(7 downto 0) := (others => '0');
 
 begin
     bram_we      <= (others => '0');
@@ -248,52 +392,226 @@ begin
             clk                 => clk
         );
 
-    worker1_data_in <= self_data_out when worker_select = "00000000" or
-                                          worker_select = "00000001"
-                                     else (others => '0');
+    worker1_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00000001" else
+                       (others => '0');
+    worker2_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00000010" else
+                       (others => '0');
+    worker3_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00000011" else
+                       (others => '0');
+    worker4_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00000100" else
+                       (others => '0');
+    worker5_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00000101" else
+                       (others => '0');
+    worker6_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00000110" else
+                       (others => '0');
+    worker7_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00000111" else
+                       (others => '0');
+    worker8_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00001000" else
+                       (others => '0');
+    worker9_i_data <= self_o_data when worker_select = "00000000" or
+                                       worker_select = "00001001" else
+                      (others => '0');
+    worker10_i_data <= self_o_data when worker_select = "00000000" or
+                                        worker_select = "00001010" else
+                       (others => '0');
+    worker11_i_data <= self_o_data when worker_select = "00000000" or
+                                        worker_select = "00001011" else
+                       (others => '0');
+    worker12_i_data <= self_o_data when worker_select = "00000000" or
+                                        worker_select = "00001100" else
+                       (others => '0');
+    worker13_i_data <= self_o_data when worker_select = "00000000" or
+                                        worker_select = "00001101" else
+                       (others => '0');
+    worker14_i_data <= self_o_data when worker_select = "00000000" or
+                                        worker_select = "00001110" else
+                       (others => '0');
+    worker15_i_data <= self_o_data when worker_select = "00000000" or
+                                        worker_select = "00001111" else
+                       (others => '0');
+    worker16_i_data <= self_o_data when worker_select = "00000000" or
+                                        worker_select = "00010000" else
+                       (others => '0');
 
-    worker1_status_in <= self_status_out when worker_select = "00000000" or
-                                              worker_select = "00000001"
-                                         else (others => '0');
-    worker1 : core
+    worker1_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00000001" else
+                       (others => '0');
+    worker2_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00000010" else
+                       (others => '0');
+    worker3_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00000011" else
+                       (others => '0');
+    worker4_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00000100" else
+                       (others => '0');
+    worker5_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00000101" else
+                       (others => '0');
+    worker6_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00000110" else
+                       (others => '0');
+    worker7_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00000111" else
+                       (others => '0');
+    worker8_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00001000" else
+                       (others => '0');
+    worker9_i_stat <= self_o_stat when worker_select = "00000000" or
+                                       worker_select = "00001001" else
+                      (others => '0');
+    worker10_i_stat <= self_o_stat when worker_select = "00000000" or
+                                        worker_select = "00001010" else
+                       (others => '0');
+    worker11_i_stat <= self_o_stat when worker_select = "00000000" or
+                                        worker_select = "00001011" else
+                       (others => '0');
+    worker12_i_stat <= self_o_stat when worker_select = "00000000" or
+                                        worker_select = "00001100" else
+                       (others => '0');
+    worker13_i_stat <= self_o_stat when worker_select = "00000000" or
+                                        worker_select = "00001101" else
+                       (others => '0');
+    worker14_i_stat <= self_o_stat when worker_select = "00000000" or
+                                        worker_select = "00001110" else
+                       (others => '0');
+    worker15_i_stat <= self_o_stat when worker_select = "00000000" or
+                                        worker_select = "00001111" else
+                       (others => '0');
+    worker16_i_stat <= self_o_stat when worker_select = "00000000" or
+                                        worker_select = "00010000" else
+                       (others => '0');
+
+    cmw : core_msa_wrapper
         port map
         (
-            clk        => clk,
+            clk => clk,
 
-            data_in    => worker1_data_in,
-            data_out   => worker1_data_out,
+            wrk1_i_data => worker1_i_data,
+            wrk1_i_stat => worker1_i_stat,
+            wrk1_o_data => worker1_o_data,
+            wrk1_o_stat => worker1_o_stat,
 
-            status_in  => worker1_status_in,
-            status_out => worker1_status_out
+            wrk2_i_data => worker2_i_data,
+            wrk2_i_stat => worker2_i_stat,
+            wrk2_o_data => worker2_o_data,
+            wrk2_o_stat => worker2_o_stat,
+
+            wrk3_i_data => worker3_i_data,
+            wrk3_i_stat => worker3_i_stat,
+            wrk3_o_data => worker3_o_data,
+            wrk3_o_stat => worker3_o_stat,
+
+            wrk4_i_data => worker4_i_data,
+            wrk4_i_stat => worker4_i_stat,
+            wrk4_o_data => worker4_o_data,
+            wrk4_o_stat => worker4_o_stat,
+
+            wrk5_i_data => worker5_i_data,
+            wrk5_i_stat => worker5_i_stat,
+            wrk5_o_data => worker5_o_data,
+            wrk5_o_stat => worker5_o_stat,
+
+            wrk6_i_data => worker6_i_data,
+            wrk6_i_stat => worker6_i_stat,
+            wrk6_o_data => worker6_o_data,
+            wrk6_o_stat => worker6_o_stat,
+
+            wrk7_i_data => worker7_i_data,
+            wrk7_i_stat => worker7_i_stat,
+            wrk7_o_data => worker7_o_data,
+            wrk7_o_stat => worker7_o_stat,
+
+            wrk8_i_data => worker8_i_data,
+            wrk8_i_stat => worker8_i_stat,
+            wrk8_o_data => worker8_o_data,
+            wrk8_o_stat => worker8_o_stat,
+
+            wrk9_i_data => worker9_i_data,
+            wrk9_i_stat => worker9_i_stat,
+            wrk9_o_data => worker9_o_data,
+            wrk9_o_stat => worker9_o_stat,
+
+            wrk10_i_data => worker10_i_data,
+            wrk10_i_stat => worker10_i_stat,
+            wrk10_o_data => worker10_o_data,
+            wrk10_o_stat => worker10_o_stat,
+
+            wrk11_i_data => worker11_i_data,
+            wrk11_i_stat => worker11_i_stat,
+            wrk11_o_data => worker11_o_data,
+            wrk11_o_stat => worker11_o_stat,
+
+            wrk12_i_data => worker12_i_data,
+            wrk12_i_stat => worker12_i_stat,
+            wrk12_o_data => worker12_o_data,
+            wrk12_o_stat => worker12_o_stat,
+
+            wrk13_i_data => worker13_i_data,
+            wrk13_i_stat => worker13_i_stat,
+            wrk13_o_data => worker13_o_data,
+            wrk13_o_stat => worker13_o_stat,
+
+            wrk14_i_data => worker14_i_data,
+            wrk14_i_stat => worker14_i_stat,
+            wrk14_o_data => worker14_o_data,
+            wrk14_o_stat => worker14_o_stat,
+
+            wrk15_i_data => worker15_i_data,
+            wrk15_i_stat => worker15_i_stat,
+            wrk15_o_data => worker15_o_data,
+            wrk15_o_stat => worker15_o_stat,
+
+            wrk16_i_data => worker16_i_data,
+            wrk16_i_stat => worker16_i_stat,
+            wrk16_o_data => worker16_o_data,
+            wrk16_o_stat => worker16_o_stat
         );
 
-    worker2_data_in <= self_data_out when worker_select = "00000000" or
-                                          worker_select = "00000010"
-                                     else (others => '0');
+    self_i_data <= worker1_o_data when worker_select = "00000001" else
+                   worker2_o_data when worker_select = "00000010" else
+                   worker3_o_data when worker_select = "00000011" else
+                   worker4_o_data when worker_select = "00000100" else
+                   worker5_o_data when worker_select = "00000101" else
+                   worker6_o_data when worker_select = "00000110" else
+                   worker7_o_data when worker_select = "00000111" else
+                   worker8_o_data when worker_select = "00001000" else
+                   worker9_o_data when worker_select = "00001001" else
+                   worker10_o_data when worker_select = "00001010" else
+                   worker11_o_data when worker_select = "00001011" else
+                   worker12_o_data when worker_select = "00001100" else
+                   worker13_o_data when worker_select = "00001101" else
+                   worker14_o_data when worker_select = "00001110" else
+                   worker15_o_data when worker_select = "00001111" else
+                   worker16_o_data when worker_select = "00010000" else
+                   (others => '0');
 
-    worker2_status_in <= self_status_out when worker_select = "00000000" or
-                                              worker_select = "00000010"
-                                         else (others => '0');
-
-    worker2 : core
-        port map
-        (
-            clk        => clk,
-
-            data_in    => worker2_data_in,
-            data_out   => worker2_data_out,
-
-            status_in  => worker2_status_in,
-            status_out => worker2_status_out
-        );
-
-    self_data_in <= worker1_data_out when worker_select = "00000001" else
-                    worker2_data_out when worker_select = "00000010"
-                                     else (others => '0');
-
-    self_status_in <= worker1_status_out when worker_select = "00000001" else
-                      worker2_status_out when worker_select = "00000010"
-                                         else "10000000"; -- so miner doesn't lock itself asleep
+    -- todo: implement multicast sleeping here
+    self_i_stat <= worker1_o_stat when worker_select = "00000001" else
+                   worker2_o_stat when worker_select = "00000010" else
+                   worker3_o_stat when worker_select = "00000011" else
+                   worker4_o_stat when worker_select = "00000100" else
+                   worker5_o_stat when worker_select = "00000101" else
+                   worker6_o_stat when worker_select = "00000110" else
+                   worker7_o_stat when worker_select = "00000111" else
+                   worker8_o_stat when worker_select = "00001000" else
+                   worker9_o_stat when worker_select = "00001001" else
+                   worker10_o_stat when worker_select = "00001010" else
+                   worker11_o_stat when worker_select = "00001011" else
+                   worker12_o_stat when worker_select = "00001100" else
+                   worker13_o_stat when worker_select = "00001101" else
+                   worker14_o_stat when worker_select = "00001110" else
+                   worker15_o_stat when worker_select = "00001111" else
+                   worker16_o_stat when worker_select = "00010000" else
+                   (others => '0');
 
     baud_rate : process(clk)
     begin
@@ -311,7 +629,7 @@ begin
     synchronize : process(clk)
     begin
         if rising_edge(clk) then
-            kcpsm6_sleep <= self_status_out(7) and not self_status_in(7);
+            kcpsm6_sleep <= self_o_stat(5) and not self_i_stat(5);
         end if;
     end process synchronize;
 
@@ -324,8 +642,8 @@ begin
                 when "00" => in_port <= uart_data_out;
                 when "01" => in_port <= "00" & uart_status;
 
-                when "10" => in_port <= self_data_in;
-                when "11" => in_port <= self_status_in;
+                when "10" => in_port <= self_i_data;
+                when "11" => in_port <= self_i_stat;
 
                 when others => in_port <= (others => '0');
             end case;
@@ -343,9 +661,9 @@ begin
                         uart_buffer_write  <= '1';
                         uart_data_in       <= out_port;
 
-                    when "01" => worker_select   <= out_port;
-                    when "10" => self_data_out   <= out_port;
-                    when "11" => self_status_out <= out_port;
+                    when "01" => worker_select <= out_port;
+                    when "10" => self_o_data   <= out_port;
+                    when "11" => self_o_stat   <= out_port(7 downto 6) & out_port(3 downto 0);
 
                     when others => NULL;
                 end case;
