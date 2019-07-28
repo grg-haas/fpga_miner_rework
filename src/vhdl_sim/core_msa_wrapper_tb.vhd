@@ -2192,48 +2192,25 @@ begin
         wait until rising_edge(clk); -- JUMP    NZ,     send_ipc_data_loop
         wait until rising_edge(clk);
 
+        wait until rising_edge(clk); -- OUTPUTK cmd_send_done, op_self_status
+        worker1_i_stat  <= "010000";
+        worker2_i_stat  <= "010000";
+        worker3_i_stat  <= "010000";
+        worker4_i_stat  <= "010000";
+        worker5_i_stat  <= "010000";
+        worker6_i_stat  <= "010000";
+        worker7_i_stat  <= "010000";
+        worker8_i_stat  <= "010000";
+        worker9_i_stat  <= "010000";
+        worker10_i_stat <= "010000";
+        worker11_i_stat <= "010000";
+        worker12_i_stat <= "010000";
+        worker13_i_stat <= "010000";
+        worker14_i_stat <= "010000";
+        worker15_i_stat <= "010000";
+        worker16_i_stat <= "010000";
         wait until rising_edge(clk);
-
-        worker1_i_stat  <= "100000";
-        worker2_i_stat  <= "100000";
-        worker3_i_stat  <= "100000";
-        worker4_i_stat  <= "100000";
-        worker5_i_stat  <= "100000";
-        worker6_i_stat  <= "100000";
-        worker7_i_stat  <= "100000";
-        worker8_i_stat  <= "100000";
-        worker9_i_stat  <= "100000";
-        worker10_i_stat <= "100000";
-        worker11_i_stat <= "100000";
-        worker12_i_stat <= "100000";
-        worker13_i_stat <= "100000";
-        worker14_i_stat <= "100000";
-        worker15_i_stat <= "100000";
-        worker16_i_stat <= "100000";
-
-        wait until (worker1_o_stat = "10000000" and
-                    worker2_o_stat = "10000000" and
-                    worker3_o_stat = "10000000" and
-                    worker4_o_stat = "10000000" and
-                    worker5_o_stat = "10000000" and
-                    worker6_o_stat = "10000000" and
-                    worker7_o_stat = "10000000" and
-                    worker8_o_stat = "10000000" and
-                    worker9_o_stat = "10000000" and
-                    worker10_o_stat = "10000000" and
-                    worker11_o_stat = "10000000" and
-                    worker12_o_stat = "10000000" and
-                    worker13_o_stat = "10000000" and
-                    worker14_o_stat = "10000000" and
-                    worker15_o_stat = "10000000" and
-                    worker16_o_stat = "10000000");
-
-        wait until rising_edge(clk); -- needed for the processor to wake up
-        wait until rising_edge(clk);
-        wait until rising_edge(clk);
-        wait until rising_edge(clk);
-
-        wait until rising_edge(clk); -- OUTPUTK 00,     op_self_status
+        wait until rising_edge(clk); -- OUTPUTK 00,  op_self_status
         worker1_i_stat  <= "000000";
         worker2_i_stat  <= "000000";
         worker3_i_stat  <= "000000";
@@ -2251,5 +2228,7 @@ begin
         worker15_i_stat <= "000000";
         worker16_i_stat <= "000000";
         wait until rising_edge(clk);
+
+        wait for 2000 ms;
     end process simulate;
 end behavioral;

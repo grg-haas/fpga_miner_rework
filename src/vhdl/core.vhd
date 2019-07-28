@@ -138,7 +138,7 @@ architecture behavioral of core is
     signal msa_i16_buf : std_logic_vector(31 downto 0) := (others => '0');
     signal msa_i15_buf : std_logic_vector(31 downto 0) := (others => '0');
     signal msa_i7_buf  : std_logic_vector(31 downto 0) := (others => '0');
-    signal msa_i2_buf  : std_logic_vector(31 downto 0);
+    signal msa_i2_buf  : std_logic_vector(31 downto 0) := (others => '0');
 
 begin
     bram_addr_in <= "111" & addr_buf & "11111";
@@ -163,6 +163,11 @@ begin
     o_hash_h   <= hash_h_buf;
     o_hash_rc  <= hash_rc_buf;
     o_hash_msa <= hash_msa_buf;
+
+    o_msa_i16 <= msa_i16_buf;
+    o_msa_i15 <= msa_i15_buf;
+    o_msa_i7  <= msa_i7_buf;
+    o_msa_i2  <= msa_i2_buf;
 
     picoblaze : kcpsm6
         generic map
