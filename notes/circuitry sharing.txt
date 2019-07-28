@@ -64,6 +64,11 @@ interrupt process
         msa_interrupt_req
         hash_interrupt_req
 
+    1. worker requests interrupt: raise corresponding signal in status_buf
+    2. worker traps self in loop
+    3. module services request by raising interrupt
+    4. worker enters interrupt and raises interrupt_ack, at which point module lowers interrupt sig and connects circuitry
+
 process from msa / hash module perspective
     sequential logic
         check which cores are requesting access

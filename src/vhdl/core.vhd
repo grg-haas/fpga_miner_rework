@@ -147,8 +147,15 @@ begin
 
     o_data <= data_out_buf;
     o_stat(7 downto 6) <= status_out_buf(7 downto 6);
-    o_stat(5) <= interrupt_ack or status_out_buf(5);
-    o_stat(4) <= interrupt_ack or status_out_buf(4);
+    o_stat(5) <= status_out_buf(5) when interrupt = '0'           else
+                 interrupt_ack     when (interrupt = '1' and
+                                         status_out_buf(5) = '1') else
+                 '0';
+
+    o_stat(4) <= status_out_buf(4) when interrupt = '0'           else
+                 interrupt_ack     when (interrupt = '1' and
+                                         status_out_buf(4) = '1') else
+                 '0';
     o_stat(3 downto 0) <= status_out_buf(3 downto 0);
 
     interrupt <= i_stat(5) or i_stat(4);
@@ -173,7 +180,7 @@ begin
         generic map
         (
             hwbuild                 => X"00",
-            interrupt_vector        => X"3FF",
+            interrupt_vector        => X"3FE",
             scratch_pad_memory_size => 64
         )
 
@@ -249,7 +256,7 @@ begin
                 -- msa result is automatically written to write_buf
             end if;
 
-            if interrupt_ack = '1' and i_stat(5) = '1' then
+            if interrupt_ack = '1' and i_stat(4) = '1' then
                 hash_h_buf <= hash_g_buf;
                 hash_g_buf <= hash_f_buf;
                 hash_f_buf <= hash_e_buf;
@@ -311,14 +318,18 @@ begin
     begin
         if rising_edge(clk) then
             -- reset various commands that don't need to go out
-            status_out_buf(5 downto 0) <= (others => '0');
+            status_out_buf(3 downto 0) <= (others => '0');
 
             if buf_select = "1111" then
                 write_buf <= read_buf;
             end if;
 
-            if interrupt_ack = '1' and i_stat(5) = '1' then
-                write_buf <= i_msa_new;
+            if interrupt_ack = '1' then
+                status_out_buf(5 downto 4) <= "00";
+
+                if i_stat(5) = '1' then
+                    write_buf <= i_msa_new;
+                end if;
             end if;
 
             if write_strobe = '1' or k_write_strobe = '1' then

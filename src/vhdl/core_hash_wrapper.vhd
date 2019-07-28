@@ -310,7 +310,6 @@ begin
         port map
         (
             clk          => clk,
-            
             hash_a_val   => hasher_a_in,
             hash_b_val   => hasher_b_in,
             hash_c_val   => hasher_c_in,
@@ -575,10 +574,10 @@ begin
             i_hash_new_e => worker8_new_e
         );
 
-    int_req_buf <= wrk1_o_stat_buf(4) & wrk2_o_stat_buf(4) &
-                   wrk3_o_stat_buf(4) & wrk4_o_stat_buf(4) &
-                   wrk5_o_stat_buf(4) & wrk6_o_stat_buf(4) &
-                   wrk7_o_stat_buf(4) & wrk8_o_stat_buf(4);
+    int_req_buf <= wrk8_o_stat_buf(4) & wrk7_o_stat_buf(4) &
+                   wrk6_o_stat_buf(4) & wrk5_o_stat_buf(4) &
+                   wrk3_o_stat_buf(4) & wrk3_o_stat_buf(4) &
+                   wrk2_o_stat_buf(4) & wrk1_o_stat_buf(4);
     int_ack_buf <= int_sig_buf and int_req_buf;
 
     hasher_a_in <= worker1_a_in when int_ack_buf = "00000001" else
@@ -691,32 +690,35 @@ begin
     worker8_new_e <= hasher_new_e when int_ack_buf = "10000000" else (others => '0');
 
     schedule_hash_access : process(clk)
+        variable toggle : std_logic := '0';
     begin
         if rising_edge(clk) then
-            if int_req_buf(0) = '1' then
-                int_sig_buf(0) <= '1';
+            if toggle = '1' then
+                if int_req_buf(0) = '1' then
+                    int_sig_buf(0) <= '1';
 
-            elsif int_req_buf(1) = '1' then
-                int_sig_buf(1) <= '1';
+                elsif int_req_buf(1) = '1' then
+                    int_sig_buf(1) <= '1';
 
-            elsif int_req_buf(2) = '1' then
-                int_sig_buf(2) <= '1';
+                elsif int_req_buf(2) = '1' then
+                    int_sig_buf(2) <= '1';
 
-            elsif int_req_buf(3) = '1' then
-                int_sig_buf(3) <= '1';
+                elsif int_req_buf(3) = '1' then
+                    int_sig_buf(3) <= '1';
 
-            elsif int_req_buf(4) = '1' then
-                int_sig_buf(4) <= '1';
+                elsif int_req_buf(4) = '1' then
+                    int_sig_buf(4) <= '1';
 
-            elsif int_req_buf(5) = '1' then
-                int_sig_buf(5) <= '1';
+                elsif int_req_buf(5) = '1' then
+                    int_sig_buf(5) <= '1';
 
-            elsif int_req_buf(6) = '1' then
-                int_sig_buf(6) <= '1';
+                elsif int_req_buf(6) = '1' then
+                    int_sig_buf(6) <= '1';
 
-            elsif int_req_buf(7) = '1' then
-                int_sig_buf(7) <= '1';
+                elsif int_req_buf(7) = '1' then
+                    int_sig_buf(7) <= '1';
 
+                end if;
             end if;
 
             if int_ack_buf(0) = '1' then
@@ -744,6 +746,8 @@ begin
                 int_sig_buf(7) <= '0';
 
             end if;
+
+            toggle := not toggle;
         end if;
     end process schedule_hash_access;
 end behavioral;

@@ -55,13 +55,14 @@ CONSTANT    baseaddr_free,      10000000'b
 ; s8
 ; s9
 ; sA
-; sB
+; sB - trap loop register
 ; sC - RC address
 ; sD - MSA addres
 ; sE - misc iterator
 ; sF - SPM pointer
 
 main:
+    ENABLE INTERRUPT
     LOAD    sC,     baseaddr_rc
     LOAD    sD,     baseaddr_msa
     LOAD    sF,     00
@@ -119,14 +120,16 @@ main:
     ADD     sE,     09
     OUTPUT  sE,     op_bram_addr
     OUTPUTK buf_r_to_w, op_bufsel_parity
-    OUTPUTK buf_msa_i7, op_bufsel_parity
+    OUTPUTK buf_msa_i2, op_bufsel_parity
 
     ; request msa extension
     OUTPUTK buf_bram, op_bufsel_parity
     OUTPUTK cmd_msa_req_int, op_self_status
 
+    LOAD    sB,     00
     .msa_trap:
-    JUMP    .msa_trap
+    COMPARE sB,     01
+    JUMP    C,      .msa_trap
 
     OUTPUT  sD,     op_bram_addr
     OUTPUTK cmd_bram_we, op_self_status
@@ -151,8 +154,14 @@ main:
     OUTPUTK buf_r_to_w, op_bufsel_parity
     OUTPUTK buf_hash_msa, op_bufsel_parity
 
+    ; request hash access
+    OUTPUTK buf_bram, op_bufsel_parity
+    OUTPUTK cmd_hash_req_int, op_self_status
+
+    LOAD    sB,     00
     .hash_trap:
-    JUMP    .hash_trap
+    COMPARE sB,     01
+    JUMP    C,     .hash_trap
 
     ADD     sC,     01
     ADD     sD,     01
@@ -226,5 +235,6 @@ recv_ipc_data:
     JUMP    Z,      .loop
     RETURN
 
-ADDRESS 3FF
+ADDRESS 3FE
+    LOAD    sB,     02
     RETURNI ENABLE

@@ -36,27 +36,26 @@ architecture behavioral of hash_circuity is
     signal temp2 : std_logic_vector(31 downto 0) := (others => '0');
 
 begin
-
-    S1    <= std_logic_vector(rotate_right(unsigned(hash_e_val), 6))  xor
-             std_logic_vector(rotate_right(unsigned(hash_e_val), 11)) xor
-             std_logic_vector(rotate_right(unsigned(hash_e_val), 25));
-
-    ch    <= (hash_e_val and hash_f_val) xor ((not hash_e_val) and hash_g_val);
-    temp1 <= hash_h_val + S1 + ch + hash_rc_val + hash_msa_val;
-
-    S0    <= std_logic_vector(rotate_right(unsigned(hash_a_val), 2))  xor
-             std_logic_vector(rotate_right(unsigned(hash_a_val), 13)) xor
-             std_logic_vector(rotate_right(unsigned(hash_a_val), 22));
-    maj   <= (hash_a_val and hash_b_val) xor (hash_a_val and hash_c_val) xor
-             (hash_b_val and hash_c_val);
-    temp2 <= S0 + maj;
-
-    compute : process(clk) is
+    compute : process(clk)
     begin
         if rising_edge(clk) then
-            hash_new_a <= temp1 + temp2;
-            hash_new_e <= hash_d_val + temp1;
+            S1    <= std_logic_vector(rotate_right(unsigned(hash_e_val), 6))  xor
+                     std_logic_vector(rotate_right(unsigned(hash_e_val), 11)) xor
+                     std_logic_vector(rotate_right(unsigned(hash_e_val), 25));
+
+            ch    <= (hash_e_val and hash_f_val) xor ((not hash_e_val) and hash_g_val);
+            temp1 <= hash_h_val + S1 + ch + hash_rc_val + hash_msa_val;
+
+            S0    <= std_logic_vector(rotate_right(unsigned(hash_a_val), 2))  xor
+                     std_logic_vector(rotate_right(unsigned(hash_a_val), 13)) xor
+                     std_logic_vector(rotate_right(unsigned(hash_a_val), 22));
+            maj   <= (hash_a_val and hash_b_val) xor (hash_a_val and hash_c_val) xor
+                     (hash_b_val and hash_c_val);
+            temp2 <= S0 + maj;
         end if;
     end process compute;
+
+    hash_new_a <= temp1 + temp2;
+    hash_new_e <= hash_d_val + temp1;
 
 end behavioral;

@@ -1,16 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
-[*] Sun Jul 28 14:24:53 2019
+[*] Sun Jul 28 16:50:17 2019
 [*]
 [dumpfile] "/mnt/shared/Projects/fpga/fpga_miner_rework/atom_proj/.out/core_msa_wrapper_tb.ghw"
-[dumpfile_mtime] "Sat Jul 27 22:33:35 2019"
-[dumpfile_size] 851090097
+[dumpfile_mtime] "Sun Jul 28 16:46:31 2019"
+[dumpfile_size] 80580554
 [savefile] "/mnt/shared/Projects/fpga/fpga_miner_rework/atom_proj/conf/core_msa_wrapper_tb.gtkw"
-[timestart] 7625900000
+[timestart] 13832900000
 [size] 2192 1233
 [pos] 0 0
-*-26.000000 7880000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] top.
+*-25.000000 13960000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.core_msa_wrapper_tb.
 [treeopen] top.core_msa_wrapper_tb.uut.
 [treeopen] top.core_msa_wrapper_tb.uut.chw1.
@@ -20,8 +19,8 @@
 [sst_width] 366
 [signals_width] 265
 [sst_expanded] 1
-[sst_vpaned_height] 374
-@28
+[sst_vpaned_height] 384
+@29
 top.core_msa_wrapper_tb.clk
 @200
 -
@@ -101,10 +100,69 @@ top.core_msa_wrapper_tb.clk
 #{top.core_msa_wrapper_tb.worker16_o_stat[7:0]} top.core_msa_wrapper_tb.worker16_o_stat[7] top.core_msa_wrapper_tb.worker16_o_stat[6] top.core_msa_wrapper_tb.worker16_o_stat[5] top.core_msa_wrapper_tb.worker16_o_stat[4] top.core_msa_wrapper_tb.worker16_o_stat[3] top.core_msa_wrapper_tb.worker16_o_stat[2] top.core_msa_wrapper_tb.worker16_o_stat[1] top.core_msa_wrapper_tb.worker16_o_stat[0]
 @200
 -
-@22
+@800022
 #{top.core_msa_wrapper_tb.uut.int_req_buf[15:0]} top.core_msa_wrapper_tb.uut.int_req_buf[15] top.core_msa_wrapper_tb.uut.int_req_buf[14] top.core_msa_wrapper_tb.uut.int_req_buf[13] top.core_msa_wrapper_tb.uut.int_req_buf[12] top.core_msa_wrapper_tb.uut.int_req_buf[11] top.core_msa_wrapper_tb.uut.int_req_buf[10] top.core_msa_wrapper_tb.uut.int_req_buf[9] top.core_msa_wrapper_tb.uut.int_req_buf[8] top.core_msa_wrapper_tb.uut.int_req_buf[7] top.core_msa_wrapper_tb.uut.int_req_buf[6] top.core_msa_wrapper_tb.uut.int_req_buf[5] top.core_msa_wrapper_tb.uut.int_req_buf[4] top.core_msa_wrapper_tb.uut.int_req_buf[3] top.core_msa_wrapper_tb.uut.int_req_buf[2] top.core_msa_wrapper_tb.uut.int_req_buf[1] top.core_msa_wrapper_tb.uut.int_req_buf[0]
+@28
+top.core_msa_wrapper_tb.uut.int_req_buf[15]
+top.core_msa_wrapper_tb.uut.int_req_buf[14]
+top.core_msa_wrapper_tb.uut.int_req_buf[13]
+top.core_msa_wrapper_tb.uut.int_req_buf[12]
+top.core_msa_wrapper_tb.uut.int_req_buf[11]
+top.core_msa_wrapper_tb.uut.int_req_buf[10]
+top.core_msa_wrapper_tb.uut.int_req_buf[9]
+top.core_msa_wrapper_tb.uut.int_req_buf[8]
+top.core_msa_wrapper_tb.uut.int_req_buf[7]
+top.core_msa_wrapper_tb.uut.int_req_buf[6]
+top.core_msa_wrapper_tb.uut.int_req_buf[5]
+top.core_msa_wrapper_tb.uut.int_req_buf[4]
+top.core_msa_wrapper_tb.uut.int_req_buf[3]
+top.core_msa_wrapper_tb.uut.int_req_buf[2]
+top.core_msa_wrapper_tb.uut.int_req_buf[1]
+top.core_msa_wrapper_tb.uut.int_req_buf[0]
+@1001200
+-group_end
+@800022
 #{top.core_msa_wrapper_tb.uut.int_sig_buf[15:0]} top.core_msa_wrapper_tb.uut.int_sig_buf[15] top.core_msa_wrapper_tb.uut.int_sig_buf[14] top.core_msa_wrapper_tb.uut.int_sig_buf[13] top.core_msa_wrapper_tb.uut.int_sig_buf[12] top.core_msa_wrapper_tb.uut.int_sig_buf[11] top.core_msa_wrapper_tb.uut.int_sig_buf[10] top.core_msa_wrapper_tb.uut.int_sig_buf[9] top.core_msa_wrapper_tb.uut.int_sig_buf[8] top.core_msa_wrapper_tb.uut.int_sig_buf[7] top.core_msa_wrapper_tb.uut.int_sig_buf[6] top.core_msa_wrapper_tb.uut.int_sig_buf[5] top.core_msa_wrapper_tb.uut.int_sig_buf[4] top.core_msa_wrapper_tb.uut.int_sig_buf[3] top.core_msa_wrapper_tb.uut.int_sig_buf[2] top.core_msa_wrapper_tb.uut.int_sig_buf[1] top.core_msa_wrapper_tb.uut.int_sig_buf[0]
+@28
+top.core_msa_wrapper_tb.uut.int_sig_buf[15]
+top.core_msa_wrapper_tb.uut.int_sig_buf[14]
+top.core_msa_wrapper_tb.uut.int_sig_buf[13]
+top.core_msa_wrapper_tb.uut.int_sig_buf[12]
+top.core_msa_wrapper_tb.uut.int_sig_buf[11]
+top.core_msa_wrapper_tb.uut.int_sig_buf[10]
+top.core_msa_wrapper_tb.uut.int_sig_buf[9]
+top.core_msa_wrapper_tb.uut.int_sig_buf[8]
+top.core_msa_wrapper_tb.uut.int_sig_buf[7]
+top.core_msa_wrapper_tb.uut.int_sig_buf[6]
+top.core_msa_wrapper_tb.uut.int_sig_buf[5]
+top.core_msa_wrapper_tb.uut.int_sig_buf[4]
+top.core_msa_wrapper_tb.uut.int_sig_buf[3]
+top.core_msa_wrapper_tb.uut.int_sig_buf[2]
+top.core_msa_wrapper_tb.uut.int_sig_buf[1]
+top.core_msa_wrapper_tb.uut.int_sig_buf[0]
+@1001200
+-group_end
+@800022
 #{top.core_msa_wrapper_tb.uut.int_ack_buf[15:0]} top.core_msa_wrapper_tb.uut.int_ack_buf[15] top.core_msa_wrapper_tb.uut.int_ack_buf[14] top.core_msa_wrapper_tb.uut.int_ack_buf[13] top.core_msa_wrapper_tb.uut.int_ack_buf[12] top.core_msa_wrapper_tb.uut.int_ack_buf[11] top.core_msa_wrapper_tb.uut.int_ack_buf[10] top.core_msa_wrapper_tb.uut.int_ack_buf[9] top.core_msa_wrapper_tb.uut.int_ack_buf[8] top.core_msa_wrapper_tb.uut.int_ack_buf[7] top.core_msa_wrapper_tb.uut.int_ack_buf[6] top.core_msa_wrapper_tb.uut.int_ack_buf[5] top.core_msa_wrapper_tb.uut.int_ack_buf[4] top.core_msa_wrapper_tb.uut.int_ack_buf[3] top.core_msa_wrapper_tb.uut.int_ack_buf[2] top.core_msa_wrapper_tb.uut.int_ack_buf[1] top.core_msa_wrapper_tb.uut.int_ack_buf[0]
+@28
+top.core_msa_wrapper_tb.uut.int_ack_buf[15]
+top.core_msa_wrapper_tb.uut.int_ack_buf[14]
+top.core_msa_wrapper_tb.uut.int_ack_buf[13]
+top.core_msa_wrapper_tb.uut.int_ack_buf[12]
+top.core_msa_wrapper_tb.uut.int_ack_buf[11]
+top.core_msa_wrapper_tb.uut.int_ack_buf[10]
+top.core_msa_wrapper_tb.uut.int_ack_buf[9]
+top.core_msa_wrapper_tb.uut.int_ack_buf[8]
+top.core_msa_wrapper_tb.uut.int_ack_buf[7]
+top.core_msa_wrapper_tb.uut.int_ack_buf[6]
+top.core_msa_wrapper_tb.uut.int_ack_buf[5]
+top.core_msa_wrapper_tb.uut.int_ack_buf[4]
+top.core_msa_wrapper_tb.uut.int_ack_buf[3]
+top.core_msa_wrapper_tb.uut.int_ack_buf[2]
+top.core_msa_wrapper_tb.uut.int_ack_buf[1]
+top.core_msa_wrapper_tb.uut.int_ack_buf[0]
+@1001200
+-group_end
 @200
 -
 @22
@@ -553,7 +611,7 @@ top.core_msa_wrapper_tb.uut.chw1.worker1.k_write_strobe
 @22
 #{top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[7:0]} top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[7] top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[6] top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[5] top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[4] top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[3] top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[2] top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[1] top.core_msa_wrapper_tb.uut.chw1.worker1.data_out_buf[0]
 #{top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[7:0]} top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[7] top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[6] top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[5] top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[4] top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[3] top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[2] top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[1] top.core_msa_wrapper_tb.uut.chw1.worker1.status_out_buf[0]
-@201
+@200
 -
 @22
 #{top.core_msa_wrapper_tb.uut.chw1.worker1.bram_we[3:0]} top.core_msa_wrapper_tb.uut.chw1.worker1.bram_we[3] top.core_msa_wrapper_tb.uut.chw1.worker1.bram_we[2] top.core_msa_wrapper_tb.uut.chw1.worker1.bram_we[1] top.core_msa_wrapper_tb.uut.chw1.worker1.bram_we[0]

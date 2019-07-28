@@ -374,7 +374,6 @@ begin
         port map
         (
             clk     => clk,
-            
             msa_i16 => msa_i16_in,
             msa_i15 => msa_i15_in,
             msa_i7  => msa_i7_in,
@@ -553,14 +552,16 @@ begin
             wrk8_msa_new => chw2_wrk8_msa_new
         );
 
-    int_req_buf <= chw1_wrk1_o_stat_buf(5) & chw1_wrk2_o_stat_buf(5) &
-                   chw1_wrk3_o_stat_buf(5) & chw1_wrk4_o_stat_buf(5) &
-                   chw1_wrk5_o_stat_buf(5) & chw1_wrk6_o_stat_buf(5) &
-                   chw1_wrk7_o_stat_buf(5) & chw1_wrk8_o_stat_buf(5) &
-                   chw2_wrk1_o_stat_buf(5) & chw2_wrk2_o_stat_buf(5) &
-                   chw2_wrk3_o_stat_buf(5) & chw2_wrk4_o_stat_buf(5) &
-                   chw2_wrk5_o_stat_buf(5) & chw2_wrk6_o_stat_buf(5) &
-                   chw2_wrk7_o_stat_buf(5) & chw2_wrk8_o_stat_buf(5);
+    int_req_buf <= chw2_wrk8_o_stat_buf(5) & chw2_wrk7_o_stat_buf(5) &
+                   chw2_wrk6_o_stat_buf(5) & chw2_wrk5_o_stat_buf(5) &
+                   chw2_wrk4_o_stat_buf(5) & chw2_wrk3_o_stat_buf(5) &
+                   chw2_wrk2_o_stat_buf(5) & chw2_wrk1_o_stat_buf(5) &
+                   chw1_wrk8_o_stat_buf(5) & chw1_wrk7_o_stat_buf(5) &
+                   chw1_wrk6_o_stat_buf(5) & chw1_wrk5_o_stat_buf(5) &
+                   chw1_wrk4_o_stat_buf(5) & chw1_wrk3_o_stat_buf(5) &
+                   chw1_wrk2_o_stat_buf(5) & chw1_wrk1_o_stat_buf(5);
+
+
     int_ack_buf <= int_sig_buf and int_req_buf;
 
     msa_i16_in <= chw1_wrk1_msa_i16 when int_ack_buf = "0000000000000001" else
@@ -650,55 +651,58 @@ begin
     chw2_wrk8_msa_new <= msa_new_out when int_ack_buf = "1000000000000000" else (others => '0');
 
     schedule_msa_access : process(clk)
+        variable toggle : std_logic := '0';
     begin
         if rising_edge(clk) then
-            if int_req_buf(0) = '1' then
-                int_sig_buf(0) <= '1';
+            if toggle = '1' then
+                if int_req_buf(0) = '1' then
+                    int_sig_buf(0) <= '1';
 
-            elsif int_req_buf(1) = '1' then
-                int_sig_buf(1) <= '1';
+                elsif int_req_buf(1) = '1' then
+                    int_sig_buf(1) <= '1';
 
-            elsif int_req_buf(2) = '1' then
-                int_sig_buf(2) <= '1';
+                elsif int_req_buf(2) = '1' then
+                    int_sig_buf(2) <= '1';
 
-            elsif int_req_buf(3) = '1' then
-                int_sig_buf(3) <= '1';
+                elsif int_req_buf(3) = '1' then
+                    int_sig_buf(3) <= '1';
 
-            elsif int_req_buf(4) = '1' then
-                int_sig_buf(4) <= '1';
+                elsif int_req_buf(4) = '1' then
+                    int_sig_buf(4) <= '1';
 
-            elsif int_req_buf(5) = '1' then
-                int_sig_buf(5) <= '1';
+                elsif int_req_buf(5) = '1' then
+                    int_sig_buf(5) <= '1';
 
-            elsif int_req_buf(6) = '1' then
-                int_sig_buf(6) <= '1';
+                elsif int_req_buf(6) = '1' then
+                    int_sig_buf(6) <= '1';
 
-            elsif int_req_buf(7) = '1' then
-                int_sig_buf(7) <= '1';
+                elsif int_req_buf(7) = '1' then
+                    int_sig_buf(7) <= '1';
 
-            elsif int_req_buf(8) = '1' then
-                int_sig_buf(8) <= '1';
+                elsif int_req_buf(8) = '1' then
+                    int_sig_buf(8) <= '1';
 
-            elsif int_req_buf(9) = '1' then
-                int_sig_buf(9) <= '1';
+                elsif int_req_buf(9) = '1' then
+                    int_sig_buf(9) <= '1';
 
-            elsif int_req_buf(10) = '1' then
-                int_sig_buf(10) <= '1';
+                elsif int_req_buf(10) = '1' then
+                    int_sig_buf(10) <= '1';
 
-            elsif int_req_buf(11) = '1' then
-                int_sig_buf(11) <= '1';
+                elsif int_req_buf(11) = '1' then
+                    int_sig_buf(11) <= '1';
 
-            elsif int_req_buf(12) = '1' then
-                int_sig_buf(12) <= '1';
+                elsif int_req_buf(12) = '1' then
+                    int_sig_buf(12) <= '1';
 
-            elsif int_req_buf(13) = '1' then
-                int_sig_buf(13) <= '1';
+                elsif int_req_buf(13) = '1' then
+                    int_sig_buf(13) <= '1';
 
-            elsif int_req_buf(14) = '1' then
-                int_sig_buf(14) <= '1';
+                elsif int_req_buf(14) = '1' then
+                    int_sig_buf(14) <= '1';
 
-            elsif int_req_buf(15) = '1' then
-                int_sig_buf(15) <= '1';
+                elsif int_req_buf(15) = '1' then
+                    int_sig_buf(15) <= '1';
+                end if;
             end if;
 
             if int_ack_buf(0) = '1' then
@@ -749,6 +753,8 @@ begin
             elsif int_ack_buf(15) = '1' then
                 int_sig_buf(15) <= '0';
             end if;
+
+            toggle := not toggle;
         end if;
     end process schedule_msa_access;
 end behavioral;

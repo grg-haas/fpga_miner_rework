@@ -25,20 +25,19 @@ architecture behavioral of msa_extender is
     signal s1    : std_logic_vector(31 downto 0) := (others => '0');
 
 begin
-
-    s0 <= std_logic_vector(rotate_right(unsigned(msa_i15), 7))  xor
-          std_logic_vector(rotate_right(unsigned(msa_i15), 18)) xor
-          std_logic_vector(shift_right(unsigned(msa_i15), 3));
-
-    s1 <= std_logic_vector(rotate_right(unsigned(msa_i2), 17)) xor
-          std_logic_vector(rotate_right(unsigned(msa_i2), 19)) xor
-          std_logic_vector(shift_right(unsigned(msa_i2), 10));
-
     compute : process(clk) is
     begin
         if rising_edge(clk) then
-            msa_out <= msa_i16 + s0 + msa_i7 + s1;
+            s0 <= std_logic_vector(rotate_right(unsigned(msa_i15), 7))  xor
+                  std_logic_vector(rotate_right(unsigned(msa_i15), 18)) xor
+                  std_logic_vector(shift_right(unsigned(msa_i15), 3));
+
+            s1 <= std_logic_vector(rotate_right(unsigned(msa_i2), 17)) xor
+                  std_logic_vector(rotate_right(unsigned(msa_i2), 19)) xor
+                  std_logic_vector(shift_right(unsigned(msa_i2), 10));
         end if;
     end process compute;
+
+    msa_out <= msa_i16 + s0 + msa_i7 + s1;
 
 end behavioral;
