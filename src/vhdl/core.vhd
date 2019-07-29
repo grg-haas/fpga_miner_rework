@@ -109,8 +109,8 @@ architecture behavioral of core is
     signal bram_parity_out : std_logic_vector(3 downto 0)  := (others => '0');
 
     signal addr_buf        : std_logic_vector(7 downto 0) := (others => '0');
-    signal data_buf        : std_logic_vector(31 downto 0) := (others => '0');
-    signal parity_buf      : std_logic_vector(3 downto 0)  := (others => '0');
+    signal bram_data_in    : std_logic_vector(31 downto 0) := (others => '0');
+    signal bram_parity_in  : std_logic_vector(3 downto 0)  := (others => '0');
 
     -- status and data out buffers
     signal status_out_buf : std_logic_vector(7 downto 0) := (others => '0');
@@ -118,8 +118,6 @@ architecture behavioral of core is
 
     -- random other buffers
     signal buf_select   : std_logic_vector(3 downto 0)  := (others => '0');
-    signal read_buf     : std_logic_vector(31 downto 0) := (others => '0');
-    signal write_buf    : std_logic_vector(31 downto 0) := (others => '0');
 
     -- hashing buffers
     signal hash_a_buf   : std_logic_vector(31 downto 0) := x"6A09E667";
@@ -217,8 +215,8 @@ begin
             clk         => clk,
 
             address_b    => bram_addr_in,
-            data_in_b    => data_buf,
-            parity_in_b  => parity_buf,
+            data_in_b    => bram_data_in,
+            parity_in_b  => bram_parity_in,
             data_out_b   => bram_data_out,
             parity_out_b => bram_parity_out,
             enable_b     => '1',
@@ -235,21 +233,6 @@ begin
     handle_msa_hash : process(clk)
     begin
         if rising_edge(clk) then
-            if write_strobe = '1' or k_write_strobe = '1' then
-                if port_id(2) = '1' then
-                    case buf_select is
-                        when "0001" => hash_a_buf <= write_buf;
-                        when "0010" => hash_b_buf <= write_buf;
-                        when "0011" => hash_c_buf <= write_buf;
-                        when "0100" => hash_d_buf <= write_buf;
-                        when "0101" => hash_e_buf <= write_buf;
-                        when "0110" => hash_f_buf <= write_buf;
-                        when "0111" => hash_g_buf <= write_buf;
-                        when "1000" => hash_h_buf <= write_buf;
-                        when others => NULL;
-                    end case;
-                end if;
-            end if;
 
             if interrupt_ack = '1' and i_stat(5) = '1' then
                 -- handled in output_ports
@@ -269,30 +252,20 @@ begin
         end if;
     end process handle_msa_hash;
 
-    read_buf <= bram_data_out when buf_select = "0000" else
-                hash_a_buf    when buf_select = "0001" else
-                hash_b_buf    when buf_select = "0010" else
-                hash_c_buf    when buf_select = "0011" else
-                hash_d_buf    when buf_select = "0100" else
-                hash_e_buf    when buf_select = "0101" else
-                hash_f_buf    when buf_select = "0110" else
-                hash_g_buf    when buf_select = "0111" else
-                hash_h_buf    when buf_select = "1000" else
-                hash_rc_buf   when buf_select = "1001" else
-                hash_msa_buf  when buf_select = "1010" else
-                msa_i16_buf   when buf_select = "1011" else
-                msa_i15_buf   when buf_select = "1100" else
-                msa_i7_buf    when buf_select = "1101" else
-                msa_i2_buf    when buf_select = "1110" else
-                unaffected;
-
-    data_buf     <= write_buf when buf_select = "0000" else unaffected;
-    hash_rc_buf  <= write_buf when buf_select = "1001" else unaffected;
-    hash_msa_buf <= write_buf when buf_select = "1010" else unaffected;
-    msa_i16_buf  <= write_buf when buf_select = "1011" else unaffected;
-    msa_i15_buf  <= write_buf when buf_select = "1100" else unaffected;
-    msa_i7_buf   <= write_buf when buf_select = "1101" else unaffected;
-    msa_i2_buf   <= write_buf when buf_select = "1110" else unaffected;
+    route_bufs : process(clk)
+    begin
+        if rising_edge(clk) then
+            case buf_select is
+                when "1001" => hash_rc_buf  <= bram_data_out;
+                when "1010" => hash_msa_buf <= bram_data_out;
+                when "1011" => msa_i16_buf  <= bram_data_out;
+                when "1100" => msa_i15_buf  <= bram_data_out;
+                when "1101" => msa_i7_buf   <= bram_data_out;
+                when "1110" => msa_i2_buf   <= bram_data_out;
+                when others => NULL;
+            end case;
+        end if;
+    end process route_bufs;
 
     input_ports : process(clk)
     begin
@@ -303,11 +276,11 @@ begin
 
                 when "010" => in_port <= (others => '0'); --reserved
 
-                when "011" => in_port <= "0000" & parity_buf;
-                when "100" => in_port <= read_buf(7 downto 0);
-                when "101" => in_port <= read_buf(15 downto 8);
-                when "110" => in_port <= read_buf(23 downto 16);
-                when "111" => in_port <= read_buf(31 downto 24);
+                when "011" => in_port <= "0000" & bram_parity_out;
+                when "100" => in_port <= bram_data_out(7 downto 0);
+                when "101" => in_port <= bram_data_out(15 downto 8);
+                when "110" => in_port <= bram_data_out(23 downto 16);
+                when "111" => in_port <= bram_data_out(31 downto 24);
 
                 when others => in_port <= (others => '0');
             end case;
@@ -320,15 +293,11 @@ begin
             -- reset various commands that don't need to go out
             status_out_buf(3 downto 0) <= (others => '0');
 
-            if buf_select = "1111" then
-                write_buf <= read_buf;
-            end if;
-
             if interrupt_ack = '1' then
                 status_out_buf(5 downto 4) <= "00";
 
                 if i_stat(5) = '1' then
-                    write_buf <= i_msa_new;
+                    bram_data_in <= i_msa_new;
                 end if;
             end if;
 
@@ -340,19 +309,19 @@ begin
 
                         if out_port(2) = '1' then
                             addr_buf   <= (others => '0');
-                            write_buf  <= (others => '0');
-                            parity_buf <= (others => '0');
+                            bram_data_in  <= (others => '0');
+                            bram_parity_in <= (others => '0');
                         end if;
 
                     when "010" => addr_buf <= out_port;
                     when "011" =>
-                        parity_buf <= out_port(3 downto 0);
-                        buf_select <= out_port(7 downto 4);
+                        bram_parity_in <= out_port(3 downto 0);
+                        buf_select     <= out_port(7 downto 4);
 
-                    when "100" => write_buf(7 downto 0)   <= out_port;
-                    when "101" => write_buf(15 downto 8)  <= out_port;
-                    when "110" => write_buf(23 downto 16) <= out_port;
-                    when "111" => write_buf(31 downto 24) <= out_port;
+                    when "100" => bram_data_in(7 downto 0)   <= out_port;
+                    when "101" => bram_data_in(15 downto 8)  <= out_port;
+                    when "110" => bram_data_in(23 downto 16) <= out_port;
+                    when "111" => bram_data_in(31 downto 24) <= out_port;
                     when others => NULL;
                 end case;
             end if;

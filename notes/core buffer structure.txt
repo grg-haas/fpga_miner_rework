@@ -1,8 +1,14 @@
-global read buf
-    modified in handle_rw_bufs based on buf_select
+buffers that i want to read
+    bram output
+    hash a -> h (optional for now honestly)
 
-global write buf
-    modified in output_ports based on out_port
+buffers that i want to write
+    bram input
+    bram address
+    hash input buffers (2 driven from RAM)
+    msa input buffers (4 driven from RAM)
 
-    changes in write buf need to be propagated to other buffers based on buf select
-        includes bram data in buf and all hash buffers
+could make BRAM centric
+    processor only reads/writes bram related buffers
+    buffer_sel can then shuffle bram reads to selected buffer
+                                selected buffer to bram writes
