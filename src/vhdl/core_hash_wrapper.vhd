@@ -493,14 +493,14 @@ begin
     wrk6_i_stat_buf <= wrk6_i_stat(6 downto 4) & int_sig_buf(5) & wrk6_i_stat(3 downto 0);
     wrk7_i_stat_buf <= wrk7_i_stat(6 downto 4) & int_sig_buf(6) & wrk7_i_stat(3 downto 0);
     wrk8_i_stat_buf <= wrk8_i_stat(6 downto 4) & int_sig_buf(7) & wrk8_i_stat(3 downto 0);
-    wrk9_i_stat_buf <= wrk9_i_stat(6 downto 4) & int_sig_buf(0) & wrk9_i_stat(3 downto 0);
-    wrk10_i_stat_buf <= wrk10_i_stat(6 downto 4) & int_sig_buf(1) & wrk10_i_stat(3 downto 0);
-    wrk11_i_stat_buf <= wrk11_i_stat(6 downto 4) & int_sig_buf(2) & wrk11_i_stat(3 downto 0);
-    wrk12_i_stat_buf <= wrk12_i_stat(6 downto 4) & int_sig_buf(3) & wrk12_i_stat(3 downto 0);
-    wrk13_i_stat_buf <= wrk13_i_stat(6 downto 4) & int_sig_buf(4) & wrk13_i_stat(3 downto 0);
-    wrk14_i_stat_buf <= wrk14_i_stat(6 downto 4) & int_sig_buf(5) & wrk14_i_stat(3 downto 0);
-    wrk15_i_stat_buf <= wrk15_i_stat(6 downto 4) & int_sig_buf(6) & wrk15_i_stat(3 downto 0);
-    wrk16_i_stat_buf <= wrk16_i_stat(6 downto 4) & int_sig_buf(7) & wrk16_i_stat(3 downto 0);
+    wrk9_i_stat_buf <= wrk9_i_stat(6 downto 4) & int_sig_buf(8) & wrk9_i_stat(3 downto 0);
+    wrk10_i_stat_buf <= wrk10_i_stat(6 downto 4) & int_sig_buf(9) & wrk10_i_stat(3 downto 0);
+    wrk11_i_stat_buf <= wrk11_i_stat(6 downto 4) & int_sig_buf(10) & wrk11_i_stat(3 downto 0);
+    wrk12_i_stat_buf <= wrk12_i_stat(6 downto 4) & int_sig_buf(11) & wrk12_i_stat(3 downto 0);
+    wrk13_i_stat_buf <= wrk13_i_stat(6 downto 4) & int_sig_buf(12) & wrk13_i_stat(3 downto 0);
+    wrk14_i_stat_buf <= wrk14_i_stat(6 downto 4) & int_sig_buf(13) & wrk14_i_stat(3 downto 0);
+    wrk15_i_stat_buf <= wrk15_i_stat(6 downto 4) & int_sig_buf(14) & wrk15_i_stat(3 downto 0);
+    wrk16_i_stat_buf <= wrk16_i_stat(6 downto 4) & int_sig_buf(15) & wrk16_i_stat(3 downto 0);
 
     wrk1_o_stat <= wrk1_o_stat_buf;
     wrk2_o_stat <= wrk2_o_stat_buf;
