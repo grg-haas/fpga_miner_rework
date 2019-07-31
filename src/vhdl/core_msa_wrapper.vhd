@@ -1045,8 +1045,6 @@ begin
                    chw1_wrk6_o_stat_buf(5) & chw1_wrk5_o_stat_buf(5) &
                    chw1_wrk4_o_stat_buf(5) & chw1_wrk3_o_stat_buf(5) &
                    chw1_wrk2_o_stat_buf(5) & chw1_wrk1_o_stat_buf(5);
-
-
     int_ack_buf <= int_sig_buf and int_req_buf;
 
     msa_i16_in <= chw1_wrk1_msa_i16 when int_ack_buf = "00000000000000000000000000000001" else
@@ -1182,15 +1180,15 @@ begin
                   chw2_wrk16_msa_i2 when int_ack_buf = "10000000000000000000000000000000" else
                   (others => '0');
 
-    chw1_wrk1_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000000000001" else (others => '0');
-    chw1_wrk2_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000000000010" else (others => '0');
-    chw1_wrk3_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000000000100" else (others => '0');
-    chw1_wrk4_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000000001000" else (others => '0');
-    chw1_wrk5_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000000010000" else (others => '0');
-    chw1_wrk6_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000000100000" else (others => '0');
-    chw1_wrk7_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000001000000" else (others => '0');
-    chw1_wrk8_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000010000000" else (others => '0');
-    chw1_wrk9_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000000100000000" else (others => '0');
+    chw1_wrk1_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000000000001" else (others => '0');
+    chw1_wrk2_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000000000010" else (others => '0');
+    chw1_wrk3_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000000000100" else (others => '0');
+    chw1_wrk4_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000000001000" else (others => '0');
+    chw1_wrk5_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000000010000" else (others => '0');
+    chw1_wrk6_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000000100000" else (others => '0');
+    chw1_wrk7_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000001000000" else (others => '0');
+    chw1_wrk8_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000010000000" else (others => '0');
+    chw1_wrk9_msa_new  <= msa_new_out when int_ack_buf = "00000000000000000000000100000000" else (others => '0');
     chw1_wrk10_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000001000000000" else (others => '0');
     chw1_wrk11_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000010000000000" else (others => '0');
     chw1_wrk12_msa_new <= msa_new_out when int_ack_buf = "00000000000000000000100000000000" else (others => '0');
@@ -1198,15 +1196,15 @@ begin
     chw1_wrk14_msa_new <= msa_new_out when int_ack_buf = "00000000000000000010000000000000" else (others => '0');
     chw1_wrk15_msa_new <= msa_new_out when int_ack_buf = "00000000000000000100000000000000" else (others => '0');
     chw1_wrk16_msa_new <= msa_new_out when int_ack_buf = "00000000000000001000000000000000" else (others => '0');
-    chw2_wrk1_msa_new <= msa_new_out when int_ack_buf = "00000000000000010000000000000000" else (others => '0');
-    chw2_wrk2_msa_new <= msa_new_out when int_ack_buf = "00000000000000100000000000000000" else (others => '0');
-    chw2_wrk3_msa_new <= msa_new_out when int_ack_buf = "00000000000001000000000000000000" else (others => '0');
-    chw2_wrk4_msa_new <= msa_new_out when int_ack_buf = "00000000000010000000000000000000" else (others => '0');
-    chw2_wrk5_msa_new <= msa_new_out when int_ack_buf = "00000000000100000000000000000000" else (others => '0');
-    chw2_wrk6_msa_new <= msa_new_out when int_ack_buf = "00000000001000000000000000000000" else (others => '0');
-    chw2_wrk7_msa_new <= msa_new_out when int_ack_buf = "00000000010000000000000000000000" else (others => '0');
-    chw2_wrk8_msa_new <= msa_new_out when int_ack_buf = "00000000100000000000000000000000" else (others => '0');
-    chw2_wrk9_msa_new <= msa_new_out when int_ack_buf = "00000001000000000000000000000000" else (others => '0');
+    chw2_wrk1_msa_new  <= msa_new_out when int_ack_buf = "00000000000000010000000000000000" else (others => '0');
+    chw2_wrk2_msa_new  <= msa_new_out when int_ack_buf = "00000000000000100000000000000000" else (others => '0');
+    chw2_wrk3_msa_new  <= msa_new_out when int_ack_buf = "00000000000001000000000000000000" else (others => '0');
+    chw2_wrk4_msa_new  <= msa_new_out when int_ack_buf = "00000000000010000000000000000000" else (others => '0');
+    chw2_wrk5_msa_new  <= msa_new_out when int_ack_buf = "00000000000100000000000000000000" else (others => '0');
+    chw2_wrk6_msa_new  <= msa_new_out when int_ack_buf = "00000000001000000000000000000000" else (others => '0');
+    chw2_wrk7_msa_new  <= msa_new_out when int_ack_buf = "00000000010000000000000000000000" else (others => '0');
+    chw2_wrk8_msa_new  <= msa_new_out when int_ack_buf = "00000000100000000000000000000000" else (others => '0');
+    chw2_wrk9_msa_new  <= msa_new_out when int_ack_buf = "00000001000000000000000000000000" else (others => '0');
     chw2_wrk10_msa_new <= msa_new_out when int_ack_buf = "00000010000000000000000000000000" else (others => '0');
     chw2_wrk11_msa_new <= msa_new_out when int_ack_buf = "00000100000000000000000000000000" else (others => '0');
     chw2_wrk12_msa_new <= msa_new_out when int_ack_buf = "00001000000000000000000000000000" else (others => '0');
@@ -1219,16 +1217,16 @@ begin
         variable toggle : std_logic := '0';
     begin
         if rising_edge(clk) then if toggle = '1' then
-                if    int_req_buf(0) = '1' then int_sig_buf(0) <= '1';
-                elsif int_req_buf(1) = '1' then int_sig_buf(1) <= '1';
-                elsif int_req_buf(2) = '1' then int_sig_buf(2) <= '1';
-                elsif int_req_buf(3) = '1' then int_sig_buf(3) <= '1';
-                elsif int_req_buf(4) = '1' then int_sig_buf(4) <= '1';
-                elsif int_req_buf(5) = '1' then int_sig_buf(5) <= '1';
-                elsif int_req_buf(6) = '1' then int_sig_buf(6) <= '1';
-                elsif int_req_buf(7) = '1' then int_sig_buf(7) <= '1';
-                elsif int_req_buf(8) = '1' then int_sig_buf(8) <= '1';
-                elsif int_req_buf(9) = '1' then int_sig_buf(9) <= '1';
+                if    int_req_buf(0)  = '1' then int_sig_buf(0)  <= '1';
+                elsif int_req_buf(1)  = '1' then int_sig_buf(1)  <= '1';
+                elsif int_req_buf(2)  = '1' then int_sig_buf(2)  <= '1';
+                elsif int_req_buf(3)  = '1' then int_sig_buf(3)  <= '1';
+                elsif int_req_buf(4)  = '1' then int_sig_buf(4)  <= '1';
+                elsif int_req_buf(5)  = '1' then int_sig_buf(5)  <= '1';
+                elsif int_req_buf(6)  = '1' then int_sig_buf(6)  <= '1';
+                elsif int_req_buf(7)  = '1' then int_sig_buf(7)  <= '1';
+                elsif int_req_buf(8)  = '1' then int_sig_buf(8)  <= '1';
+                elsif int_req_buf(9)  = '1' then int_sig_buf(9)  <= '1';
                 elsif int_req_buf(10) = '1' then int_sig_buf(10) <= '1';
                 elsif int_req_buf(11) = '1' then int_sig_buf(11) <= '1';
                 elsif int_req_buf(12) = '1' then int_sig_buf(12) <= '1';
@@ -1254,16 +1252,16 @@ begin
                 end if;
             end if;
 
-            if int_ack_buf(0) = '1' then int_sig_buf(0) <= '0'; end if;
-            if int_ack_buf(1) = '1' then int_sig_buf(1) <= '0'; end if;
-            if int_ack_buf(2) = '1' then int_sig_buf(2) <= '0'; end if;
-            if int_ack_buf(3) = '1' then int_sig_buf(3) <= '0'; end if;
-            if int_ack_buf(4) = '1' then int_sig_buf(4) <= '0'; end if;
-            if int_ack_buf(5) = '1' then int_sig_buf(5) <= '0'; end if;
-            if int_ack_buf(6) = '1' then int_sig_buf(6) <= '0'; end if;
-            if int_ack_buf(7) = '1' then int_sig_buf(7) <= '0'; end if;
-            if int_ack_buf(8) = '1' then int_sig_buf(8) <= '0'; end if;
-            if int_ack_buf(9) = '1' then int_sig_buf(9) <= '0'; end if;
+            if int_ack_buf(0)  = '1' then int_sig_buf(0)  <= '0'; end if;
+            if int_ack_buf(1)  = '1' then int_sig_buf(1)  <= '0'; end if;
+            if int_ack_buf(2)  = '1' then int_sig_buf(2)  <= '0'; end if;
+            if int_ack_buf(3)  = '1' then int_sig_buf(3)  <= '0'; end if;
+            if int_ack_buf(4)  = '1' then int_sig_buf(4)  <= '0'; end if;
+            if int_ack_buf(5)  = '1' then int_sig_buf(5)  <= '0'; end if;
+            if int_ack_buf(6)  = '1' then int_sig_buf(6)  <= '0'; end if;
+            if int_ack_buf(7)  = '1' then int_sig_buf(7)  <= '0'; end if;
+            if int_ack_buf(8)  = '1' then int_sig_buf(8)  <= '0'; end if;
+            if int_ack_buf(9)  = '1' then int_sig_buf(9)  <= '0'; end if;
             if int_ack_buf(10) = '1' then int_sig_buf(10) <= '0'; end if;
             if int_ack_buf(11) = '1' then int_sig_buf(11) <= '0'; end if;
             if int_ack_buf(12) = '1' then int_sig_buf(12) <= '0'; end if;

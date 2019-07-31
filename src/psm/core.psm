@@ -61,8 +61,10 @@ CONSTANT    baseaddr_free,      10000000'b
 ; sE - misc iterator
 ; sF - SPM pointer
 
-main:
+init:
     ENABLE INTERRUPT
+
+main:
     LOAD    sC,     baseaddr_rc
     LOAD    sD,     baseaddr_msa
     LOAD    sF,     00
@@ -96,21 +98,23 @@ main:
 
     .msa_extend_loop:
     LOAD    sE,     sD
+    LOAD    sE,     sD
+    LOAD    sE,     sD
 
     OUTPUTK buf_msa_i16, op_bufsel_parity
-    SUB     sE,     0F
+    SUB     sE,     10
     OUTPUT  sE,     op_bram_addr
 
     OUTPUTK buf_msa_i15, op_bufsel_parity
-    ADD     sE,     0D
+    ADD     sE,     01
     OUTPUT  sE,     op_bram_addr
 
     OUTPUTK buf_msa_i7, op_bufsel_parity
-    SUB     sE,     0E
+    ADD     sE,     08
     OUTPUT  sE,     op_bram_addr
 
     OUTPUTK buf_msa_i2, op_bufsel_parity
-    ADD     sE,     09
+    ADD     sE,     05
     OUTPUT  sE,     op_bram_addr
 
     ; request msa extension
